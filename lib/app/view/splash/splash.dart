@@ -6,13 +6,11 @@ class Splash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
+    return const Column(children: [
       CarouselView(itemExtent: 300, children: [
         Card(child: Text("Log Workout")),
         Card(child: Text("Plan Workout")),
       ])
     ],);
-    // TODO: implement build
-    // throw UnimplementedError();
   }
 }
