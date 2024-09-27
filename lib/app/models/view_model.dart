@@ -9,6 +9,7 @@ enum CurrentView {
   dataViz
 }
 
+/// ChangeNotifier to determine what the current page view is
 class ViewModel extends ChangeNotifier {
   CurrentView _view = CurrentView.home;
 
