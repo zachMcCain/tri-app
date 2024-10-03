@@ -13,7 +13,7 @@ on:
 
 jobs:
   build:
-    runs-on: mac-os-12
+    runs-on: macos-latest
 
     steps:
       - name: Checkout Repo
@@ -24,7 +24,7 @@ jobs:
       # https://github.com/dart-lang/setup-dart/blob/main/README.md
       - uses: dart-lang/setup-dart@v1
       # - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
-      
+
       - name: Install Flutter
         uses: monterail/flutter-action@v2
       # - name: Setup flutter SDK
@@ -49,3 +49,11 @@ jobs:
       # want to change this to 'flutter test'.
       - name: Run tests
         run: flutter test
+
+      - name: Build Docker Image
+        uses: actions/build-push-action@v2
+        with:
+          context: .
+          dockerfile: Dockerfile
+          push: false
+          tags: 
