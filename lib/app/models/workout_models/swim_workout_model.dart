@@ -10,6 +10,5 @@ class SwimWorkoutModel extends ChangeNotifier implements Segment {
   // TODO: implement duration
   get duration => throw UnimplementedError();
 
-  @override
   get time => throw UnimplementedError();
 }

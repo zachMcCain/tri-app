@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tri/app/models/view_model.dart';
-import 'package:tri/app/models/workout_models/run_workout_model.dart';
-import 'package:tri/app/models/workout_models/workout_model.dart';
 import 'package:tri/app/view/workout/workout.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tri/app/view/workout_stack/workout_stack.dart';

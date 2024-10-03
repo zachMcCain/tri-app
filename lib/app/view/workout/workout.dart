@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tri/app/models/workout_bank_model.dart';
 import 'package:tri/app/models/workout_models/run_workout_model.dart';
-import 'package:tri/app/models/workout_models/workout_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Workout extends StatelessWidget {
