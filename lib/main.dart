@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tri/app/models/workout_models/fake_workout_model.dart';
 import 'package:tri/app/view/home/home.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -32,7 +31,7 @@ class MyApp extends StatelessWidget {
 
 
 
-final myFakeCounter = ChangeNotifierProvider<FakeWorkoutModel>((ref) =>  FakeWorkoutModel()); // This is what provides the state to the WidgetRef - can live in another file (does it auto pickup everything that is a ChangeNotifierProvider??) - the model it returns needs to extend ChangeNotifier
+// final myFakeCounter = ChangeNotifierProvider<FakeWorkoutModel>((ref) =>  FakeWorkoutModel()); // This is what provides the state to the WidgetRef - can live in another file (does it auto pickup everything that is a ChangeNotifierProvider??) - the model it returns needs to extend ChangeNotifier
 
 // class MyFakeHome extends ConsumerWidget /**ConsumerWidget is what gives access to the ref */ {
 //   @override
