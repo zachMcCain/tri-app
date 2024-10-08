@@ -9,7 +9,7 @@ class Workout implements WorkoutModel{
   int? heartRate;
 
   @override
-  Uuid id = const Uuid();
+  String id = const Uuid().v1();
 
   @override
   String label = '';
@@ -28,7 +28,7 @@ class Workout implements WorkoutModel{
   }
 
   @override
-  Uuid getId() {
+  String getId() {
     return id;
   }
 

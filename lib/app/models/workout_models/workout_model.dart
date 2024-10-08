@@ -1,4 +1,3 @@
-import 'package:uuid/uuid.dart';
 
 // Abstract class to hold the data that all workouts need
 abstract class WorkoutModel {
@@ -7,7 +6,7 @@ abstract class WorkoutModel {
   abstract String label;
   abstract DateTime startTime;
   abstract int? heartRate;
-  abstract Uuid id;
+  abstract String id;
 
 
   String getLabel() {
@@ -40,7 +39,7 @@ abstract class WorkoutModel {
     this.startTime = startTime;
   }
 
-  Uuid getId() {
+  String getId() {
     return id;
   }
 }

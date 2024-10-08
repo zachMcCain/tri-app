@@ -1,18 +1,30 @@
-import 'package:uuid/uuid.dart';
 
 abstract class Node<T> {
-  T? data;
+  abstract T data;
   abstract Node<T>? leftNode;
   abstract Node<T>? rightNode;
+  abstract Node<T>? parent;
 
   // Should insert the data into the tree
   void insert(T data);
 
-  bool contains(T data);
+  bool contains(String id);
 
-  T getDataById(Uuid id);
+  T? getDataById(String id);
 
-  bool delete(T data);
+  bool deleteChild(T data);
+
+  Node<T> getRightmostLeaf();
+
+  void replace(Node<T> child, Node<T> replacement);
+
+  Node<T>? getParent() {
+    return parent;
+  }
+
+  void setParent(Node<T> parent) {
+    this.parent = parent;
+  }
 
   List<T> getOrderedData() {
      List<T> orderedData = List.empty();
