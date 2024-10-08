@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tri/app/models/workout_models/workout.dart';
 import 'package:tri/app/view/workout_form/run_form.dart/run_form.dart';
 
 class WorkoutForm extends StatefulWidget {
