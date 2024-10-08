@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tri/app/models/view_model.dart';
-import 'package:tri/app/view/workout/workout.dart';
+import 'package:tri/app/view/workout_view/workout_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tri/app/view/workout_form/workout_form.dart';
 import 'package:tri/app/view/workout_stack/workout_stack.dart';
 
 class MyHomePage extends ConsumerWidget {
@@ -18,7 +19,7 @@ class MyHomePage extends ConsumerWidget {
       } else if (currentView == CurrentView.home) {
         return Home();
       } else if (currentView == CurrentView.workoutCreator) {
-        return const Workout();
+        return const WorkoutForm();
       } else if (currentView == CurrentView.workoutBank) {
         return const WorkoutStack();
       }
