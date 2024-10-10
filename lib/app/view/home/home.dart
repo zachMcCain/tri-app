@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tri/app/models/view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tri/app/view/workout_form/workout_form.dart';
-import 'package:tri/app/view/workout_stack/workout_stack.dart';
+import 'package:tri/app/models/workout_models/workout_type.dart';
+import 'package:tri/app/view/forms/workout_form.dart';
+import 'package:tri/app/view/view_picker/view_picker.dart';
 
 class MyHomePage extends ConsumerWidget {
   const MyHomePage({super.key, required this.title});
@@ -18,9 +19,9 @@ class MyHomePage extends ConsumerWidget {
       } else if (currentView == CurrentView.home) {
         return Home();
       } else if (currentView == CurrentView.workoutCreator) {
-        return const WorkoutForm();
+        return const WorkoutForm(workoutType: WorkoutType.run,);
       } else if (currentView == CurrentView.workoutBank) {
-        return const WorkoutStack();
+        return const ViewPicker(tiles: WorkoutType.values,);
       }
       return Home();
       
@@ -34,17 +35,17 @@ class MyHomePage extends ConsumerWidget {
         title: Text(title),
         actions: [
           IconButton(onPressed: () => ref.read(view).view = CurrentView.home, icon: const Icon(Icons.home), tooltip: "Home",),
-          IconButton(onPressed: () => ref.read(view).view = CurrentView.workoutCreator, icon: const Icon(Icons.work), tooltip: "Build Workout",),
+          IconButton(onPressed: () => ref.read(view).view = CurrentView.workoutCreator, icon: const Icon(Icons.run_circle), tooltip: "Build Workout",),
           IconButton(onPressed: () => ref.read(view).view = CurrentView.calendar, icon: const Icon(Icons.calendar_month), tooltip: "Plan",),
           IconButton(onPressed: () => ref.read(view).view = CurrentView.workoutBank, icon: const Icon(Icons.list), tooltip: "View Workouts",),
         ]
       ),
       body: currentPage,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => {print("hello")},
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () => {print("hello")},
+      //   tooltip: 'Increment',
+      //   child: const Icon(Icons.add),
+      // ),
     );
 
 
