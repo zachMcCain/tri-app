@@ -23,6 +23,7 @@ class DistanceFormField extends StatelessWidget {
         helperText: "",
       ),
       validator: validator,
+      keyboardType: TextInputType.number,
     );
   }
 }

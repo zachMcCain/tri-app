@@ -5,52 +5,56 @@ import 'package:tri/app/models/workout_models/workout_type.dart';
 import 'package:tri/app/view/forms/workout_form.dart';
 import 'package:tri/app/view/view_picker/view_picker.dart';
 
-class MyHomePage extends ConsumerWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    CurrentView currentView = ref.watch(view).view;
+  State<MyHomePage> createState() => _MyHomePageState();
+}
 
-    Widget getCurrentView() {
-      if (currentView == CurrentView.calendar) {
-        return CalendarDatePicker(initialDate: DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2050), onDateChanged: (change) => print("Hi"));
-      } else if (currentView == CurrentView.home) {
-        return Home();
-      } else if (currentView == CurrentView.workoutCreator) {
-        return const WorkoutForm(workoutType: WorkoutType.run,);
-      } else if (currentView == CurrentView.workoutBank) {
-        return const ViewPicker(tiles: WorkoutType.values,);
-      }
-      return Home();
-      
-    }
+class _MyHomePageState extends State<MyHomePage> {
+  List<Widget> views = [
+    Home(),
+    const Material(child: ViewPicker(tiles: WorkoutType.values)),
+    Material(child: CalendarDatePicker(initialDate: DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2050), onDateChanged: (change) => print("Hi"))),
+  ];
 
-    Widget currentPage = getCurrentView();
+  int _selectedIndex = 0;
+
+  Widget getCurrentView() {
+    return views.elementAt(_selectedIndex);
+  }
+
+  @override
+  Widget build(BuildContext context) {
 
     return Scaffold(
       appBar: AppBar(
+        title: Text(widget.title),
         backgroundColor: Theme.of(context).colorScheme.primary,
-        title: Text(title),
-        actions: [
-          IconButton(onPressed: () => ref.read(view).view = CurrentView.home, icon: const Icon(Icons.home), tooltip: "Home",),
-          IconButton(onPressed: () => ref.read(view).view = CurrentView.workoutCreator, icon: const Icon(Icons.run_circle), tooltip: "Build Workout",),
-          IconButton(onPressed: () => ref.read(view).view = CurrentView.calendar, icon: const Icon(Icons.calendar_month), tooltip: "Plan",),
-          IconButton(onPressed: () => ref.read(view).view = CurrentView.workoutBank, icon: const Icon(Icons.list), tooltip: "View Workouts",),
-        ]
+        
       ),
-      body: currentPage,
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () => {print("hello")},
-      //   tooltip: 'Increment',
-      //   child: const Icon(Icons.add),
-      // ),
+      bottomNavigationBar: NavigationBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        selectedIndex: _selectedIndex,
+        // title: Text(title),
+        destinations: const <Widget>[
+          NavigationDestination(icon: Badge(child: Icon(Icons.home)), label: "Home"),
+          NavigationDestination(icon: Badge(child: Icon(Icons.run_circle),), label: "Build Workout"),
+          NavigationDestination(icon: Badge(child: Icon(Icons.calendar_month)), label: "Log"),
+        ],
+        onDestinationSelected: (int index) => {
+          setState(() {
+            _selectedIndex = index;
+          })
+        },
+      ),
+      body: getCurrentView()
     );
 
 
   }
-
 }
 
 class Home extends StatelessWidget {

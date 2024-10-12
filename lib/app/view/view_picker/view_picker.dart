@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:tri/app/view/view_picker/abstract_view_tile.dart';
 
@@ -13,27 +14,19 @@ class ViewPicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    Widget view = const SizedBox.shrink();
 
-    setView(Widget widget) {
-      view = widget;
-    }
-
-    List<ListTile> cards = tiles.map((tile) => 
-      ListTile(
-          leading: tile.icon,
-          title: Text(tile.title),
-          trailing: tile.trailing,
-          tileColor: Theme.of(context).cardColor,
-          onTap: () => {
-            setView(tile.onTap())
-          },
-        ),
-      )
-    .toList();
-
-    view = ListView(children: cards);
-
-    return view;
+    return ListView(
+      children: tiles.map((tile) => 
+        ListTile(
+            leading: tile.icon,
+            title: Text(tile.title),
+            trailing: tile.trailing,
+            tileColor: Theme.of(context).cardColor,
+            onTap: () => {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => tile.onTap()))
+            },
+          ),
+        )
+      .toList());
   }
 }

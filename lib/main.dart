@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tri/app/models/workout_models/workout_type.dart';
 import 'package:tri/app/view/home/home.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tri/app/view/view_picker/view_picker.dart';
 
 void main() {
   runApp(const ProviderScope( 
