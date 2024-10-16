@@ -16,7 +16,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<Widget> views = [
     Home(),
-    const Material(child: ViewPicker(tiles: WorkoutType.values)),
+    Material(child: ViewPicker(tiles: WorkoutType.values, insert: false,)),
     Material(child: CalendarDatePicker(initialDate: DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2050), onDateChanged: (change) => print("Hi"))),
   ];
 
@@ -40,9 +40,9 @@ class _MyHomePageState extends State<MyHomePage> {
         selectedIndex: _selectedIndex,
         // title: Text(title),
         destinations: const <Widget>[
-          NavigationDestination(icon: Badge(child: Icon(Icons.home)), label: "Home"),
-          NavigationDestination(icon: Badge(child: Icon(Icons.run_circle),), label: "Build Workout"),
-          NavigationDestination(icon: Badge(child: Icon(Icons.calendar_month)), label: "Log"),
+          NavigationDestination(icon: Icon(Icons.home), label: "Home"),
+          NavigationDestination(icon: Icon(Icons.run_circle), label: "Build Workout"),
+          NavigationDestination(icon: Icon(Icons.calendar_month), label: "Log"),
         ],
         onDestinationSelected: (int index) => {
           setState(() {
@@ -68,13 +68,11 @@ class Home extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          const Text(
-            'You have pushed the button this many times:',
-          ),
           Text(
-            'home',
+            'Welcome to TRI',
             style: Theme.of(context).textTheme.headlineMedium,
           ),
+          Placeholder(color: Colors.green.shade100),
         ],
       ),
     );

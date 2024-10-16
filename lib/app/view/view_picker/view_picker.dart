@@ -4,29 +4,48 @@ import 'package:tri/app/view/view_picker/abstract_view_tile.dart';
 
 enum WorkoutPickerMode { type, workout }
 
-/// This is just a placeholder for the idea of having a cascading stack - perhaps Stack is not the best class for this as it just straight up stacks them
-class ViewPicker extends StatelessWidget {
+class ViewPicker extends StatefulWidget {
 
   final List<AbstractViewTile> tiles;
+  final bool insert;
 
-  const ViewPicker({super.key, required this.tiles});
+  const ViewPicker({super.key, required this.tiles, required this.insert});
+
+  @override
+  State<ViewPicker> createState() => _ViewPickerState();
+}
+
+class _ViewPickerState extends State<ViewPicker> {
+
+  List<Widget> additionalView = List.empty(growable: true);
+  List<Widget> tileView = List.empty(growable: true);
 
   @override
   Widget build(BuildContext context) {
 
-
-    return ListView(
-      children: tiles.map((tile) => 
+    List<Widget> tileView = widget.tiles.map((tile) => 
         ListTile(
             leading: tile.icon,
             title: Text(tile.title),
             trailing: tile.trailing,
             tileColor: Theme.of(context).cardColor,
             onTap: () => {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => tile.onTap()))
+              if (!widget.insert) {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => tile.onTap()))
+              } else {
+                setState(() {
+                  additionalView.add(tile.onTap());
+                })
+              }
             },
           ),
         )
-      .toList());
+      .toList();
+
+    List<Widget> view = additionalView.map((v) => v).toList(); // clone the additionalView
+    view.addAll(tileView);
+    return ListView(
+      children: view
+    );
   }
 }

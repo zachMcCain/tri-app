@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tri/app/models/workout_models/workout_type.dart';
-import 'package:tri/app/utils/validators.dart';
-import 'package:tri/app/view/forms/custom_form_fields/start_time_form_field.dart';
 import 'package:tri/app/view/forms/forms/run_form.dart';
 import 'package:tri/app/view/forms/forms/swim_form.dart';
 
@@ -45,6 +43,8 @@ class WorkoutFormState extends State<WorkoutForm> {
     }
   }
 
+  TimeOfDay time = TimeOfDay.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,25 +61,90 @@ class WorkoutFormState extends State<WorkoutForm> {
               key: _formKey, // used to save, reset, and validate every child FormField
               child: ListView(
                 children: [
-                  TextFormField(
-                    validator: Validators.notEmpty,
-                    decoration: InputDecoration(hintText: "Placeholder for Workout Duration"),
-                    controller: textController,
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                      Container(
+                        padding: const EdgeInsets.all(7.0),
+                        child: Text('Build ${widget.workoutType.title} Workout', 
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        )
+                      ),
+                      widget.workoutType.icon,
+                    ]),
+                  ),
+
+                  // A general workout form should -
+                    // Build duration from the added segments
+                    // Build distance from the added segments
+                      // So... like text title fields?
+                    // Allow setting total duration (to be modified if segments overflow it?)
+                    /**
+                     * Hmmm... start with an "add +" button that opens up options of -
+                     *  open segment, time, calories, distance, pace (distance over time)
+                     *  Also maybe - warmup, cooldown?
+                     *  Also maybe - other activity type?
+                     * 
+                     *  So maybe, top thing with goal thing, like
+                     *  time with goal pace/heartrate
+                     *  distance with goal pace/heartrate
+                     *  
+                     * 
+                     * How to handle repeats? - give that as an "add" option when there is 
+                     *  a repeatable segment available? - be able to select one or collection
+                     *  of repeatable segments to repeat together
+                     * 
+                     * Maybe use a builder pattern? Workout builder?
+                     * 
+                     * Distance with goal pace
+                     * Time with goal 
+                     *
+                     */
+
+                  // TextFormField(
+                  //   validator: Validators.notEmpty,
+                  //   decoration: InputDecoration(hintText: "Placeholder for Workout Duration"),
+                  //   controller: textController,
                     
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(hintText: "Placeholder for Workout Heartrate"),
-                    keyboardType: TextInputType.number,
-                    validator: Validators.isNumber,
-                  ),
-                  StartTimeFormField(
-                    validator: Validators.notEmpty,
-                    currentValue: TimeOfDay.now(),
-                    onChanged: (value) => {
-        
-                    },
-                  ),
+                  // ),
+                  // Give some buttons:
+                    // Add target heartrate
+                    // add segment
+                    // add target cadence
+                    // add target pace
+                    // 
+                  // TextFormField(
+                  //   decoration: InputDecoration(hintText: "Placeholder for Workout Heartrate"),
+                  //   keyboardType: TextInputType.number,
+                  //   validator: Validators.isNumber,
+                  // ),
                   getWorkoutView(),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Notes',
+                      ),
+                      maxLines: 15,
+                      // expands: true,
+                      minLines: 5,
+                    ),
+                  ),
+                  // StartTimeFormField<TimeOfDay>(
+                  //   validator: Validators.notNull,
+                  //   currentValue: time,
+                  //   onChanged: (value) => {
+                  //     print("Start time has changed to $value"),
+                  //     if (value != null) {
+                  //       setState(() {
+                          
+                  //         time = value;
+                  //       })
+                  //     }
+                  //   },
+                  // ),
                   ElevatedButton(
                     onPressed: onSubmit,
                     child: const Text('Submit')

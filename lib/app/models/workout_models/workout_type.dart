@@ -20,9 +20,9 @@ enum WorkoutType implements AbstractViewTile{
     'Custom';
 
   @override
-  Icon get icon =>  this == WorkoutType.swim ? const Icon(Icons.water, color: Colors.lightBlue,) : 
+  Icon get icon =>  this == WorkoutType.swim ? const Icon(Icons.water) : 
     this == WorkoutType.bike ? const Icon(Icons.directions_bike):
-    this == WorkoutType.run ? const Icon(Icons.run_circle_outlined, color: Colors.green):
+    this == WorkoutType.run ? const Icon(Icons.run_circle_outlined):
     this == WorkoutType.tri ? const Icon(Icons.speed):
     this == WorkoutType.strength ? const Icon(Icons.cabin):
     const Icon(Icons.dashboard_customize);

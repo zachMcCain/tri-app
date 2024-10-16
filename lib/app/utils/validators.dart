@@ -16,4 +16,10 @@ class Validators {
     return "Must be a numeric value";
   }
 
+  static String? notNull(value) {
+    if (value == null) {
+      return 'Value required';
+    }
+    return null;
+  }
 }
