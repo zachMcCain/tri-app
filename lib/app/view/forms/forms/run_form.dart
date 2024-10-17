@@ -6,9 +6,9 @@ import 'package:tri/app/view/view_picker/view_picker.dart';
 
 class RunForm extends StatelessWidget {
 
-  List<FieldOptions> fields = [
+  final List<FieldOptions> fields = [
     FieldOptions.distance,
-    // FieldOptions.cadence,
+    FieldOptions.duration,
   ];
 
   @override

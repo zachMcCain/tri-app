@@ -2,21 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:tri/app/models/workout_models/workout_type.dart';
 import 'package:tri/app/view/forms/forms/run_form.dart';
 import 'package:tri/app/view/forms/forms/swim_form.dart';
-import 'package:tri/app/view/view_picker/abstract_result_widget.dart';
 
-class WorkoutForm extends ResultWidget<double> {
+class WorkoutForm extends StatefulWidget {
 
   final WorkoutType workoutType;
 
-  WorkoutForm({super.key, required this.workoutType});
+  const WorkoutForm({super.key, required this.workoutType});
 
   @override
   State<WorkoutForm> createState() => _WorkoutFormState();
-  
-  @override
-  double? getResult() {
-    return 33;
-  }
 }
 
 class _WorkoutFormState extends State<WorkoutForm> {
@@ -35,8 +29,7 @@ class _WorkoutFormState extends State<WorkoutForm> {
     return RunForm();
   }
 
-  final TimeOfDay time = TimeOfDay.now();
-
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(        
@@ -52,19 +45,19 @@ class _WorkoutFormState extends State<WorkoutForm> {
               key: _formKey, // used to save, reset, and validate every child FormField
               child: ListView(
                 children: [
-                  // Center(
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                  //     children: [
-                  //     Container(
-                  //       padding: const EdgeInsets.all(7.0),
-                  //       child: Text('${widget.workoutType.title} Workout', 
-                  //         style: Theme.of(context).textTheme.headlineSmall,
-                  //       )
-                  //     ),
-                  //     widget.workoutType.icon,
-                  //   ]),
-                  // ),
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                      Container(
+                        padding: const EdgeInsets.all(7.0),
+                        child: Text('${widget.workoutType.title} Workout', 
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        )
+                      ),
+                      widget.workoutType.icon,
+                    ]),
+                  ),
                   Container(
                     decoration: BoxDecoration(
                       border: Border.all(
@@ -72,21 +65,9 @@ class _WorkoutFormState extends State<WorkoutForm> {
                       ),
                       borderRadius: BorderRadius.circular(9)
                     ),
-                    child: Column(
+                    child: const Column(
                       children: [
-                        Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                            Container(
-                              padding: const EdgeInsets.all(7.0),
-                              child: Text('${widget.workoutType.title} Workout', 
-                                style: Theme.of(context).textTheme.headlineSmall,
-                              )
-                            ),
-                            widget.workoutType.icon,
-                          ]),
-                        ),
+                        Text("Workout Card Here"),
                       ],
                     ),
                   ),

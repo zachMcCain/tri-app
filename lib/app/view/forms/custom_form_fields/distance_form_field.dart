@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:tri/app/view/view_picker/abstract_result_widget.dart';
 
 class DistanceFormField extends StatefulWidget {
   final ValueChanged<String> onChanged;
   final FormFieldValidator<String>? validator;
   final double? currentValue;
 
-  DistanceFormField({
+  const DistanceFormField({
     super.key,
     required this.onChanged,
     required this.currentValue,
