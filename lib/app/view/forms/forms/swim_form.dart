@@ -13,7 +13,10 @@ class SwimForm extends StatelessWidget {
             decoration: InputDecoration(hintText: "Stroke Count"),
           ),
           DistanceFormField(
-            onChanged: (value) => {}, currentValue: 0.0, validator: Validators.isNumber
+            onChanged: (value) {
+              
+            },
+            currentValue: 0.0, validator: Validators.isNumber
           ),
           TextFormField(
             decoration: InputDecoration(hintText: "Pace"),

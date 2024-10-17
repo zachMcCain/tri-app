@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tri/app/view/forms/custom_form_fields/cadence_form_field.dart';
 import 'package:tri/app/view/forms/custom_form_fields/distance_form_field.dart';
+import 'package:tri/app/view/view_picker/abstract_result_widget.dart';
 import 'package:tri/app/view/view_picker/abstract_view_tile.dart';
 
 enum FieldOptions implements AbstractViewTile {
@@ -22,10 +23,10 @@ enum FieldOptions implements AbstractViewTile {
   Icon? get trailing => const Icon(Icons.list);
 
   @override
-  Widget onTap() {
-    return this == FieldOptions.distance ? DistanceFormField(onChanged: (dist) => {}, currentValue: null, validator: null) : 
-    this == FieldOptions.cadence ? CadenceFormField(onChanged: (cadence) => {}, currentValue: null, validator: null) : 
-    DistanceFormField(onChanged: (distance) => {}, currentValue: null, validator: null);
+  Widget onTap(Function(Object val) callback) {
+    return this == FieldOptions.distance ? DistanceFormField(onChanged: (value) => callback(value), currentValue: null, validator: null) : 
+    this == FieldOptions.cadence ? CadenceFormField(onChanged: (value) => callback(value), currentValue: null, validator: null) : 
+    DistanceFormField(onChanged: (value) => callback(value), currentValue: null, validator: null);
   }
 
 }

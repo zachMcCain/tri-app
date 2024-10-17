@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:tri/app/view/forms/workout_form.dart';
+import 'package:tri/app/view/view_picker/abstract_result_widget.dart';
 import 'package:tri/app/view/view_picker/abstract_view_tile.dart';
 
 enum WorkoutType implements AbstractViewTile{
@@ -31,7 +32,7 @@ enum WorkoutType implements AbstractViewTile{
   Icon? get trailing => const Icon(Icons.list);
 
   @override
-  Widget onTap() {
+  Widget onTap(Function(Object val) callback) {
     return WorkoutForm(workoutType: this);
   }
 
