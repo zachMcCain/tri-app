@@ -8,7 +8,7 @@ class RunForm extends StatelessWidget {
 
   List<FieldOptions> fields = [
     FieldOptions.distance,
-    FieldOptions.cadence,
+    // FieldOptions.cadence,
   ];
 
   @override
@@ -17,8 +17,9 @@ class RunForm extends StatelessWidget {
 
     // TODO: implement build
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        ConstrainedBox(constraints: BoxConstraints(maxHeight: 400), child:
+        ConstrainedBox(constraints: BoxConstraints(maxHeight: 350), child:
           ViewPicker(tiles: fields, insert: true,),
         ),
         // TextFormField(

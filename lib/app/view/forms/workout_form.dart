@@ -52,19 +52,45 @@ class _WorkoutFormState extends State<WorkoutForm> {
               key: _formKey, // used to save, reset, and validate every child FormField
               child: ListView(
                 children: [
-                  Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                      Container(
-                        padding: const EdgeInsets.all(7.0),
-                        child: Text('Build ${widget.workoutType.title} Workout', 
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        )
+                  // Center(
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
+                  //     Container(
+                  //       padding: const EdgeInsets.all(7.0),
+                  //       child: Text('${widget.workoutType.title} Workout', 
+                  //         style: Theme.of(context).textTheme.headlineSmall,
+                  //       )
+                  //     ),
+                  //     widget.workoutType.icon,
+                  //   ]),
+                  // ),
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 1,
                       ),
-                      widget.workoutType.icon,
-                    ]),
+                      borderRadius: BorderRadius.circular(9)
+                    ),
+                    child: Column(
+                      children: [
+                        Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                            Container(
+                              padding: const EdgeInsets.all(7.0),
+                              child: Text('${widget.workoutType.title} Workout', 
+                                style: Theme.of(context).textTheme.headlineSmall,
+                              )
+                            ),
+                            widget.workoutType.icon,
+                          ]),
+                        ),
+                      ],
+                    ),
                   ),
+                  // Placeholder(fallbackHeight: 100,),
 
                   // A general workout form should -
                     // Build duration from the added segments

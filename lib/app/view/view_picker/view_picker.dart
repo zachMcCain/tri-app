@@ -30,11 +30,11 @@ class _ViewPickerState extends State<ViewPicker> {
             title: Text(tile.title),
             trailing: tile.trailing,
             tileColor: Theme.of(context).cardColor,
-            onTap: () => {
+            onTap: () {
               if (!widget.insert) {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => tile.onTap((v) {})))
+                Navigator.push(context, MaterialPageRoute(builder: (context) => tile.onTap((v) {})));
               } else {
-                setState(() {
+                // setState(() {
                   Object? result;
                   Widget form = tile.onTap((val) {result = val;});
 
@@ -63,18 +63,21 @@ class _ViewPickerState extends State<ViewPicker> {
                   ).then((someResult) {
                     print("Retrieved a result of $someResult");
                     if (someResult != null) {
-                      additionalView.add(ListTile(
-                        leading: tile.icon,
-                        title: Text(someResult.toString()),
-                        trailing: tile.trailing
-                      ));
+                      setState(() {
+                        
+                        additionalView.add(ListTile(
+                          leading: tile.icon,
+                          title: Text(someResult.toString()),
+                          trailing: tile.trailing
+                        ));
+                      });
                     }
                   });
 
-                  // Instead of the widget, we should be adding a row field with a title based on the 
-                  // tile.title and a value of the result of the future here.
-                  // additionalView.add(tile.onTap());
-                })
+                //   // Instead of the widget, we should be adding a row field with a title based on the 
+                //   // tile.title and a value of the result of the future here.
+                //   // additionalView.add(tile.onTap());
+                // })
               }
             },
           ),
@@ -84,6 +87,7 @@ class _ViewPickerState extends State<ViewPicker> {
     List<Widget> view = additionalView.map((v) => v).toList(); // clone the additionalView
     view.addAll(tileView);
     return ListView(
+      shrinkWrap: true,
       children: view
     );
   }

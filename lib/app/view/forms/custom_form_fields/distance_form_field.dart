@@ -20,16 +20,20 @@ class DistanceFormField extends StatefulWidget {
 class _DistanceFormFieldState extends State<DistanceFormField> {
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      initialValue: widget.currentValue.toString(),
-      onChanged: widget.onChanged,
-      decoration: const InputDecoration(
-        hintText: '3.1 miles',
-        labelText: 'Distance',
-        helperText: "",
+    return SizedBox(
+      width: 200,
+      child: TextFormField(
+        // initialValue: widget.currentValue.toString(),
+        onChanged: widget.onChanged,
+        decoration: const InputDecoration(
+          hintText: '3.1',
+          labelText: 'Distance',
+          helperText: "",
+          suffixText: "miles"
+        ),
+        validator: widget.validator,
+        keyboardType: TextInputType.number,
       ),
-      validator: widget.validator,
-      keyboardType: TextInputType.number,
     );
   }
 }

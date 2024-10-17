@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tri/app/view/view_picker/abstract_result_widget.dart';
 
-class CadenceFormField extends ResultWidget<double> {
+class CadenceFormField extends StatefulWidget {
   final ValueChanged<String> onChanged;
   final FormFieldValidator<String>? validator;
   final double? currentValue;
@@ -16,17 +16,13 @@ class CadenceFormField extends ResultWidget<double> {
   @override
   State<CadenceFormField> createState() => _CadenceFormFieldState();
   
-  @override
-  double? getResult() {
-    return 33;
-  }
 }
 
 class _CadenceFormFieldState extends State<CadenceFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      initialValue: widget.currentValue.toString(),
+      // initialValue: widget.currentValue.toString(),
       onChanged: widget.onChanged,
       decoration: const InputDecoration(
         hintText: 'Turnover per minute',
@@ -36,9 +32,5 @@ class _CadenceFormFieldState extends State<CadenceFormField> {
       validator: widget.validator,
       keyboardType: TextInputType.number,
     );
-  }
-
-  double? getResult() {
-    return widget.currentValue;
   }
 }
