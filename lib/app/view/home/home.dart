@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tri/app/models/view_model.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tri/app/models/workout_models/workout_type.dart';
-import 'package:tri/app/view/forms/workout_form.dart';
 import 'package:tri/app/view/view_picker/view_picker.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -16,7 +13,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<Widget> views = [
     Home(),
-    Material(child: ViewPicker(tiles: WorkoutType.values, insert: false,)),
+    const Material(child: ViewPicker(tiles: WorkoutType.values, insert: false,)),
     Material(child: CalendarDatePicker(initialDate: DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2050), onDateChanged: (change) => print("Hi"))),
   ];
 

@@ -9,8 +9,9 @@ class ViewPicker extends StatefulWidget {
 
   final List<AbstractViewTile> tiles;
   final bool insert;
+  final ValueChanged<Object>? onChanged;
 
-  const ViewPicker({super.key, required this.tiles, required this.insert});
+  const ViewPicker({super.key, required this.tiles, required this.insert, this.onChanged});
 
   @override
   State<ViewPicker> createState() => _ViewPickerState();
@@ -61,16 +62,30 @@ class _ViewPickerState extends State<ViewPicker> {
                       )
                     ),
                   ).then((someResult) {
-                    print("Retrieved a result of $someResult");
                     if (someResult != null) {
-                      setState(() {
+                      if (widget.onChanged != null) {
+                        widget.onChanged!(someResult);
+                        //   Padding(
+                        //   padding: const EdgeInsets.all(8.0),
+                        //   child: Row(
+                        //     children: [
+                        //       tile.icon ?? Icon(Icons.abc),
+                        //       Text(someResult.toString()),
+                        //     ],
+                        //     // leading: tile.icon,
+                        //     // title: Text(someResult.toString()),
+                        //     // trailing: tile.trailing
+                        //   ),
+                        // ));
+                      }
+                      // setState(() {
                         
-                        additionalView.add(ListTile(
-                          leading: tile.icon,
-                          title: Text(someResult.toString()),
-                          trailing: tile.trailing
-                        ));
-                      });
+                      //   additionalView.add(ListTile(
+                      //     leading: tile.icon,
+                      //     title: Text(someResult.toString()),
+                      //     trailing: tile.trailing
+                      //   ));
+                      // });
                     }
                   });
 

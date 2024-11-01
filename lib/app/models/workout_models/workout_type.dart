@@ -1,14 +1,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:tri/app/view/forms/workout_form.dart';
-import 'package:tri/app/view/view_picker/abstract_result_widget.dart';
 import 'package:tri/app/view/view_picker/abstract_view_tile.dart';
 
 enum WorkoutType implements AbstractViewTile{
   swim,
   bike,
   run,
-  tri,
+  brick,
   strength,
   custom;
 
@@ -16,7 +15,7 @@ enum WorkoutType implements AbstractViewTile{
   String get title => this == WorkoutType.swim ? 'Swim' : 
     this == WorkoutType.bike ? 'Bike' :
     this == WorkoutType.run ? 'Run' :
-    this == WorkoutType.tri ? 'Tri' :
+    this == WorkoutType.brick ? 'Brick' :
     this == WorkoutType.strength ? 'Strength' :
     'Custom';
 
@@ -24,7 +23,7 @@ enum WorkoutType implements AbstractViewTile{
   Icon get icon =>  this == WorkoutType.swim ? const Icon(Icons.water) : 
     this == WorkoutType.bike ? const Icon(Icons.directions_bike):
     this == WorkoutType.run ? const Icon(Icons.run_circle_outlined):
-    this == WorkoutType.tri ? const Icon(Icons.speed):
+    this == WorkoutType.brick ? const Icon(Icons.speed):
     this == WorkoutType.strength ? const Icon(Icons.cabin):
     const Icon(Icons.dashboard_customize);
   
