@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tri/app/models/workout_models/workout_type.dart';
 import 'package:tri/app/providers/workouts_provider.dart';
+import 'package:tri/app/view/planner/planner.dart';
 import 'package:tri/app/view/view_picker/view_picker.dart';
 import 'package:tri/app/view/workout/full_workout_view.dart';
+import 'package:tri/app/view/workout/workout_list.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -15,9 +17,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<Widget> views = [
-    Home(),
+    const WorkoutList(),
     const Material(child: ViewPicker(tiles: WorkoutType.values, insert: false,)),
-    Material(child: CalendarDatePicker(initialDate: DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2050), onDateChanged: (change) => print("Hi"))),
+    const Planner()
   ];
 
   int _selectedIndex = 0;
@@ -57,44 +59,45 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class Home extends ConsumerWidget {
-  Home({
-    super.key,
-  });
+// class Home extends StatelessWidget {
+//   // Home({
+//   //   super.key,
+//   // });
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
+//   @override
+//   Widget build(BuildContext context) {
 
-    final allWorkouts = ref.watch(workoutsProvider);
+//     return const WorkoutList();
+//   //   final allWorkouts = ref.watch(workoutsProvider);
 
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            'Welcome to TRI',
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
-          // GridView.builder(
-          //   itemCount: 4,
-          //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), 
-          //   itemBuilder: (context, index) {
-          //     return FullWorkoutView(workout: allWorkouts.workouts[index]);
-          //   }
-          // ),
-          // another way to do it:
-          Container(
-            height: 600,
-            child: ListWheelScrollView(
-              itemExtent: 200, 
-              diameterRatio: 5,
-              children: [...allWorkouts.workouts.map((workout) => FullWorkoutView(workout: workout))]
-            ),
-          ) 
+//   //   return Center(
+//   //     child: Column(
+//   //       mainAxisAlignment: MainAxisAlignment.center,
+//   //       children: <Widget>[
+//   //         Text(
+//   //           'Your Workouts',
+//   //           style: Theme.of(context).textTheme.headlineMedium,
+//   //         ),
+//   //         // GridView.builder(
+//   //         //   itemCount: 4,
+//   //         //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), 
+//   //         //   itemBuilder: (context, index) {
+//   //         //     return FullWorkoutView(workout: allWorkouts.workouts[index]);
+//   //         //   }
+//   //         // ),
+//   //         // another way to do it:
+//   //         IntrinsicHeight(
+//   //           // height: 600,
+//   //           child: ListWheelScrollView(
+//   //             itemExtent: 200, 
+//   //             diameterRatio: 5,
+//   //             children: [...allWorkouts.workouts.map((workout) => FullWorkoutView(workout: workout))]
+//   //           ),
+//   //         ) 
           
-          // Placeholder(color: Colors.green.shade100),
-        ],
-      ),
-    );
-  }
-}
+//   //         // Placeholder(color: Colors.green.shade100),
+//   //       ],
+//   //     ),
+//   //   );
+//   // }
+// }
