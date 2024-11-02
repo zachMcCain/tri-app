@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tri/app/models/workout_models/workout_type.dart';
+import 'package:tri/app/providers/workouts_provider.dart';
 import 'package:tri/app/view/view_picker/view_picker.dart';
+import 'package:tri/app/view/workout/full_workout_view.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -54,13 +57,16 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends ConsumerWidget {
   Home({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    final allWorkouts = ref.watch(workoutsProvider);
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -69,7 +75,24 @@ class Home extends StatelessWidget {
             'Welcome to TRI',
             style: Theme.of(context).textTheme.headlineMedium,
           ),
-          Placeholder(color: Colors.green.shade100),
+          // GridView.builder(
+          //   itemCount: 4,
+          //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), 
+          //   itemBuilder: (context, index) {
+          //     return FullWorkoutView(workout: allWorkouts.workouts[index]);
+          //   }
+          // ),
+          // another way to do it:
+          Container(
+            height: 600,
+            child: ListWheelScrollView(
+              itemExtent: 200, 
+              diameterRatio: 5,
+              children: [...allWorkouts.workouts.map((workout) => FullWorkoutView(workout: workout))]
+            ),
+          ) 
+          
+          // Placeholder(color: Colors.green.shade100),
         ],
       ),
     );

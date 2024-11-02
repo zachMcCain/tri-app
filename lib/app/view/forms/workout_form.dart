@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tri/app/models/workout/abstract_segment.dart';
 import 'package:tri/app/models/workout/abstract_workout.dart';
 import 'package:tri/app/models/workout/distance.dart';
@@ -7,22 +8,23 @@ import 'package:tri/app/models/workout/workout_factory.dart';
 import 'package:tri/app/models/workout/workout_summary_visitor.dart';
 import 'package:tri/app/models/workout_models/workout.dart';
 import 'package:tri/app/models/workout_models/workout_type.dart';
+import 'package:tri/app/providers/workouts_provider.dart';
 import 'package:tri/app/view/forms/forms/run_form.dart';
 import 'package:tri/app/view/forms/forms/swim_form.dart';
 import 'package:tri/app/view/workout/full_workout_view.dart';
 import 'package:tri/app/view/workout/workout_summary_view.dart';
 
-class WorkoutForm extends StatefulWidget {
+class WorkoutForm extends ConsumerStatefulWidget {
 
   final WorkoutType workoutType;
 
   const WorkoutForm({super.key, required this.workoutType});
 
   @override
-  State<WorkoutForm> createState() => _WorkoutFormState();
+  ConsumerState<WorkoutForm> createState() => _WorkoutFormState();
 }
 
-class _WorkoutFormState extends State<WorkoutForm> {
+class _WorkoutFormState extends ConsumerState<WorkoutForm> {
   final _formKey = GlobalKey<FormState>();
 
   final textController = TextEditingController();
@@ -83,13 +85,13 @@ class _WorkoutFormState extends State<WorkoutForm> {
       ),
       // Metadata on the Current State of the Workout
       Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).secondaryHeaderColor,
-          border: Border.all(
-            width: 1,
-          ),
-          borderRadius: BorderRadius.circular(9)
-        ),
+        // decoration: BoxDecoration(
+        //   color: Theme.of(context).secondaryHeaderColor,
+        //   border: Border.all(
+        //     width: 1,
+        //   ),
+        //   borderRadius: BorderRadius.circular(9)
+        // ),
         child: Column(
           children: [
             // Padding(
@@ -119,6 +121,9 @@ class _WorkoutFormState extends State<WorkoutForm> {
 
   @override
   Widget build(BuildContext context) {
+    // Provider tracking user's list of workouts
+    final workoutList = ref.watch(workoutsProvider);
+
     // The full layout
     return Scaffold(
       // AppBar with title and navigation
@@ -157,9 +162,10 @@ class _WorkoutFormState extends State<WorkoutForm> {
                   // The Submit Button
                   ElevatedButton(
                     onPressed: () {
+                      // ref.
                       if (_formKey.currentState!.validate()) {
 
-
+                        workoutList.addWorkout(workout);
                         // This needs to add the built workout to the overall app state
 
                         // If the form is valid, display a snackbar. In the real world,
@@ -169,6 +175,7 @@ class _WorkoutFormState extends State<WorkoutForm> {
                             Column(children: [...getWorkoutView()],)
                           )
                         );
+                        Navigator.pop(context);
                       }
                     },
                     child: const Text('Submit')

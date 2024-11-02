@@ -19,7 +19,20 @@ class FullWorkoutView extends StatelessWidget {
       children: [
         WorkoutSummaryView(summary: summaryVisitor.summary),
         Text(workout.workoutNotes ??= ''),
-        ...workout.segments.map((segment) => Text(segment.getDisplayValue()))
+        ...workout.segments.map(
+          (segment) {
+            return SizedBox(
+              width: 300,
+              height: 60,
+              child: Card.filled(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(segment.getDisplayValue()),
+                )
+              ),
+            );
+          } 
+        )
       ],
     );
   }
