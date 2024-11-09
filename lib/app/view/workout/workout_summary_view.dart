@@ -1,22 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:tri/app/models/workout/abstract_workout.dart';
 import 'package:tri/app/models/workout/workout_summary_visitor.dart';
 
 class WorkoutSummaryView extends StatelessWidget {
-  WorkoutSummary summary;
+  final AbstractWorkout workout;
 
-  WorkoutSummaryView({super.key, required this.summary});
+  const WorkoutSummaryView({super.key, required this.workout});
 
   @override
   Widget build(BuildContext context) {
+    WorkoutSummaryVisitor summaryVisitor = WorkoutSummaryVisitor(type: workout.type);
+    workout.accept(summaryVisitor);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(summary.type?.name.toString().toUpperCase() ?? 'Open'),
-          const Spacer(),
-          Text('Time: ${summary.totalTime?.toString() ?? 'Open'}'),
-          const Spacer(),
-          Text('Distance: ${summary.totalDistance?.toString() ?? 'Open'}'),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Row(
+              children: [
+                summaryVisitor.summary.type.icon,
+                const SizedBox(width: 9,),
+                Text(summaryVisitor.summary.type.name.toString().toUpperCase()),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Text('Distance: ${summaryVisitor.getDistanceDisplay()}'),
+                const SizedBox(width: 10,),
+                Text('Time: ${summaryVisitor.getTimeDisplay()}'),
+              ],
+            ),
+          ),
         ],
       ),
     );

@@ -1,11 +1,15 @@
 import 'package:tri/app/models/interfaces/visitor.dart';
 import 'package:tri/app/models/workout/abstract_workout.dart';
+import 'package:tri/app/models/workout_models/workout_type.dart';
 
 class Run extends AbstractWorkout {
   @override
+  WorkoutType type = WorkoutType.run;
+
+  @override
   accept(Visitor v) {
-    print("Calling accept on teh visitor in run workout");
     segments.forEach(v.visit);
+    
   }
 
   @override

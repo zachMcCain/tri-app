@@ -62,7 +62,7 @@ class _DistanceFormFieldState extends State<DistanceFormField> {
               showDialog(context: context, 
                 builder: (context) => PaceFormField(
                   onChanged: setPace, 
-                  unit: DistanceUnit.mile
+                  unit: DistanceUnit.mi
                 )
               );
             }, 

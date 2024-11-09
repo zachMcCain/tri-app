@@ -46,7 +46,10 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
     });
   }
 
-  void onSubmit(workoutList) {
+  void onSubmit() {
+    // Provider tracking user's list of workouts
+    final workoutList = ref.watch(workoutsProvider);
+
     if (workout.valid()) {
       workoutList.addWorkout(workout);
       // This needs to add the built workout to the overall app state
@@ -93,9 +96,6 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
 
   @override
   Widget build(BuildContext context) {
-    // Provider tracking user's list of workouts
-    final workoutList = ref.watch(workoutsProvider);
-
     // The full layout
     return Scaffold(
       // AppBar with title and navigation
@@ -103,6 +103,7 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
         title: const Text('TRI'),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
+
       // Workout form holder
       body: Center(
         child: Material(
@@ -130,9 +131,7 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
                 ),
                 // The Submit Button
                 TextButton(
-                  onPressed: () {
-                    onSubmit(workoutList);
-                  },
+                  onPressed: onSubmit,
                   child: const Text('Submit')
                 )
               ],
