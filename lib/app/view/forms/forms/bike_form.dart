@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tri/app/view/forms/field_options.dart';
 import 'package:tri/app/view/view_picker/view_picker.dart';
 
-class RunForm extends StatelessWidget {
+class BikeForm extends StatelessWidget {
   final ValueChanged<Object>? onChanged;
 
   final List<FieldOptions> fields = [
@@ -10,7 +10,7 @@ class RunForm extends StatelessWidget {
     FieldOptions.duration,
   ];
 
-  RunForm({super.key, this.onChanged});
+  BikeForm({super.key, this.onChanged});
 
   @override
   Widget build(BuildContext context) {

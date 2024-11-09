@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:tri/app/view/view_picker/abstract_result_widget.dart';
 import 'package:tri/app/view/view_picker/abstract_view_tile.dart';
 
-enum WorkoutPickerMode { type, workout }
-
+/// Widget used for building a grid of selectable options that when selected 
+/// will replace the view with the result of the onTap method
+/// Typically nested inside another component
 class ViewPicker extends StatefulWidget {
 
   final List<AbstractViewTile> tiles;
-  final bool insert;
   final ValueChanged<Object>? onChanged;
 
-  const ViewPicker({super.key, required this.tiles, required this.insert, this.onChanged});
+  const ViewPicker({super.key, required this.tiles, this.onChanged});
 
   @override
   State<ViewPicker> createState() => _ViewPickerState();
@@ -19,91 +19,52 @@ class ViewPicker extends StatefulWidget {
 
 class _ViewPickerState extends State<ViewPicker> {
 
-  List<Widget> additionalView = List.empty(growable: true);
   List<Widget> tileView = List.empty(growable: true);
 
   @override
   Widget build(BuildContext context) {
 
     List<Widget> tileView = widget.tiles.map((tile) => 
-        ListTile(
-            leading: tile.icon,
-            title: Text(tile.title),
-            trailing: tile.trailing,
-            tileColor: Theme.of(context).cardColor,
-            onTap: () {
-              if (!widget.insert) {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => tile.onTap((v) {})));
-              } else {
-                // setState(() {
-                  Object? result;
-                  Widget form = tile.onTap((val) {result = val;});
-
-                  // Should actually pop out the form field and then insert the result of the input
-                  showDialog(
-                    context: context, 
-                    builder: (BuildContext context) => Dialog(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            form,
-                            const SizedBox(height: 15),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context, result);
-                              },
-                              child: const Text('Submit'),
-                            ),
-                          ],
-                        ),
-                      )
-                    ),
-                  ).then((someResult) {
-                    if (someResult != null) {
-                      if (widget.onChanged != null) {
-                        widget.onChanged!(someResult);
-                        //   Padding(
-                        //   padding: const EdgeInsets.all(8.0),
-                        //   child: Row(
-                        //     children: [
-                        //       tile.icon ?? Icon(Icons.abc),
-                        //       Text(someResult.toString()),
-                        //     ],
-                        //     // leading: tile.icon,
-                        //     // title: Text(someResult.toString()),
-                        //     // trailing: tile.trailing
-                        //   ),
-                        // ));
-                      }
-                      // setState(() {
-                        
-                      //   additionalView.add(ListTile(
-                      //     leading: tile.icon,
-                      //     title: Text(someResult.toString()),
-                      //     trailing: tile.trailing
-                      //   ));
-                      // });
-                    }
-                  });
-
-                //   // Instead of the widget, we should be adding a row field with a title based on the 
-                //   // tile.title and a value of the result of the future here.
-                //   // additionalView.add(tile.onTap());
-                // })
-              }
+      Container(
+        margin: const EdgeInsets.all(3),
+        decoration: BoxDecoration(
+          color: Colors.grey[200],
+          border: Border.all(color: Colors.white),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Listener(
+          onPointerUp: (event) {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => tile.onTap((v) {})))
+              .then((result) {
+                if (result != null) {
+                  if (widget.onChanged != null) {
+                    widget.onChanged!(result);
+                  }
+                }
+              });
             },
+          child: GridTile(
+            header: Text(
+              tile.title,
+              style: const TextStyle(
+                fontSize: 20,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            child: tile.icon!,
           ),
-        )
-      .toList();
+        ),
+      ),
+    )
+    .toList();
 
-    List<Widget> view = additionalView.map((v) => v).toList(); // clone the additionalView
-    view.addAll(tileView);
-    return ListView(
-      shrinkWrap: true,
-      children: view
+    return Container(
+      color: Colors.grey[300],
+      child: GridView.count(
+        crossAxisCount: tileView.length > 3 ? 3 : tileView.length,
+        shrinkWrap: true,
+        children: tileView
+      ),
     );
   }
 }

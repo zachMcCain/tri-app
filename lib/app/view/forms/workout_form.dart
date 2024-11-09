@@ -2,17 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tri/app/models/workout/abstract_segment.dart';
 import 'package:tri/app/models/workout/abstract_workout.dart';
-import 'package:tri/app/models/workout/distance.dart';
-import 'package:tri/app/models/workout/workout_duration.dart';
 import 'package:tri/app/models/workout/workout_factory.dart';
-import 'package:tri/app/models/workout/workout_summary_visitor.dart';
-import 'package:tri/app/models/workout_models/workout.dart';
 import 'package:tri/app/models/workout_models/workout_type.dart';
 import 'package:tri/app/providers/workouts_provider.dart';
-import 'package:tri/app/view/forms/forms/run_form.dart';
-import 'package:tri/app/view/forms/forms/swim_form.dart';
+import 'package:tri/app/view/forms/workout_form_factory.dart';
 import 'package:tri/app/view/workout/full_workout_view.dart';
-import 'package:tri/app/view/workout/workout_summary_view.dart';
 
 class WorkoutForm extends ConsumerStatefulWidget {
 
@@ -35,17 +29,6 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
   void initState() {
     super.initState();
     workout = WorkoutFactory().create(widget.workoutType);
-  }
-
-  Widget getWorkoutForm() {
-    // if (widget.workoutType == WorkoutType.run) {
-    //   return RunForm();
-    // } else if (widget.workoutType == WorkoutType.swim) {
-    //   return SwimForm();
-    // }
-
-    /// The below should be a WorkoutFormFactory that takes the type
-    return RunForm(onChanged: onWorkoutChanged,);
   }
 
   void onWorkoutChanged(value) {
@@ -83,33 +66,7 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
           widget.workoutType.icon,
         ]),
       ),
-      // Metadata on the Current State of the Workout
-      Container(
-        // decoration: BoxDecoration(
-        //   color: Theme.of(context).secondaryHeaderColor,
-        //   border: Border.all(
-        //     width: 1,
-        //   ),
-        //   borderRadius: BorderRadius.circular(9)
-        // ),
-        child: Column(
-          children: [
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: TextField(
-            //     decoration: InputDecoration(
-            //       hintText: '${widget.workoutType.title} Workout',
-            //       label: const Text('Workout Title: '),
-            //     ),
-            //   ),
-            // ),
-            // The actual workout data
-            builtWorkout ?? const Text('No Workout Info Yet')
-          ],
-        ),
-      ),
-
-
+      builtWorkout ?? const Text('No Workout Info Yet')
     ];
   }
 
@@ -145,7 +102,7 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
                   // Places the Metadata from the Workout
                   ...getWorkoutView(),
                   // Gets the Actual Form Based on Type
-                  getWorkoutForm(),
+                  WorkoutFormFactory().getWorkoutForm(widget.workoutType, onWorkoutChanged),
                   // The Notes Section of All Workout Forms
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
@@ -160,11 +117,10 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
                     ),
                   ),
                   // The Submit Button
-                  ElevatedButton(
+                  TextButton(
                     onPressed: () {
                       // ref.
-                      if (_formKey.currentState!.validate()) {
-
+                      if (workout.valid()) {
                         workoutList.addWorkout(workout);
                         // This needs to add the built workout to the overall app state
 
@@ -176,7 +132,16 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
                           )
                         );
                         Navigator.pop(context);
+                      
+
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: 
+                            Text('Nothing to Submit')
+                          )
+                        );
                       }
+
                     },
                     child: const Text('Submit')
                   )

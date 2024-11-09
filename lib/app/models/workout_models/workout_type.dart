@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tri/app/view/forms/workout_form.dart';
 import 'package:tri/app/view/view_picker/abstract_view_tile.dart';
 
-enum WorkoutType implements AbstractViewTile{
+enum WorkoutType implements AbstractViewTile {
   swim,
   bike,
   run,
@@ -34,7 +34,5 @@ enum WorkoutType implements AbstractViewTile{
   Widget onTap(Function(Object val) callback) {
     return WorkoutForm(workoutType: this);
   }
-
- 
   
 }

@@ -7,5 +7,5 @@ abstract class AbstractWorkout {
   final List<AbstractSegment> segments = List.empty(growable: true);
   String? workoutNotes;
   accept(Visitor v);
-
+  bool valid();
 }

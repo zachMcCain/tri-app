@@ -18,7 +18,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<Widget> views = [
     const WorkoutList(),
-    const Material(child: ViewPicker(tiles: WorkoutType.values, insert: false,)),
+    const Material(child: ViewPicker(tiles: WorkoutType.values,)),
     const Planner()
   ];
 
@@ -58,46 +58,3 @@ class _MyHomePageState extends State<MyHomePage> {
 
   }
 }
-
-// class Home extends StatelessWidget {
-//   // Home({
-//   //   super.key,
-//   // });
-
-//   @override
-//   Widget build(BuildContext context) {
-
-//     return const WorkoutList();
-//   //   final allWorkouts = ref.watch(workoutsProvider);
-
-//   //   return Center(
-//   //     child: Column(
-//   //       mainAxisAlignment: MainAxisAlignment.center,
-//   //       children: <Widget>[
-//   //         Text(
-//   //           'Your Workouts',
-//   //           style: Theme.of(context).textTheme.headlineMedium,
-//   //         ),
-//   //         // GridView.builder(
-//   //         //   itemCount: 4,
-//   //         //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), 
-//   //         //   itemBuilder: (context, index) {
-//   //         //     return FullWorkoutView(workout: allWorkouts.workouts[index]);
-//   //         //   }
-//   //         // ),
-//   //         // another way to do it:
-//   //         IntrinsicHeight(
-//   //           // height: 600,
-//   //           child: ListWheelScrollView(
-//   //             itemExtent: 200, 
-//   //             diameterRatio: 5,
-//   //             children: [...allWorkouts.workouts.map((workout) => FullWorkoutView(workout: workout))]
-//   //           ),
-//   //         ) 
-          
-//   //         // Placeholder(color: Colors.green.shade100),
-//   //       ],
-//   //     ),
-//   //   );
-//   // }
-// }

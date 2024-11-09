@@ -19,16 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
         useMaterial3: true,
-      ),
-      darkTheme: ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.dark,
-        // colorSchemeSeed: const Color(0xFF63A002),
-        primaryColorDark: const Color(0xFF63A002),
-        primaryColor: const Color(0xFF63A002),
-        // secondaryHeaderColor: const Color(0xFF63A002)
-        primaryTextTheme: Typography.blackCupertino
-        // primaryIconTheme: IconThemeData()
+        scaffoldBackgroundColor: Colors.grey[300]
       ),
       home: const MyHomePage(title: 'TRI',),
     );

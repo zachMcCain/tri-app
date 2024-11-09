@@ -7,4 +7,9 @@ class Run extends AbstractWorkout {
     print("Calling accept on teh visitor in run workout");
     segments.forEach(v.visit);
   }
+
+  @override
+  bool valid() {
+    return segments.isEmpty ? false : true;
+  }
 }

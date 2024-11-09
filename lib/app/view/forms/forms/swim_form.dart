@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:tri/app/utils/validators.dart';
-import 'package:tri/app/view/forms/custom_form_fields/distance_form_field.dart';
+import 'package:tri/app/view/forms/field_options.dart';
+import 'package:tri/app/view/view_picker/view_picker.dart';
 
 class SwimForm extends StatelessWidget {
+  final ValueChanged<Object>? onChanged;
+
+  final List<FieldOptions> fields = [
+    FieldOptions.distance,
+    FieldOptions.duration,
+  ];
+
+  SwimForm({super.key, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          TextFormField(
-            decoration: InputDecoration(hintText: "Stroke Count"),
-          ),
-          DistanceFormField(
-            onChanged: (value) {
-              
-            },
-            currentValue: 0.0, validator: Validators.isNumber
-          ),
-          TextFormField(
-            decoration: InputDecoration(hintText: "Pace"),
-          ),
-        ]
-      ),
+        return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        ConstrainedBox(constraints: const BoxConstraints(maxHeight: 350), child:
+          ViewPicker(tiles: fields, onChanged: onChanged,),
+        ),
+      ]
     );
   }
 }

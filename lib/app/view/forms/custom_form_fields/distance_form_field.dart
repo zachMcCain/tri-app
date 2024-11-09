@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tri/app/models/units/distance_unit.dart';
 import 'package:tri/app/models/workout/distance.dart';
 import 'package:tri/app/models/workout/pace.dart';
+import 'package:tri/app/view/forms/custom_form_fields/pace_form_field.dart';
 
 class DistanceFormField extends StatefulWidget {
   final ValueChanged<Distance> onChanged;
@@ -23,6 +25,7 @@ class _DistanceFormFieldState extends State<DistanceFormField> {
 
   void setDistance(String dist) {
     distance.distance = double.tryParse(dist.replaceAll(",", "")) ?? 0;
+    print('calling setdistance with a distance of ${distance.distance}');
     widget.onChanged(distance);
   }
 
@@ -36,19 +39,45 @@ class _DistanceFormFieldState extends State<DistanceFormField> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 200,
-      child: TextFormField(
-        // initialValue: widget.currentValue.toString(),
-        onChanged: setDistance,
-        decoration: const InputDecoration(
-          hintText: '3.1',
-          labelText: 'Distance',
-          helperText: "",
-          suffixText: "miles"
-        ),
-        validator: widget.validator,
-        keyboardType: TextInputType.number,
+    return Scaffold(
+      body: Column(
+        children: [
+          AppBar(
+            title: const Text('TRI'),
+            backgroundColor: Theme.of(context).colorScheme.primary,
+          ),
+          TextFormField(
+            onChanged: setDistance,
+            decoration: const InputDecoration(
+              hintText: '3.1',
+              labelText: 'Distance',
+              helperText: "",
+              suffixText: "miles"
+            ),
+            validator: widget.validator,
+            keyboardType: TextInputType.number,
+          ),
+          TextButton(
+            onPressed: () {
+              showDialog(context: context, 
+                builder: (context) => PaceFormField(
+                  onChanged: setPace, 
+                  unit: DistanceUnit.mile
+                )
+              );
+            }, 
+            child: const Text('Add Pace')
+          ),
+          TextButton(
+            onPressed: () {
+              // Make sure the model is up to date
+              widget.onChanged(distance);
+              // Pass the model out to the level above
+              Navigator.pop(context, distance);
+            }, 
+            child: const Text('Submit')
+          )
+        ],
       ),
     );
   }
