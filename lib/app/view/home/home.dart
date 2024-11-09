@@ -5,6 +5,7 @@ import 'package:tri/app/providers/workouts_provider.dart';
 import 'package:tri/app/view/planner/planner.dart';
 import 'package:tri/app/view/view_picker/view_picker.dart';
 import 'package:tri/app/view/workout/full_workout_view.dart';
+import 'package:tri/app/view/workout/workout_builder.dart';
 import 'package:tri/app/view/workout/workout_list.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -17,8 +18,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<Widget> views = [
-    const WorkoutList(),
-    const Material(child: ViewPicker(tiles: WorkoutType.values,)),
+    const WorkoutList(placeholder: Text('Welcome, let\'s get started!'),),
+    const WorkoutBuilder(),
     const Planner()
   ];
 

@@ -12,7 +12,7 @@ class Planner extends StatelessWidget {
        Material(
         child: CalendarDatePicker(initialDate: DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2050), 
         onDateChanged: (change) => print("Hi"))),
-        const Expanded(child: WorkoutList()),
+        const Expanded(child: WorkoutList(placeholder: Text('Your workouts will appear here!'),)),
       ],
     );
  

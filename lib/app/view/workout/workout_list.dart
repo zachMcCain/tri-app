@@ -4,28 +4,29 @@ import 'package:tri/app/providers/workouts_provider.dart';
 import 'package:tri/app/view/workout/full_workout_view.dart';
 
 class WorkoutList extends ConsumerWidget {
-  const WorkoutList({super.key});
+  final Widget placeholder;
+
+  const WorkoutList({super.key, required this.placeholder});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
     final allWorkouts = ref.watch(workoutsProvider);
 
-    return Card(
-      child: Column(
-        children: [
-          const Text('Workouts'),
-          Expanded(
-            child: ListWheelScrollView(
-              itemExtent: 200, 
-              diameterRatio: 10,
-              children: [
-                ...allWorkouts.workouts.map((workout) => FullWorkoutView(workout: workout))
-              ]
-            ),
-          )
-        ],
-      ),
-    );
+    Widget getWorkoutList() {
+      if (allWorkouts.workouts.isNotEmpty) {
+        return ListWheelScrollView(
+          itemExtent: 200, 
+          diameterRatio: 10,
+          children: [
+            ...allWorkouts.workouts.map((workout) => FullWorkoutView(workout: workout))
+          ]
+        );
+      } else {
+        return placeholder;
+      }
+    }
+
+    return getWorkoutList();
   }
 }
