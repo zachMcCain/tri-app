@@ -25,15 +25,8 @@ class _ViewPickerState extends State<ViewPicker> {
   Widget build(BuildContext context) {
 
     List<Widget> tileView = widget.tiles.map((tile) => 
-      Container(
-        margin: const EdgeInsets.all(3),
-        decoration: BoxDecoration(
-          color: Colors.grey[200],
-          border: Border.all(color: Colors.white),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Listener(
-          onPointerUp: (event) {
+      Listener(
+        onPointerUp: (event) {
               Navigator.push(context, MaterialPageRoute(builder: (context) => tile.onTap((v) {})))
               .then((result) {
                 if (result != null) {
@@ -43,6 +36,13 @@ class _ViewPickerState extends State<ViewPicker> {
                 }
               });
             },
+        child: Container(
+          margin: const EdgeInsets.all(3),
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+            border: Border.all(color: Colors.white),
+            borderRadius: BorderRadius.circular(8),
+          ),
           child: GridTile(
             header: Text(
               tile.title,
