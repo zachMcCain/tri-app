@@ -21,8 +21,8 @@ class WorkoutSummaryView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Row(
               children: [
-                summaryVisitor.summary.type.icon,
-                const SizedBox(width: 9,),
+                // summaryVisitor.summary.type.icon,
+                // const SizedBox(width: 9,),
                 Text(summaryVisitor.summary.type.name.toString().toUpperCase()),
               ],
             ),
@@ -31,9 +31,21 @@ class WorkoutSummaryView extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                Text('Distance: ${summaryVisitor.getDistanceDisplay()}'),
-                const SizedBox(width: 10,),
-                Text('Time: ${summaryVisitor.getTimeDisplay()}'),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('Planned Distance:'),
+                    Text(summaryVisitor.getDistanceDisplay())
+                  ],
+                ),
+                const SizedBox(width: 30,),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('Planned Time:'),
+                    Text(summaryVisitor.getTimeDisplay())
+                  ],
+                ),
               ],
             ),
           ),

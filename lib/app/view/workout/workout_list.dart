@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tri/app/providers/workouts_provider.dart';
-import 'package:tri/app/view/workout/full_workout_view.dart';
+import 'package:tri/app/view/workout/workout_list_item.dart';
+import 'package:tri/app/view/workout/workout_summary_view.dart';
 
 class WorkoutList extends ConsumerWidget {
   final Widget placeholder;
@@ -15,11 +16,10 @@ class WorkoutList extends ConsumerWidget {
 
     Widget getWorkoutList() {
       if (allWorkouts.workouts.isNotEmpty) {
-        return ListWheelScrollView(
-          itemExtent: 200, 
-          diameterRatio: 10,
+        return ListView(
+          itemExtent: 100, 
           children: [
-            ...allWorkouts.workouts.map((workout) => FullWorkoutView(workout: workout))
+            ...allWorkouts.workouts.map((workout) => WorkoutListItem(workout: workout))
           ]
         );
       } else {
