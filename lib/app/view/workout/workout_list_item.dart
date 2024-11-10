@@ -5,7 +5,7 @@ import 'package:tri/app/view/workout/workout_summary_view.dart';
 class WorkoutListItem extends StatelessWidget {
   final AbstractWorkout workout;
 
-  const WorkoutListItem({required this.workout});
+  const WorkoutListItem({super.key, required this.workout});
 
   @override
   Widget build(BuildContext context) {

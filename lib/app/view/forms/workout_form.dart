@@ -6,6 +6,7 @@ import 'package:tri/app/models/workout/workout_factory.dart';
 import 'package:tri/app/models/workout_models/workout_type.dart';
 import 'package:tri/app/providers/workouts_provider.dart';
 import 'package:tri/app/view/forms/workout_form_factory.dart';
+import 'package:tri/app/view/widgets/tri_text_input.dart';
 import 'package:tri/app/view/workout/full_workout_view.dart';
 
 class WorkoutForm extends ConsumerStatefulWidget {
@@ -90,7 +91,7 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
           widget.workoutType.icon,
         ]),
       ),
-      builtWorkout ?? const Text('No Workout Info Yet')
+      builtWorkout ?? const SizedBox()
     ];
   }
 
@@ -107,6 +108,7 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
       // Workout form holder
       body: Center(
         child: Material(
+          color: Colors.grey[300],
           // The Actual Form
           child: Form(
             key: _formKey, // used to save, reset, and validate every child FormField
@@ -117,18 +119,7 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
                 // Gets the Actual Form Based on Type
                 WorkoutFormFactory().getWorkoutForm(widget.workoutType, onWorkoutChanged),
                 // The Notes Section of All Workout Forms
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Notes',
-                    ),
-                    onChanged: onNotesChanged,
-                    maxLines: 15,
-                    minLines: 5,
-                  ),
-                ),
+                TriTextInput(onChanged: onNotesChanged, minLines: 5, maxLines: 10,),
                 // The Submit Button
                 TextButton(
                   onPressed: onSubmit,

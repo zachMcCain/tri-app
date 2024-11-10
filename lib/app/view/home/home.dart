@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tri/app/models/workout_models/workout_type.dart';
-import 'package:tri/app/providers/workouts_provider.dart';
 import 'package:tri/app/view/planner/planner.dart';
-import 'package:tri/app/view/view_picker/view_picker.dart';
-import 'package:tri/app/view/workout/full_workout_view.dart';
 import 'package:tri/app/view/workout/workout_builder.dart';
 import 'package:tri/app/view/workout/workout_list.dart';
 
