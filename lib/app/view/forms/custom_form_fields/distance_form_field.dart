@@ -10,12 +10,14 @@ class DistanceFormField extends StatefulWidget {
   final ValueChanged<Distance> onChanged;
   final FormFieldValidator<String>? validator;
   final Distance? currentValue;
+  final PaceMode paceMode;
 
   const DistanceFormField({
     super.key,
     required this.onChanged,
     this.validator,
     this.currentValue,
+    this.paceMode = PaceMode.mpm
   });
 
   @override
@@ -33,34 +35,41 @@ class _DistanceFormFieldState extends State<DistanceFormField> {
 
   void setPace(Pace pace) {
     setState(() {
+      distance.paceMode = widget.paceMode;
       distance.pace = pace;
     });
   }
 
   Widget getPaceOrButton() {
     if (distance.pace != null) {
-      return Column(
-        children: [
-          const Text('Target Pace:'),
-          Text(distance.getPaceDisplay())
-        ],
+      return TextButton(
+        onPressed: paceDialog,
+        child: Column(
+          children: [
+            const Text('Target Pace:'),
+            Text(distance.getPaceDisplay())
+          ],
+        ),
       );
     } else {
       return TextButton(
-        onPressed: () {
-          showDialog(context: context, 
-            builder: (context) => Dialog(
-              child: PaceFormField(
-                onChanged: setPace, 
-                unit: DistanceUnit.mi
-              ),
-            )
-          );
-        }, 
+        onPressed: paceDialog, 
         child: const Text('Set Pace Target')
       );
     }
   }
+
+  void paceDialog() {
+      showDialog(context: context, 
+        builder: (context) => Dialog(
+          child: PaceFormField(
+            onChanged: setPace, 
+            unit: DistanceUnit.mi,
+            paceMode: widget.paceMode,
+          ),
+        )
+      );
+    }
 
   Widget getDistanceOrEditor() {
     return TextButton(

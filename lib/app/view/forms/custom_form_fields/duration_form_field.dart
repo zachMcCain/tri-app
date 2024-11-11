@@ -9,12 +9,14 @@ class DurationFormField extends StatefulWidget {
   final ValueChanged<WorkoutDuration> onChanged;
   final FormFieldValidator<String>? validator;
   final WorkoutDuration? currentValue;
+  final PaceMode paceMode;
 
   const DurationFormField({
     super.key,
     required this.onChanged,
     this.currentValue,
     this.validator,
+    this.paceMode = PaceMode.mpm
   });
 
   @override
@@ -32,6 +34,7 @@ class _DurationFormFieldState extends State<DurationFormField> {
 
   void setPace(Pace pace) {
     setState(() {
+      duration.paceMode = widget.paceMode;
       duration.pace = pace;
     });
   }
@@ -70,27 +73,35 @@ class _DurationFormFieldState extends State<DurationFormField> {
 
   Widget getPaceOrButton() {
     if (duration.pace != null) {
-      return Column(
-        children: [
-          const Text('Target Pace:'),
-          Text(duration.getPaceDisplay())
-        ],
+      return TextButton(
+        onPressed: paceDialog,
+        child: Column(
+          children: [
+            const Text('Target Pace:'),
+            Text(duration.getPaceDisplay())
+          ],
+        ),
       );
     } else {
       return TextButton(
         onPressed: () {
-          showDialog(context: context, 
-            builder: (context) => Dialog(
-              child: PaceFormField(
-                onChanged: setPace, 
-                unit: DistanceUnit.mi
-              ),
-            )
-          );
+          paceDialog();
         }, 
         child: const Text('Set Pace Target')
       );
     }
+  }
+
+  Future<dynamic> paceDialog() {
+    return showDialog(context: context, 
+          builder: (context) => Dialog(
+            child: PaceFormField(
+              onChanged: setPace, 
+              unit: DistanceUnit.mi,
+              paceMode: widget.paceMode,
+            ),
+          )
+        );
   }
 
   @override
