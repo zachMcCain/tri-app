@@ -45,7 +45,7 @@ class _DurationFormFieldState extends State<DurationFormField> {
     } else {
       return TextButton(
         onPressed: onDurationEdit, 
-        child: const Text('Add Time Segment')
+        child: const Text('Add Target Time')
       );
     }
   }
@@ -88,7 +88,7 @@ class _DurationFormFieldState extends State<DurationFormField> {
             )
           );
         }, 
-        child: const Text('Add Pace Target')
+        child: const Text('Set Pace Target')
       );
     }
   }

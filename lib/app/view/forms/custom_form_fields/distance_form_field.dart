@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:numberpicker/numberpicker.dart';
 import 'package:tri/app/models/units/distance_unit.dart';
 import 'package:tri/app/models/workout/distance.dart';
 import 'package:tri/app/models/workout/pace.dart';
@@ -24,9 +25,9 @@ class DistanceFormField extends StatefulWidget {
 class _DistanceFormFieldState extends State<DistanceFormField> {
   Distance distance = Distance();
 
-  void setDistance(String dist) {
+  void setDistance(double dist) {
     setState(() {
-      distance.distance = double.tryParse(dist.replaceAll(",", "")) ?? 0;
+      distance.distance = dist;
     });
   }
 
@@ -56,9 +57,53 @@ class _DistanceFormFieldState extends State<DistanceFormField> {
             )
           );
         }, 
-        child: const Text('Add Pace Target')
+        child: const Text('Set Pace Target')
       );
     }
+  }
+
+  Widget getDistanceOrEditor() {
+    return TextButton(
+      onPressed: onDistanceEdit, 
+      child: Text(distance.distance > 0 ? distance.getDistanceDisplay() : 'Add Target Distance')
+    );
+  }
+
+  void onDistanceEdit() {
+    showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, stateSetter) {
+          return Dialog(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      child: DecimalNumberPicker(
+                        minValue: 0, 
+                        maxValue: 200, 
+                        decimalPlaces: 2,
+                        value: distance.distance,
+                        decimalTextMapper: (text) => '. ${text.padLeft(2, '0')} ${distance.units.name}',
+                        onChanged: (value) { 
+                          stateSetter(() {
+                            setDistance(value);
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                TextButton(onPressed: () => {Navigator.pop(context)}, child: const Text('Submit'))
+              ],
+            )
+              );
+        }
+      ));
   }
 
   @override
@@ -74,10 +119,7 @@ class _DistanceFormFieldState extends State<DistanceFormField> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
-              width: 200,
-              child: TriTextInput(onChanged: setDistance, hintText: distance.units.name, maxLines: 1,),
-            ),
+            getDistanceOrEditor(),
             getPaceOrButton(),
             IconButton(
               onPressed: () {
