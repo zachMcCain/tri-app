@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:tri/app/view/forms/custom_form_fields/distance_form_field.dart';
+import 'package:tri/app/view/forms/custom_form_fields/duration_form_field.dart';
 import 'package:tri/app/view/forms/field_options.dart';
-import 'package:tri/app/view/view_picker/view_picker.dart';
+import 'package:tri/app/view/widgets/tri_header.dart';
 
 class RunForm extends StatelessWidget {
-  final ValueChanged<Object>? onChanged;
+  final ValueChanged<Object> onChanged;
 
   final List<FieldOptions> fields = [
     FieldOptions.distance,
     FieldOptions.duration,
   ];
 
-  RunForm({super.key, this.onChanged});
+  RunForm({super.key, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +20,9 @@ class RunForm extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        ConstrainedBox(constraints: const BoxConstraints(maxHeight: 350), child:
-          ViewPicker(tiles: fields, onChanged: onChanged,),
-        ),
+        const TriHeader(header: 'Add a Segment'),
+        DistanceFormField(onChanged: onChanged, validator: null),
+        // DurationFormField(onChanged: onChanged, currentValue: null, validator: null),
       ]
     );
   }

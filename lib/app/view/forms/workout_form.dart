@@ -119,7 +119,7 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
                 // Gets the Actual Form Based on Type
                 WorkoutFormFactory().getWorkoutForm(widget.workoutType, onWorkoutChanged),
                 // The Notes Section of All Workout Forms
-                TriTextInput(onChanged: onNotesChanged, minLines: 5, maxLines: 10,),
+                TriTextInput(onChanged: onNotesChanged, minLines: 5, maxLines: 10, fillColor: Colors.white70,),
                 // The Submit Button
                 TextButton(
                   onPressed: onSubmit,

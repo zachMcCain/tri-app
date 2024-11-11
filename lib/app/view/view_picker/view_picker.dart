@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:tri/app/view/view_picker/abstract_result_widget.dart';
 import 'package:tri/app/view/view_picker/abstract_view_tile.dart';
 
 /// Widget used for building a grid of selectable options that when selected 

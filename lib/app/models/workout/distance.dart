@@ -9,8 +9,16 @@ class Distance extends AbstractSegment {
 
   @override
   String getDisplayValue() {
-    String paceDisplay = pace != null ? 'Pace: ${pace!.time.inMinutes}\' ${pace!.time.inSeconds % 60}" / ${units.name}' : '';
+    String paceDisplay = pace != null ? 'Pace: $getPaceDisplay()' : '';
     return '$distance ${units.name} \n $paceDisplay';
+  }
+
+  String getDistanceDisplay() {
+    return '$distance ${units.name}';
+  }
+
+  String getPaceDisplay() {
+    return pace != null ? '${pace!.time.inMinutes}\' ${pace!.time.inSeconds % 60}" / ${units.name}' : '';
   }
 
   Distance addDistance(Distance distToAdd) {

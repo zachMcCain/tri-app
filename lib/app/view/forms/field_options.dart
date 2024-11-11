@@ -33,10 +33,10 @@ enum FieldOptions implements AbstractViewTile {
   // to whatever onchanged was given it.
   @override
   Widget onTap(Function(Object val) callback) {
-    return this == FieldOptions.distance ? DistanceFormField(onChanged: (value) => callback(value), currentValue: null, validator: null) : 
+    return this == FieldOptions.distance ? DistanceFormField(onChanged: (value) => callback(value), validator: null) : 
     this == FieldOptions.cadence ? CadenceFormField(onChanged: (value) => callback(value), currentValue: null, validator: null) : 
     this == FieldOptions.duration ? DurationFormField(onChanged: (value) => callback(value), currentValue: null, validator: null) : 
-    DistanceFormField(onChanged: (value) => callback(value), currentValue: null, validator: null);
+    DistanceFormField(onChanged: (value) => callback(value), validator: null);
   }
 
 }
