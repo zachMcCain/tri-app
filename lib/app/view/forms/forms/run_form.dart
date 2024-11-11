@@ -21,8 +21,9 @@ class RunForm extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         const TriHeader(header: 'Add a Segment'),
-        DistanceFormField(onChanged: onChanged, validator: null),
-        // DurationFormField(onChanged: onChanged, currentValue: null, validator: null),
+        DistanceFormField(onChanged: onChanged),
+        const SizedBox(height: 5,),
+        DurationFormField(onChanged: onChanged),
       ]
     );
   }

@@ -8,11 +8,13 @@ import 'package:tri/app/view/widgets/tri_text_input.dart';
 class DistanceFormField extends StatefulWidget {
   final ValueChanged<Distance> onChanged;
   final FormFieldValidator<String>? validator;
+  final Distance? currentValue;
 
   const DistanceFormField({
     super.key,
     required this.onChanged,
-    required this.validator,
+    this.validator,
+    this.currentValue,
   });
 
   @override
