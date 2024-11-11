@@ -11,13 +11,19 @@ class DistanceFormField extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final Distance? currentValue;
   final PaceMode paceMode;
+  final DistanceUnit distanceUnit;
+  final bool decimal;
+  final int step;
 
   const DistanceFormField({
     super.key,
     required this.onChanged,
     this.validator,
     this.currentValue,
-    this.paceMode = PaceMode.mpm
+    this.paceMode = PaceMode.mpm,
+    this.distanceUnit = DistanceUnit.mi,
+    this.decimal = true,
+    this.step = 1,
   });
 
   @override
@@ -26,6 +32,13 @@ class DistanceFormField extends StatefulWidget {
 
 class _DistanceFormFieldState extends State<DistanceFormField> {
   Distance distance = Distance();
+
+  @override
+  void initState() {
+    super.initState();
+    distance = Distance();
+    distance.units = widget.distanceUnit;
+  }
 
   void setDistance(double dist) {
     setState(() {
@@ -64,7 +77,7 @@ class _DistanceFormFieldState extends State<DistanceFormField> {
         builder: (context) => Dialog(
           child: PaceFormField(
             onChanged: setPace, 
-            unit: DistanceUnit.mi,
+            unit: widget.distanceUnit,
             paceMode: widget.paceMode,
           ),
         )
@@ -92,18 +105,7 @@ class _DistanceFormFieldState extends State<DistanceFormField> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                      child: DecimalNumberPicker(
-                        minValue: 0, 
-                        maxValue: 200, 
-                        decimalPlaces: 2,
-                        value: distance.distance,
-                        decimalTextMapper: (text) => '. ${text.padLeft(2, '0')} ${distance.units.name}',
-                        onChanged: (value) { 
-                          stateSetter(() {
-                            setDistance(value);
-                          });
-                        },
-                      ),
+                      child: widget.decimal ? getDecimalNumberPicker(stateSetter) : getNumberPicker(stateSetter),
                     ),
                   ],
                 ),
@@ -113,6 +115,35 @@ class _DistanceFormFieldState extends State<DistanceFormField> {
               );
         }
       ));
+  }
+
+  DecimalNumberPicker getDecimalNumberPicker(StateSetter stateSetter) {
+    return DecimalNumberPicker(
+      minValue: 0, 
+      maxValue: 200, 
+      decimalPlaces: 2,
+      value: distance.distance,
+      decimalTextMapper: (text) => '. ${text.padLeft(2, '0')} ${distance.units.name}',
+      onChanged: (value) { 
+        stateSetter(() {
+          setDistance(value);
+        });
+      },
+    );
+  }
+
+  NumberPicker getNumberPicker(StateSetter stateSetter) {
+    return NumberPicker(
+      minValue: 0,
+      maxValue: widget.step * 200,
+      value: distance.distance.toInt(),
+      step: widget.step,
+      onChanged:  (value) { 
+        stateSetter(() {
+          setDistance(value.toDouble());
+        });
+      },
+    );
   }
 
   @override

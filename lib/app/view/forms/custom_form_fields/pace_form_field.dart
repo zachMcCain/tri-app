@@ -76,4 +76,5 @@ class _PaceFormFieldState extends State<PaceFormField> {
 enum PaceMode {
   mph, // miles per hour
   mpm, // minutes per mile
+  meters,
 }

@@ -5,7 +5,7 @@ import 'package:tri/app/view/forms/custom_form_fields/pace_form_field.dart';
 
 class WorkoutDuration extends AbstractSegment {
   Duration duration = const Duration();
-  DistanceUnit? units = DistanceUnit.mi;
+  DistanceUnit units = DistanceUnit.mi;
   Pace? pace;
   PaceMode paceMode = PaceMode.mpm;
 
@@ -39,10 +39,14 @@ class WorkoutDuration extends AbstractSegment {
   }
 
   String getPaceDisplay() {
-    if (paceMode == PaceMode.mpm) {
-      return pace != null ? '${pace!.time.inMinutes}\' ${pace!.time.inSeconds % 60}" / ${units!.name}' : '';
+    if (pace == null) {
+      return '';
+    } else if (paceMode == PaceMode.mpm) {
+      return '${pace!.time.inMinutes}\' ${(pace!.time.inSeconds % 60).toString().padRight(2, '0')}" / ${units.name}';
+    } else if (paceMode == PaceMode.meters) {
+      return '${pace!.time.inMinutes}:${(pace!.time.inSeconds % 60).toString().padRight(2, '0')} / 25 m';
     } else {
-      return pace != null ? '${pace!.distance} ${paceMode.name}' : '';
+      return '${pace!.distance} ${paceMode.name}';
     }
   }
 }
