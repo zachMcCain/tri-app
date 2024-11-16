@@ -48,7 +48,7 @@ class _DurationFormFieldState extends State<DurationFormField> {
     } else {
       return TextButton(
         onPressed: onDurationEdit, 
-        child: const Text('Add Target Time')
+        child: const Text('Add Timed Segment')
       );
     }
   }

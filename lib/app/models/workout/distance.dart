@@ -12,7 +12,7 @@ class Distance extends AbstractSegment {
   @override
   String getDisplayValue() {
     String paceDisplay = pace != null ? 'Pace: $getPaceDisplay()' : '';
-    return '$distance ${units.name} \n $paceDisplay';
+    return '$distance ${units.name}';
   }
 
   String getDistanceDisplay() {
@@ -21,7 +21,7 @@ class Distance extends AbstractSegment {
 
   String getPaceDisplay() {
     if (pace == null) {
-      return '';
+      return 'open';
     } else if (paceMode == PaceMode.mpm) {
       return '${pace!.time.inMinutes}\' ${(pace!.time.inSeconds % 60).toString().padRight(2, '0')}" / ${units.name}';
     } else if (paceMode == PaceMode.meters) {

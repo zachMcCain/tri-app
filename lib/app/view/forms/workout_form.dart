@@ -112,10 +112,11 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
           // The Actual Form
           child: Form(
             key: _formKey, // used to save, reset, and validate every child FormField
-            child: ListView(
+            child: Column(
               children: [
                 // Places the Metadata from the Workout
                 ...getWorkoutSummary(),
+                Divider(),
                 // Gets the Actual Form Based on Type
                 WorkoutFormFactory().getWorkoutForm(widget.workoutType, onWorkoutChanged),
                 // The Notes Section of All Workout Forms

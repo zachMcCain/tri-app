@@ -87,7 +87,7 @@ class _DistanceFormFieldState extends State<DistanceFormField> {
   Widget getDistanceOrEditor() {
     return TextButton(
       onPressed: onDistanceEdit, 
-      child: Text(distance.distance > 0 ? distance.getDistanceDisplay() : 'Add Target Distance')
+      child: Text(distance.distance > 0 ? distance.getDistanceDisplay() : 'Add Distance Segment')
     );
   }
 
