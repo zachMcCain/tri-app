@@ -20,10 +20,14 @@ class WorkoutsProvider extends ChangeNotifier {
         //   print('We have a workout string here: $val')
         // });
         idToJsonString.forEach((id, jsonString) {
-          final workoutJson = jsonDecode(jsonString) as Map<String, dynamic>; // format error at character 2 in {__type: Run, }
+          final workoutJson = jsonDecode(jsonString) as Map<String, dynamic>;
           // take this and load it
-          final workout = AbstractWorkout.fromJson(workoutJson);
-          workouts.add(workout);
+          try {
+            final workout = AbstractWorkout.fromJson(workoutJson);
+            workouts.add(workout);
+          } catch (e) {
+            print("Exception creating the workout from $workoutJson, not adding to the list");
+          }
         });
       });
     notifyListeners();
