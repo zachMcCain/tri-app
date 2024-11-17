@@ -11,6 +11,7 @@ import 'package:tri/app/models/workout/pace.dart';
 import 'package:tri/app/models/workout/run.dart';
 import 'package:tri/app/models/workout/strength.dart';
 import 'package:tri/app/models/workout/swim.dart';
+import 'package:tri/app/models/workout/text_segment.dart';
 import 'package:tri/app/models/workout/workout_duration.dart';
 import 'package:tri/app/view/home/home.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
     FromJsonFactory().register(Bike());
     FromJsonFactory().register(Brick());
     FromJsonFactory().register(Custom());
+    FromJsonFactory().register(TextSegment());
 
 
     return MaterialApp(

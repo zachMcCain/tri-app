@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tri/app/models/workout_models/workout_type.dart';
 import 'package:tri/app/view/forms/forms/bike_form.dart';
 import 'package:tri/app/view/forms/forms/run_form.dart';
+import 'package:tri/app/view/forms/forms/strength_form.dart';
 import 'package:tri/app/view/forms/forms/swim_form.dart';
 
 class WorkoutFormFactory {
@@ -12,6 +13,8 @@ class WorkoutFormFactory {
       return SwimForm(onChanged: onChanged,);
     } else if (type == WorkoutType.bike) {
       return BikeForm(onChanged: onChanged,);
+    } else if (type == WorkoutType.strength) {
+      return StrengthForm(onChanged: onChanged,);
     } else {
       return RunForm(onChanged: onChanged,);
     }
