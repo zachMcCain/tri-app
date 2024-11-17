@@ -1,13 +1,20 @@
+import 'package:carp_serializable/carp_serializable.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:tri/app/models/units/distance_unit.dart';
 import 'package:tri/app/models/workout/abstract_segment.dart';
 import 'package:tri/app/models/workout/pace.dart';
 import 'package:tri/app/view/forms/custom_form_fields/pace_form_field.dart';
 
+part 'distance.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class Distance extends AbstractSegment {
   DistanceUnit units = DistanceUnit.mi;
   double distance = 0.0;
   Pace? pace;
   PaceMode paceMode = PaceMode.mpm;
+
+  Distance();
 
   @override
   String getDisplayValue() {
@@ -35,4 +42,24 @@ class Distance extends AbstractSegment {
     distance = distance + distToAdd.distance;
     return this;
   }
+
+  @override
+  // TODO: implement fromJsonFunction
+  Function get fromJsonFunction => _$DistanceFromJson;
+
+  factory Distance.fromJson(Map<String, dynamic> json) => FromJsonFactory().fromJson<Distance>(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$DistanceToJson(this);
+
+  // @override
+  // Map<String, dynamic> toJson() {
+  //   return {
+  //     'type': 'distance',
+  //     'distance': distance,
+  //     'units': units.name,
+  //     'pace': pace?.toJson(),
+  //     'paceMode': paceMode.name,
+  //   };
+  // }
 }

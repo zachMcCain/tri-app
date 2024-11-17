@@ -1,11 +1,13 @@
+import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 import 'package:path/path.dart' as p;
 
 class DocsPath {
-  late Directory docsDirectory;
-  late Directory workoutsDir;
+  Directory? docsDirectory;
+  Directory? workoutsDir;
 
   static final DocsPath _docsPathInstance = DocsPath._();
 
@@ -14,7 +16,6 @@ class DocsPath {
   }
 
   DocsPath._() {
-    setupDirectoriesIfNecessary();
   }
 
   // DocsPath._() {
@@ -34,11 +35,14 @@ class DocsPath {
     // final Directory workoutsDir = Directory('${docsDirectory.path}/workouts');
 
     // Really should create a directory inside the docsDirectory - a workouts directory
-    await workoutsDir.create();
-    File newWorkout = File('${workoutsDir.absolute}/$uniqueFileName.json');
+    await setupDirectoriesIfNecessary();
+    await workoutsDir!.create();
+    
+    File newWorkout = File(p.join(workoutsDir!.absolute.path, '$uniqueFileName.json')); // can't do it because the path ends with a ' weirdly
     await newWorkout.create();
     var sink = newWorkout.openWrite();
-    sink.write(json);
+    // jsonEncode(json);
+    sink.write(jsonEncode(json));
     await sink.flush();
     await sink.close();
   }
@@ -47,25 +51,34 @@ class DocsPath {
   Future<Map<String, String>> getJsonData() async {
     // final Directory docsDirectory = await getApplicationDocumentsDirectory();
     // final Directory workoutsDir = Directory('${docsDirectory.path}/workouts');
-    if (!(await workoutsDir.exists())) {
+    await setupDirectoriesIfNecessary();
+    print("Looking for workoutsDir at " + workoutsDir!.path);
+    if (!(await workoutsDir!.exists())) {
+      print('Looks like we cant findit');
       return {};
     }
-    Stream<FileSystemEntity> files = workoutsDir.list();
+    Stream<FileSystemEntity> files = workoutsDir!.list();
     Map<String, String> stringFiles = {};
-    files.forEach((file) async {
+    Iterable<FileSystemEntity> fileList = await files.toList();
+    await Future.forEach(fileList, (file) async {
+      // print('have a file');
       if (file is File && p.extension(file.path) == '.json') {
         String fileString = await file.readAsString();
+        // print('file has a json extension and looks like $fileString');
         stringFiles[p.basename(file.path)] = fileString;
+        // print('as we build stringFiles, its current size is ${stringFiles.length}');
       }
     });
+    print('returning stringfiles of size ${stringFiles.length}');
     return stringFiles;
   }
 
   Future<bool> deleteJsonData(String fileName) async {
-    if (!(await workoutsDir.exists())) {
+    await setupDirectoriesIfNecessary();
+    if (!(await workoutsDir!.exists())) {
       return false;
     }
-    Stream<FileSystemEntity> files = workoutsDir.list();
+    Stream<FileSystemEntity> files = workoutsDir!.list();
     File file = await files.firstWhere((el) => el is File && (p.basename(el.path) == fileName) || (p.basename(el.path) == '$fileName.json')) as File;
     if (await file.exists()) {
       await file.delete();
@@ -77,9 +90,15 @@ class DocsPath {
 
 
   Future<void> setupDirectoriesIfNecessary() async {
-    docsDirectory = await getApplicationDocumentsDirectory();
-    await docsDirectory.create();
-    workoutsDir = Directory('${docsDirectory.path}/workouts');
-    await workoutsDir.create();
+    String path = '/assets/db';
+    if (!kIsWeb) {
+      print('NOT WEB');
+      docsDirectory = await getApplicationDocumentsDirectory();
+    } else {
+      docsDirectory = Directory(path);
+    }
+    await docsDirectory!.create(recursive: true);
+    workoutsDir = Directory('${docsDirectory!.path}/workouts');
+    await workoutsDir!.create();
   }
 }
