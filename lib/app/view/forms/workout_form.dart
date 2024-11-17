@@ -52,6 +52,7 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
     final workoutList = ref.watch(workoutsProvider);
 
     if (workout.valid()) {
+      print("Adding workout $workout");
       workoutList.addWorkout(workout);
       // This needs to add the built workout to the overall app state
 

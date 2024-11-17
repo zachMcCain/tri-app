@@ -27,6 +27,7 @@ class WorkoutsProvider extends ChangeNotifier {
             workouts.add(workout);
           } catch (e) {
             print("Exception creating the workout from $workoutJson, not adding to the list");
+            print(e);
           }
         });
       });
