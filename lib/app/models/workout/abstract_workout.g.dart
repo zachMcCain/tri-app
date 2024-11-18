@@ -10,11 +10,13 @@ AbstractWorkout _$AbstractWorkoutFromJson(Map<String, dynamic> json) =>
     AbstractWorkout()
       ..$type = json['__type'] as String?
       ..workoutId = json['workoutId'] as String
-      ..workoutNotes = json['workoutNotes'] as String?;
+      ..workoutNotes = json['workoutNotes'] as String?
+      ..name = json['name'] as String?;
 
 Map<String, dynamic> _$AbstractWorkoutToJson(AbstractWorkout instance) =>
     <String, dynamic>{
       '__type': instance.$type,
       'workoutId': instance.workoutId,
       'workoutNotes': instance.workoutNotes,
+      'name': instance.name,
     };

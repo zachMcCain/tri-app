@@ -13,6 +13,7 @@ class AbstractWorkout extends Serializable {
   final List<AbstractSegment> segments = List.empty(growable: true);
   final WorkoutType type = WorkoutType.custom;
   String? workoutNotes;
+  String? name;
   void accept(Visitor v) => {};
   bool valid() => true;
 

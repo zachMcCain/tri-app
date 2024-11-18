@@ -47,6 +47,12 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
     });
   }
 
+  void onNameChanged(String val) {
+    setState(() {
+      workout.name = val;
+    });
+  }
+
   void onSubmit() {
     // Provider tracking user's list of workouts
     final workoutList = ref.watch(workoutsProvider);
@@ -77,22 +83,23 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
   }
 
   List<Widget> getWorkoutSummary() {
+    // String title = workout.name != null && workout.name!.isNotEmpty ? workout.name! : widget.workoutType.title;
     return [
       // Title of the Workout Form
-      Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-          Container(
-            padding: const EdgeInsets.all(7.0),
-            child: Text('${widget.workoutType.title} Workout', 
-              style: Theme.of(context).textTheme.headlineSmall,
-            )
-          ),
-          widget.workoutType.icon,
-        ]),
-      ),
-      builtWorkout ?? const SizedBox()
+      // Center(
+      //   child: Row(
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     children: [
+      //     // Container(
+      //     //   padding: const EdgeInsets.all(7.0),
+      //     //   child: Text(title, 
+      //     //     style: Theme.of(context).textTheme.headlineSmall,
+      //     //   )
+      //     // ),
+      //     widget.workoutType.icon,
+      //   ]),
+      // ),
+      builtWorkout ?? const SizedBox(height: 308,) // TODO: Make this more interesting - contain some kind of placeholder
     ];
   }
 
@@ -115,6 +122,7 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
             key: _formKey, // used to save, reset, and validate every child FormField
             child: Column(
               children: [
+                TriTextInput(onChanged: onNameChanged, minLines: 1, maxLines: 1, fillColor: Colors.white70, hintText: widget.workoutType.name.toUpperCase(),),
                 // Places the Metadata from the Workout
                 ...getWorkoutSummary(),
                 Divider(),

@@ -10,6 +10,7 @@ Swim _$SwimFromJson(Map<String, dynamic> json) => Swim()
   ..$type = json['__type'] as String?
   ..workoutId = json['workoutId'] as String
   ..workoutNotes = json['workoutNotes'] as String?
+  ..name = json['name'] as String?
   ..type = $enumDecode(_$WorkoutTypeEnumMap, json['type'])
   ..segments = (json['segments'] as List<dynamic>)
       .map((e) => AbstractSegment.fromJson(e as Map<String, dynamic>))
@@ -19,6 +20,7 @@ Map<String, dynamic> _$SwimToJson(Swim instance) => <String, dynamic>{
       '__type': instance.$type,
       'workoutId': instance.workoutId,
       'workoutNotes': instance.workoutNotes,
+      'name': instance.name,
       'type': _$WorkoutTypeEnumMap[instance.type]!,
       'segments': instance.segments.map((e) => e.toJson()).toList(),
     };
