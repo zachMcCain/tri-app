@@ -8,6 +8,7 @@ part of 'custom.dart';
 
 Custom _$CustomFromJson(Map<String, dynamic> json) => Custom()
   ..$type = json['__type'] as String?
+  ..workoutId = json['workoutId'] as String
   ..workoutNotes = json['workoutNotes'] as String?
   ..type = $enumDecode(_$WorkoutTypeEnumMap, json['type'])
   ..segments = (json['segments'] as List<dynamic>)
@@ -16,6 +17,7 @@ Custom _$CustomFromJson(Map<String, dynamic> json) => Custom()
 
 Map<String, dynamic> _$CustomToJson(Custom instance) => <String, dynamic>{
       '__type': instance.$type,
+      'workoutId': instance.workoutId,
       'workoutNotes': instance.workoutNotes,
       'type': _$WorkoutTypeEnumMap[instance.type]!,
       'segments': instance.segments.map((e) => e.toJson()).toList(),

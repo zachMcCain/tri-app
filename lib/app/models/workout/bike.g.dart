@@ -8,6 +8,7 @@ part of 'bike.dart';
 
 Bike _$BikeFromJson(Map<String, dynamic> json) => Bike()
   ..$type = json['__type'] as String?
+  ..workoutId = json['workoutId'] as String
   ..workoutNotes = json['workoutNotes'] as String?
   ..type = $enumDecode(_$WorkoutTypeEnumMap, json['type'])
   ..segments = (json['segments'] as List<dynamic>)
@@ -16,6 +17,7 @@ Bike _$BikeFromJson(Map<String, dynamic> json) => Bike()
 
 Map<String, dynamic> _$BikeToJson(Bike instance) => <String, dynamic>{
       '__type': instance.$type,
+      'workoutId': instance.workoutId,
       'workoutNotes': instance.workoutNotes,
       'type': _$WorkoutTypeEnumMap[instance.type]!,
       'segments': instance.segments.map((e) => e.toJson()).toList(),

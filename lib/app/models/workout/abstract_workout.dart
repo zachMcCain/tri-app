@@ -9,7 +9,7 @@ part 'abstract_workout.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class AbstractWorkout extends Serializable {
-  final String _id = const uuid.Uuid().v1();
+  String workoutId = const uuid.Uuid().v1();
   final List<AbstractSegment> segments = List.empty(growable: true);
   final WorkoutType type = WorkoutType.custom;
   String? workoutNotes;
@@ -18,7 +18,6 @@ class AbstractWorkout extends Serializable {
 
   AbstractWorkout();
 
-  get id => _id;
 
   @override
   Map<String, dynamic> toJson() => _$AbstractWorkoutToJson(this);

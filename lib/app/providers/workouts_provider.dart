@@ -30,14 +30,24 @@ class WorkoutsProvider extends ChangeNotifier {
             print(e);
           }
         });
+        notifyListeners();
       });
-    notifyListeners();
   }
 
   void addWorkout(AbstractWorkout workout) {
     workouts.add(workout);
-    DocsPath().writeJsonData(workout.toJson(), workout.id);
+    print("Adding workout with id: ${workout.workoutId}");
+    DocsPath().writeJsonData(workout.toJson(), workout.workoutId);
     notifyListeners();
+  }
+
+  Future<bool> removeWorkout(AbstractWorkout workout) async {
+    print('Removing workout with id: ${workout.workoutId}');
+    bool success = await DocsPath().deleteJsonData('${workout.workoutId}.json');
+    workouts.remove(workout);
+    print("Was workout removal successful? $success");
+    notifyListeners();
+    return success;
   }
 
 

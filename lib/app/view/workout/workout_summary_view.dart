@@ -1,19 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tri/app/models/workout/abstract_workout.dart';
 import 'package:tri/app/models/workout/workout_summary_visitor.dart';
+import 'package:tri/app/providers/workouts_provider.dart';
 
-class WorkoutSummaryView extends StatelessWidget {
+class WorkoutSummaryView extends ConsumerStatefulWidget {
   final AbstractWorkout workout;
 
   const WorkoutSummaryView({super.key, required this.workout});
 
   @override
+  ConsumerState<WorkoutSummaryView> createState() => _WorkoutSummaryViewState();
+}
+
+class _WorkoutSummaryViewState extends ConsumerState<WorkoutSummaryView> {
+  @override
   Widget build(BuildContext context) {
-    WorkoutSummaryVisitor summaryVisitor = WorkoutSummaryVisitor(type: workout.type);
-    workout.accept(summaryVisitor);
+
+    // Provider tracking user's list of workouts
+    final workoutList = ref.watch(workoutsProvider);
+    WorkoutSummaryVisitor summaryVisitor = WorkoutSummaryVisitor(type: widget.workout.type);
+    widget.workout.accept(summaryVisitor);
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(4.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -46,6 +56,7 @@ class WorkoutSummaryView extends StatelessWidget {
                     Text(summaryVisitor.getTimeDisplay())
                   ],
                 ),
+                Expanded(child: IconButton(alignment: Alignment.centerRight, onPressed: () => workoutList.removeWorkout(widget.workout), icon: Icon(Icons.delete)))
               ],
             ),
           ),
@@ -53,5 +64,4 @@ class WorkoutSummaryView extends StatelessWidget {
       ),
     );
   }
-  
 }
