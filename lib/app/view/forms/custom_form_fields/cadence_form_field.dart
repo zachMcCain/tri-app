@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tri/app/view/view_picker/abstract_result_widget.dart';
 
 class CadenceFormField extends StatefulWidget {
   final ValueChanged<String> onChanged;

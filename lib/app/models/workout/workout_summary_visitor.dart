@@ -1,5 +1,4 @@
 import 'package:tri/app/models/interfaces/visitor.dart';
-import 'package:tri/app/models/units/distance_unit.dart';
 import 'package:tri/app/models/workout/abstract_segment.dart';
 import 'package:tri/app/models/workout/distance.dart';
 import 'package:tri/app/models/workout/workout_duration.dart';

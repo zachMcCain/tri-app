@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tri/app/providers/workouts_provider.dart';
 import 'package:tri/app/view/workout/workout_list_item.dart';
-import 'package:tri/app/view/workout/workout_summary_view.dart';
 
 class WorkoutList extends ConsumerWidget {
   final Widget placeholder;

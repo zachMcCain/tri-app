@@ -4,7 +4,6 @@ import 'package:tri/app/models/units/distance_unit.dart';
 import 'package:tri/app/models/workout/distance.dart';
 import 'package:tri/app/models/workout/pace.dart';
 import 'package:tri/app/view/forms/custom_form_fields/pace_form_field.dart';
-import 'package:tri/app/view/widgets/tri_text_input.dart';
 
 class DistanceFormField extends StatefulWidget {
   final ValueChanged<Distance> onChanged;

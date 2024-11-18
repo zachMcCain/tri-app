@@ -18,7 +18,6 @@ class Distance extends AbstractSegment {
 
   @override
   String getDisplayValue() {
-    String paceDisplay = pace != null ? 'Pace: $getPaceDisplay()' : '';
     return '$distance ${units.name}';
   }
 
