@@ -3,7 +3,7 @@ import 'package:uuid/uuid.dart';
 
 class Workout implements WorkoutModel{
   @override
-  Duration duration;
+  Duration? duration;
 
   @override
   int? heartRate;
@@ -15,15 +15,15 @@ class Workout implements WorkoutModel{
   String label = '';
 
   @override
-  String notes = '';
+  String? notes = '';
 
   @override
-  DateTime startTime;
+  DateTime? startTime;
 
   Workout(this.duration, this.heartRate, this.startTime);
 
   @override
-  Duration getDuration() {
+  Duration? getDuration() {
     return duration;
   }
 
@@ -38,12 +38,12 @@ class Workout implements WorkoutModel{
   }
 
   @override
-  String getNotes() {
+  String? getNotes() {
     return notes;
   }
 
   @override
-  DateTime getStartTime() {
+  DateTime? getStartTime() {
     return startTime;
   }
 

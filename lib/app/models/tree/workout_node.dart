@@ -19,19 +19,19 @@ class WorkoutNode extends Node<WorkoutModel>{
 
   @override
   void insert(WorkoutModel data) {
-    if (this.data.startTime.isAfter(data.startTime)) {
-      if (leftNode != null) {
-        leftNode!.insert(data);
-      } else {
-        leftNode == WorkoutNode(data);
-      }
-    } else {
-      if (rightNode != null) {
-        rightNode!.insert(data);
-      } else {
-        rightNode = WorkoutNode(data);
-      }
-    }
+    // if (this.data.startTime.isAfter(data.startTime)) {
+    //   if (leftNode != null) {
+    //     leftNode!.insert(data);
+    //   } else {
+    //     leftNode == WorkoutNode(data);
+    //   }
+    // } else {
+    //   if (rightNode != null) {
+    //     rightNode!.insert(data);
+    //   } else {
+    //     rightNode = WorkoutNode(data);
+    //   }
+    // }
   }
 
   @override

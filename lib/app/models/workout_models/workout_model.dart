@@ -1,10 +1,10 @@
 
 // Abstract class to hold the data that all workouts need
 abstract class WorkoutModel {
-  abstract Duration duration;
-  abstract String notes;
+  abstract Duration? duration;
+  abstract String? notes;
   abstract String label;
-  abstract DateTime startTime;
+  abstract DateTime? startTime;
   abstract int? heartRate;
   abstract String id;
 
@@ -17,13 +17,13 @@ abstract class WorkoutModel {
     this.label = label;
   }
 
-  String getNotes() {
+  String? getNotes() {
     return notes;
   }
 
   void setNotes(String notes);
 
-  Duration getDuration() {
+  Duration? getDuration() {
     return duration;
   }
 
@@ -31,7 +31,7 @@ abstract class WorkoutModel {
     this.duration = duration;
   }
 
-  DateTime getStartTime() {
+  DateTime? getStartTime() {
     return startTime;
   }
 

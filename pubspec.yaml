@@ -31,7 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_riverpod: ^2.5.1
-  riverpod_annotation: ^2.3.5
+  riverpod_annotation: ^2.6.1
   uuid:
 
 
@@ -39,6 +39,12 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   provider: ^6.1.2
+  numberpicker: ^2.1.2
+  # sqflite: ^2.4.1
+  path: ^1.9.0
+  path_provider: ^2.1.5
+  json_annotation: ^4.9.0
+  carp_serializable: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -53,9 +59,10 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^4.0.0
-  riverpod_generator: ^2.4.3
+  riverpod_generator: ^2.6.1
   custom_lint: ^0.6.7
   riverpod_lint: ^2.3.13
+  json_serializable: ^6.8.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

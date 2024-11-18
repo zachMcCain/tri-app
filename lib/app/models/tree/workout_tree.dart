@@ -36,4 +36,11 @@ class WorkoutTree {
   bool contains(String id) {
     return root?.data.getId() == id || (root != null && root!.contains(id));
   }
+
+  List<WorkoutModel> getOrderedData() {
+    if (root == null) {
+      return List.empty();
+    }
+    return root!.getOrderedData();
+  }
 }
