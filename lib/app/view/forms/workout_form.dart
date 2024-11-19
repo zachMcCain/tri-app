@@ -106,37 +106,45 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
   @override
   Widget build(BuildContext context) {
     // The full layout
-    return Scaffold(
-      // AppBar with title and navigation
-      appBar: AppBar(        
-        title: const Text('TRI'),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-      ),
-
-      // Workout form holder
-      body: Center(
-        child: Material(
-          color: Colors.grey[300],
-          // The Actual Form
-          child: Form(
-            key: _formKey, // used to save, reset, and validate every child FormField
-            child: Column(
-              children: [
-                TriTextInput(onChanged: onNameChanged, minLines: 1, maxLines: 1, fillColor: Colors.white70, hintText: widget.workoutType.name.toUpperCase(),),
-                // Places the Metadata from the Workout
-                ...getWorkoutSummary(),
-                Divider(),
-                // Gets the Actual Form Based on Type
-                WorkoutFormFactory().getWorkoutForm(widget.workoutType, onWorkoutChanged),
-                // The Notes Section of All Workout Forms
-                TriTextInput(onChanged: onNotesChanged, minLines: 5, maxLines: 10, fillColor: Colors.white70,),
-                // The Submit Button
-                TextButton(
-                  onPressed: onSubmit,
-                  child: const Text('Submit')
-                )
-              ],
-            )
+    return Container(
+      decoration: BoxDecoration(color: Colors.grey[500]),
+      child: Center(
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 700),
+          child: Scaffold(
+            // AppBar with title and navigation
+            appBar: AppBar(        
+              title: const Text('TRI'),
+              backgroundColor: Theme.of(context).colorScheme.primary,
+            ),
+          
+            // Workout form holder
+            body: Center(
+              child: Material(
+                color: Colors.grey[300],
+                // The Actual Form
+                child: Form(
+                  key: _formKey, // used to save, reset, and validate every child FormField
+                  child: Column(
+                    children: [
+                      TriTextInput(onChanged: onNameChanged, minLines: 1, maxLines: 1, fillColor: Colors.white70, hintText: widget.workoutType.name.toUpperCase(),),
+                      // Places the Metadata from the Workout
+                      ...getWorkoutSummary(),
+                      Divider(),
+                      // Gets the Actual Form Based on Type
+                      WorkoutFormFactory().getWorkoutForm(widget.workoutType, onWorkoutChanged),
+                      // The Notes Section of All Workout Forms
+                      TriTextInput(onChanged: onNotesChanged, minLines: 5, maxLines: 10, fillColor: Colors.white70,),
+                      // The Submit Button
+                      TextButton(
+                        onPressed: onSubmit,
+                        child: const Text('Submit')
+                      )
+                    ],
+                  )
+                ),
+              ),
+            ),
           ),
         ),
       ),
