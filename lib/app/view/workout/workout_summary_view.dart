@@ -22,6 +22,7 @@ class _WorkoutSummaryViewState extends ConsumerState<WorkoutSummaryView> {
     WorkoutSummaryVisitor summaryVisitor = WorkoutSummaryVisitor(type: widget.workout.type);
     widget.workout.accept(summaryVisitor);
 
+    String summaryTitle = widget.workout.name != null && widget.workout.name!.isNotEmpty ? widget.workout.name! : summaryVisitor.summary.type.name.toString().toUpperCase();
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Column(
@@ -33,7 +34,7 @@ class _WorkoutSummaryViewState extends ConsumerState<WorkoutSummaryView> {
               children: [
                 // summaryVisitor.summary.type.icon,
                 // const SizedBox(width: 9,),
-                Text(summaryVisitor.summary.type.name.toString().toUpperCase()),
+                Text(summaryTitle),
               ],
             ),
           ),

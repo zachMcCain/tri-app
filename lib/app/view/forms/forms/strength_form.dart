@@ -17,8 +17,8 @@ class StrengthForm extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const TriHeader(header: 'Add a Segment'),
-        TextSegmentFormField(onChanged: onChanged)
+        const TriHeader(header: 'Add a Set'),
+        TextSegmentFormField(onChanged: onChanged, hintText: 'Set Description')
       ],
     );
   }

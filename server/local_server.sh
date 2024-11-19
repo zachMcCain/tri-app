@@ -11,7 +11,7 @@ if [ "$(lsof -t -i :$PORT)" ]; then
 fi
 
 # Switch to the web construction directory
-cd /app/build/web/
+cd ../build/web/
 
 # Start the web server on the specified port
 echo "Starting the server on port $PORT..."

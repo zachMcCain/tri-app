@@ -27,28 +27,36 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        
+    return Container(
+      decoration: BoxDecoration(color: Colors.grey[500]),
+      child: Center(
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 700),
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text(widget.title),
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              
+            ),
+            bottomNavigationBar: NavigationBar(
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              selectedIndex: _selectedIndex,
+              // title: Text(title),
+              destinations: const <Widget>[
+                NavigationDestination(icon: Icon(Icons.home), label: "Home"),
+                NavigationDestination(icon: Icon(Icons.run_circle), label: "Build Workout"),
+                NavigationDestination(icon: Icon(Icons.calendar_month), label: "Log"),
+              ],
+              onDestinationSelected: (int index) => {
+                setState(() {
+                  _selectedIndex = index;
+                })
+              },
+            ),
+            body: getCurrentView()
+          ),
+        ),
       ),
-      bottomNavigationBar: NavigationBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        selectedIndex: _selectedIndex,
-        // title: Text(title),
-        destinations: const <Widget>[
-          NavigationDestination(icon: Icon(Icons.home), label: "Home"),
-          NavigationDestination(icon: Icon(Icons.run_circle), label: "Build Workout"),
-          NavigationDestination(icon: Icon(Icons.calendar_month), label: "Log"),
-        ],
-        onDestinationSelected: (int index) => {
-          setState(() {
-            _selectedIndex = index;
-          })
-        },
-      ),
-      body: getCurrentView()
     );
 
 

@@ -6,8 +6,9 @@ class TextSegmentFormField extends StatefulWidget {
   final ValueChanged<TextSegment> onChanged;
   final FormFieldValidator<String>? validator;
   final String notes;
+  final String hintText;
 
-  const TextSegmentFormField({super.key, required this.onChanged, this.validator, this.notes = ''});
+  const TextSegmentFormField({super.key, required this.onChanged, this.validator, this.notes = '', this.hintText = 'Segment Description'});
 
   @override
   State<TextSegmentFormField> createState() => _TextSegmentFormFieldState();
@@ -38,7 +39,8 @@ class _TextSegmentFormFieldState extends State<TextSegmentFormField> {
             Expanded(
               child: TriTextInput(onChanged: (data) {
                 notes.description = data;
-              }),
+              },
+              hintText: widget.hintText,),
             ),
             IconButton(
               onPressed: () {
@@ -46,6 +48,7 @@ class _TextSegmentFormFieldState extends State<TextSegmentFormField> {
                 setState(() {
                   
                   notes = TextSegment();
+                  notes.description = widget.notes;
                 });
               }, 
               icon: const Icon(Icons.add)
