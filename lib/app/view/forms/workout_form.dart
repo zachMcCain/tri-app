@@ -125,7 +125,7 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
                 // The Actual Form
                 child: Form(
                   key: _formKey, // used to save, reset, and validate every child FormField
-                  child: Column(
+                  child: ListView(
                     children: [
                       TriTextInput(onChanged: onNameChanged, minLines: 1, maxLines: 1, fillColor: Colors.white70, hintText: widget.workoutType.name.toUpperCase(),),
                       // Places the Metadata from the Workout

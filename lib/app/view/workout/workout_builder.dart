@@ -9,21 +9,21 @@ class WorkoutBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Column(
-        children: [
+    return Center(
+      child: ListView(
+        children: const [
           // Have 
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            padding: EdgeInsets.symmetric(vertical: 20.0),
             child: Text('Build Workout from Type', style: TextStyle(fontSize: 20),),
           ),
           // SizedBox(height: 20,),
           Material(child: ViewPicker(tiles: WorkoutType.values),),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            padding: EdgeInsets.symmetric(vertical: 20.0),
             child: Text('Start with Your Workout', style: TextStyle(fontSize: 20),),
           ),
-          Expanded(child: WorkoutList(placeholder: Center(child: Padding(
+          SizedBox(height: 300, child: WorkoutList(placeholder: Center(child: Padding(
           padding: EdgeInsets.all(16.0),
           child: Column(
             children: [
