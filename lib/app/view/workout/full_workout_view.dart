@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tri/app/models/workout/abstract_workout.dart';
+import 'package:tri/app/models/workout_models/abstract_workout.dart';
 import 'package:tri/app/view/workout/workout_segment_list.dart';
 import 'package:tri/app/view/workout/workout_summary_view.dart';
 

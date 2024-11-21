@@ -1,7 +1,7 @@
 import 'package:carp_serializable/carp_serializable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:tri/app/models/workout/abstract_segment.dart';
-import 'package:tri/app/models/workout/pace.dart';
+import 'package:tri/app/models/workout_models/segments/abstract_segment.dart';
+import 'package:tri/app/models/workout_models/targets/pace.dart';
 
 part 'open_segment.g.dart';
 

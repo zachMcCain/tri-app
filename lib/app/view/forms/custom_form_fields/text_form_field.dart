@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tri/app/models/workout/text_segment.dart';
+import 'package:tri/app/models/workout_models/segments/text_segment.dart';
 import 'package:tri/app/view/widgets/tri_text_input.dart';
 
 class TextSegmentFormField extends StatefulWidget {

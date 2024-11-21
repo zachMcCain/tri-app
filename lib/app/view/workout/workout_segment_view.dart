@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tri/app/models/workout/abstract_segment.dart';
-import 'package:tri/app/models/workout/distance.dart';
+import 'package:tri/app/models/workout_models/segments/abstract_segment.dart';
+import 'package:tri/app/models/workout_models/segments/distance.dart';
 
 class WorkoutSegmentView extends StatelessWidget {
   final AbstractSegment segment;

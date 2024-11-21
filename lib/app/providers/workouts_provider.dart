@@ -1,10 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:tri/app/models/workout/abstract_workout.dart';
+import 'package:tri/app/models/workout_models/abstract_workout.dart';
 import 'package:tri/data/docs_path.dart';
 
 // part 'workouts_provider.g.dart';

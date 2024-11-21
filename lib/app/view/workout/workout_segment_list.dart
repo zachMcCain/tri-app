@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tri/app/models/workout/abstract_segment.dart';
-import 'package:tri/app/models/workout/abstract_workout.dart';
+import 'package:tri/app/models/workout_models/segments/abstract_segment.dart';
+import 'package:tri/app/models/workout_models/abstract_workout.dart';
 import 'package:tri/app/view/workout/workout_segment_view.dart';
 
 class WorkoutSegmentList extends StatefulWidget {

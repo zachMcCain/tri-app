@@ -1,20 +1,20 @@
 import 'package:carp_serializable/carp_serializable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tri/app/models/interfaces/visitor.dart';
-import 'package:tri/app/models/workout/abstract_segment.dart';
-import 'package:tri/app/models/workout/abstract_workout.dart';
+import 'package:tri/app/models/workout_models/segments/abstract_segment.dart';
+import 'package:tri/app/models/workout_models/abstract_workout.dart';
 import 'package:tri/app/models/workout_models/workout_type.dart';
-part 'run.g.dart';
+part 'brick.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class Run extends AbstractWorkout {
+class Brick extends AbstractWorkout {
   @override
-  WorkoutType type = WorkoutType.run;
+  WorkoutType type = WorkoutType.brick;
   @override
   List<AbstractSegment> segments = List.empty(growable: true);
 
 
-  Run();
+  Brick();
 
   @override
   accept(Visitor v) {
@@ -28,10 +28,10 @@ class Run extends AbstractWorkout {
   }
 
   @override
-  Function get fromJsonFunction => _$RunFromJson;
+  Function get fromJsonFunction => _$BrickFromJson;
 
-  factory Run.fromJson(Map<String, dynamic> json) => FromJsonFactory().fromJson<Run>(json);
+  factory Brick.fromJson(Map<String, dynamic> json) => FromJsonFactory().fromJson<Brick>(json);
   
   @override
-  Map<String, dynamic> toJson() => _$RunToJson(this);
+  Map<String, dynamic> toJson() => _$BrickToJson(this);
 }

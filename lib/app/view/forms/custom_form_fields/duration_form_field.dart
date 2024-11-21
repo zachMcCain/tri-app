@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tri/app/models/units/distance_unit.dart';
-import 'package:tri/app/models/workout/pace.dart';
-import 'package:tri/app/models/workout/workout_duration.dart';
+import 'package:tri/app/models/workout_models/targets/pace.dart';
+import 'package:tri/app/models/workout_models/segments/workout_duration.dart';
 import 'package:tri/app/view/forms/custom_form_fields/pace_form_field.dart';
 
 class DurationFormField extends StatefulWidget {

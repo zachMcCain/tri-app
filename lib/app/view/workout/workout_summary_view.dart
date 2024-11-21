@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tri/app/models/workout/abstract_workout.dart';
+import 'package:tri/app/models/workout_models/abstract_workout.dart';
 import 'package:tri/app/models/workout/workout_summary_visitor.dart';
 import 'package:tri/app/providers/workouts_provider.dart';
 

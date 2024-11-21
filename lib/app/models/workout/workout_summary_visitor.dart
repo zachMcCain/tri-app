@@ -1,7 +1,7 @@
 import 'package:tri/app/models/interfaces/visitor.dart';
-import 'package:tri/app/models/workout/abstract_segment.dart';
-import 'package:tri/app/models/workout/distance.dart';
-import 'package:tri/app/models/workout/workout_duration.dart';
+import 'package:tri/app/models/workout_models/segments/abstract_segment.dart';
+import 'package:tri/app/models/workout_models/segments/distance.dart';
+import 'package:tri/app/models/workout_models/segments/workout_duration.dart';
 import 'package:tri/app/models/workout_models/workout_type.dart';
 
 class WorkoutSummaryVisitor implements Visitor<AbstractSegment> {

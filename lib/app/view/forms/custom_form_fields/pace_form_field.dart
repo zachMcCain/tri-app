@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:tri/app/models/units/distance_unit.dart';
-import 'package:tri/app/models/workout/pace.dart';
+import 'package:tri/app/models/workout_models/targets/pace.dart';
 
 class PaceFormField extends StatefulWidget {
   final ValueChanged<Pace> onChanged;

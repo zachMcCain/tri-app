@@ -1,20 +1,21 @@
 import 'package:carp_serializable/carp_serializable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tri/app/models/interfaces/visitor.dart';
-import 'package:tri/app/models/workout/abstract_segment.dart';
-import 'package:tri/app/models/workout/abstract_workout.dart';
+import 'package:tri/app/models/workout_models/segments/abstract_segment.dart';
+import 'package:tri/app/models/workout_models/abstract_workout.dart';
 import 'package:tri/app/models/workout_models/workout_type.dart';
-part 'brick.g.dart';
+
+part 'strength.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class Brick extends AbstractWorkout {
+class Strength extends AbstractWorkout {
   @override
-  WorkoutType type = WorkoutType.brick;
+  WorkoutType type = WorkoutType.strength;
   @override
   List<AbstractSegment> segments = List.empty(growable: true);
 
 
-  Brick();
+  Strength();
 
   @override
   accept(Visitor v) {
@@ -28,10 +29,10 @@ class Brick extends AbstractWorkout {
   }
 
   @override
-  Function get fromJsonFunction => _$BrickFromJson;
+  Function get fromJsonFunction => _$StrengthFromJson;
 
-  factory Brick.fromJson(Map<String, dynamic> json) => FromJsonFactory().fromJson<Brick>(json);
+  factory Strength.fromJson(Map<String, dynamic> json) => FromJsonFactory().fromJson<Strength>(json);
   
   @override
-  Map<String, dynamic> toJson() => _$BrickToJson(this);
+  Map<String, dynamic> toJson() => _$StrengthToJson(this);
 }
