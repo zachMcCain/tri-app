@@ -57,7 +57,8 @@ class _WorkoutSummaryViewState extends ConsumerState<WorkoutSummaryView> {
                     Text(summaryVisitor.getTimeDisplay())
                   ],
                 ),
-                Expanded(child: IconButton(alignment: Alignment.centerRight, onPressed: () => workoutList.removeWorkout(widget.workout), icon: Icon(Icons.delete)))
+                const Spacer(),
+                IconButton(alignment: Alignment.centerRight, onPressed: () => workoutList.removeWorkout(widget.workout), icon: Icon(Icons.delete))
               ],
             ),
           ),
