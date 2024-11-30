@@ -1,6 +1,7 @@
 import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:tri/app/models/workout_models/abstract_workout.dart';
+import 'package:tri/app/models/workout_models/workout_type.dart';
 import 'package:tri/app/view/workout/workout_list_item.dart';
 
 class MonthDay extends StatelessWidget {
@@ -9,8 +10,9 @@ class MonthDay extends StatelessWidget {
   final void Function(DragTargetDetails<Object>, DateTime)? onDrop;
   final bool isInMonth;
   final bool isToday;
+  final void Function(CalendarEventData<Object?> event, DateTime date) onTap;
 
-  const MonthDay({super.key, required this.date, required this.isToday, required this.isInMonth, required this.events, this.onDrop});
+  const MonthDay({super.key, required this.date, required this.isToday, required this.isInMonth, required this.events, required this.onTap, this.onDrop});
 
   @override
   Widget build(BuildContext context) {
@@ -21,21 +23,46 @@ class MonthDay extends StatelessWidget {
         onDrop!(details, date);
       }
     }
+
+    Color getEventColor(AbstractWorkout workout) {
+      if (workout.type == WorkoutType.run) {
+        return Colors.green.shade300;
+      } else if (workout.type == WorkoutType.bike) {
+        return Colors.amber.shade600;
+      } else if (workout.type == WorkoutType.swim) {
+        return Colors.blue.shade300;
+      } else if (workout.type == WorkoutType.brick) {
+        return Colors.red.shade200;
+      }
+      return Colors.green.shade300;
+    }
     
     Widget getListItem(CalendarEventData<Object?> data) {
       if (data.event is AbstractWorkout) {
-        Icon icon = Icon((data.event as AbstractWorkout).type.icon, size: 12,);
-        return Row(
-          children: [
-            icon,
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 3.0),
-              child: Text(
-                (data.event as AbstractWorkout).name ?? (data.event as AbstractWorkout).type.title,
-                style: const TextStyle(fontSize: 10,)
-              ),
-            )
-          ],
+        AbstractWorkout workout = data.event as AbstractWorkout;
+        Icon icon = Icon(workout.type.icon, size: 12,);
+        Color eventColor = getEventColor(workout);
+        return Listener(
+          onPointerDown:(event) => onTap(data, date),
+          child: Container(
+            decoration: BoxDecoration(
+              color: eventColor 
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                icon,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                  child: Text(
+                    workout.name ?? workout.type.title,
+                    style: const TextStyle(fontSize: 10,)
+                  ),
+                )
+              ],
+            ),
+          ),
         );
       } else {
         return const Text("Some Event");
