@@ -19,7 +19,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
   runApp(ProviderScope( 
-    child: CalendarControllerProvider(controller: EventController(), child: const MyApp()))
+    child: CalendarControllerProvider<Object?>(controller: EventController(), child: const MyApp()))
   );
 }
 
