@@ -2,7 +2,6 @@ import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:tri/app/models/workout_models/abstract_workout.dart';
 import 'package:tri/app/models/workout_models/workout_type.dart';
-import 'package:tri/app/view/workout/workout_list_item.dart';
 
 class MonthDay extends StatelessWidget {
   final DateTime date;
@@ -37,31 +36,32 @@ class MonthDay extends StatelessWidget {
       return Colors.green.shade300;
     }
     
+    bool dragging = false;
     Widget getListItem(CalendarEventData<Object?> data) {
+
+
       if (data.event is AbstractWorkout) {
         AbstractWorkout workout = data.event as AbstractWorkout;
         Icon icon = Icon(workout.type.icon, size: 12,);
         Color eventColor = getEventColor(workout);
+
+        
         return Listener(
-          onPointerDown:(event) => onTap(data, date),
-          child: Container(
-            decoration: BoxDecoration(
-              color: eventColor 
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                icon,
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 3.0),
-                  child: Text(
-                    workout.name ?? workout.type.title,
-                    style: const TextStyle(fontSize: 10,)
-                  ),
-                )
-              ],
-            ),
+          onPointerUp:(event) {
+            if (!dragging) {
+              onTap(data, date);
+            }
+          },
+          child: LongPressDraggable(
+            data: data, // this doesn't like being set to data
+            feedback: WorkoutCalendarEvent(eventColor: eventColor, icon: icon, workout: workout),
+            onDragStarted: () {
+              dragging = true; 
+            },
+            onDragCompleted: () {
+              dragging = false;
+            },
+            child: WorkoutCalendarEvent(eventColor: eventColor, icon: icon, workout: workout),
           ),
         );
       } else {
@@ -69,7 +69,7 @@ class MonthDay extends StatelessWidget {
       }
     }
 
-    return DragTarget<AbstractWorkout>(
+    return DragTarget<Object>(
       builder: (context, candidateItems, rejectedItems) {
         
 
@@ -96,6 +96,42 @@ class MonthDay extends StatelessWidget {
         );
       },
       onAcceptWithDetails: onTargetDrop,
+    );
+  }
+}
+
+class WorkoutCalendarEvent extends StatelessWidget {
+  const WorkoutCalendarEvent({
+    super.key,
+    required this.eventColor,
+    required this.icon,
+    required this.workout,
+  });
+
+  final Color eventColor;
+  final Icon icon;
+  final AbstractWorkout workout;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: eventColor
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          icon,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 3.0),
+            child: Text(
+              workout.name ?? workout.type.title,
+              style: const TextStyle(fontSize: 10,)
+            ),
+          )
+        ],
+      ),
     );
   }
 }

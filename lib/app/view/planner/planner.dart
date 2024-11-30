@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tri/app/models/workout_models/abstract_workout.dart';
 import 'package:tri/app/view/planner/month_day.dart';
+import 'package:tri/app/view/workout/full_workout_view.dart';
 import 'package:tri/app/view/workout/workout_list.dart';
 import 'package:calendar_view/calendar_view.dart';
-import 'package:tri/app/view/workout/workout_summary_view.dart';
 
 class Planner extends StatelessWidget {
   const Planner({super.key});
@@ -21,12 +21,22 @@ class Planner extends StatelessWidget {
     }
 
     void addWorkout(DragTargetDetails<Object> dragData, date) {
-      print("Adding a workout yo $dragData on date $date");
+      AbstractWorkout? workout = null;
+      if (dragData.data is CalendarEventData) {
+        CalendarEventData calData = dragData.data as CalendarEventData;
+        CalendarControllerProvider.of(context).controller.remove(calData);
+        if (calData.event is AbstractWorkout) {
+          workout = calData.event as AbstractWorkout;
+        }
+      }
       String title = "Unkown";
       if (dragData.data is AbstractWorkout) {
-        title = (dragData.data as AbstractWorkout).type.title;
+        workout = dragData.data as AbstractWorkout;
       }
-      var event = CalendarEventData<Object>(title: title, date: date, event: dragData.data);
+      if (workout != null) {
+        title = workout.type.title;
+      }
+      var event = CalendarEventData<Object>(title: title, date: date, event: workout);
       CalendarControllerProvider.of(context).controller.add(event);
     }
 
@@ -42,13 +52,13 @@ class Planner extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
               
-                  WorkoutSummaryView(workout: (event.event as AbstractWorkout)),
+                  FullWorkoutView(workout: (event.event as AbstractWorkout)),
                   TextButton(
                     onPressed: () {
                       CalendarControllerProvider.of(context).controller.remove(event);
                       Navigator.pop(context);
                     }, 
-                    child: const Text('Remove'),
+                    child: const Text('Remove from Calendar'),
                   )
                 ],
               ),
