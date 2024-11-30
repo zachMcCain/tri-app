@@ -18,13 +18,13 @@ class Planner extends StatelessWidget {
       // CalendarControllerProvider.of(context).controller.add(event);
     }
 
-    void addWorkout(DragTargetDetails<Object> workout, date) {
-      print("Adding a workout yo $workout on date $date");
+    void addWorkout(DragTargetDetails<Object> dragData, date) {
+      print("Adding a workout yo $dragData on date $date");
       String title = "Unkown";
-      if (workout.data is AbstractWorkout) {
-        title = (workout.data as AbstractWorkout).type.title;
+      if (dragData.data is AbstractWorkout) {
+        title = (dragData.data as AbstractWorkout).type.title;
       }
-      var event = CalendarEventData<Object>(title: title, date: date, event: workout.data);
+      var event = CalendarEventData<Object>(title: title, date: date, event: dragData.data);
       CalendarControllerProvider.of(context).controller.add(event);
     }
 
@@ -39,8 +39,9 @@ class Planner extends StatelessWidget {
     return Column(
         children: [
           Expanded(
+            flex: 3,
             child: MonthView(
-              cellAspectRatio: 1,
+              cellAspectRatio: 0.8,
               onCellTap: addEvent,
               cellBuilder: getCell,
               onEventTap: onEventTap,
@@ -51,7 +52,7 @@ class Planner extends StatelessWidget {
           //   child: CalendarDatePicker(initialDate: DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2050), 
           //     onDateChanged: (change) => print("Hi"))
           // ),
-          Expanded(child: WorkoutList(placeholder: Text('Your workouts will appear here!'),)),
+          Expanded(flex: 2, child: WorkoutList(placeholder: Text('Your workouts will appear here!'),)),
         ],
       );
  

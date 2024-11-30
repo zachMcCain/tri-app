@@ -10,12 +10,12 @@ class MonthDay extends StatelessWidget {
   final bool isInMonth;
   final bool isToday;
 
-  MonthDay({super.key, required this.date, required this.isToday, required this.isInMonth, required this.events, this.onDrop});
+  const MonthDay({super.key, required this.date, required this.isToday, required this.isInMonth, required this.events, this.onDrop});
 
   @override
   Widget build(BuildContext context) {
 
-    void _onDrop(DragTargetDetails<Object> details) {
+    void onTargetDrop(DragTargetDetails<Object> details) {
       if (onDrop != null) {
 
         onDrop!(details, date);
@@ -24,37 +24,51 @@ class MonthDay extends StatelessWidget {
     
     Widget getListItem(CalendarEventData<Object?> data) {
       if (data.event is AbstractWorkout) {
-        Icon icon = (data.event as AbstractWorkout).type.icon;
+        Icon icon = Icon((data.event as AbstractWorkout).type.icon, size: 12,);
         return Row(
           children: [
             icon,
-            Text((data.event as AbstractWorkout).name ?? (data.event as AbstractWorkout).type.title),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 3.0),
+              child: Text(
+                (data.event as AbstractWorkout).name ?? (data.event as AbstractWorkout).type.title,
+                style: const TextStyle(fontSize: 10,)
+              ),
+            )
           ],
         );
       } else {
-        return Text("Some Event");
+        return const Text("Some Event");
       }
     }
 
-
-    // TODO: implement build
     return DragTarget<AbstractWorkout>(
       builder: (context, candidateItems, rejectedItems) {
         
 
         return Container(
+          clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
-            color: isInMonth ? Colors.white70 : null
+            color: isInMonth ? Colors.white : null
           ),
           child: Column(
             children: [
-              Text(date.day.toString()),
+              isToday ? 
+                CircleAvatar(
+                  radius: 13, 
+                  backgroundColor: Colors.blue.shade400,
+                  child: Text(
+                    date.day.toString(),
+                    style: const TextStyle(color: Colors.white, fontSize: 12)
+                  ),
+                ) : 
+                Text(date.day.toString(), style: TextStyle(color: Colors.grey[600], fontSize: 12),),
               ...events.map((event) => getListItem(event))
             ],
           ),
         );
       },
-      onAcceptWithDetails: _onDrop,
+      onAcceptWithDetails: onTargetDrop,
     );
   }
 }

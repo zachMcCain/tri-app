@@ -29,6 +29,8 @@ class WorkoutList extends ConsumerWidget {
     Widget getWorkoutList() {
       if (allWorkouts.workouts.isNotEmpty) {
         return ListView(
+          shrinkWrap: true,
+          physics: ClampingScrollPhysics(),
           itemExtent: 100, 
           children: [
             ...allWorkouts.workouts.map(getDragableWorkouts)

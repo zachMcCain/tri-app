@@ -50,7 +50,7 @@ class _ViewPickerState extends State<ViewPicker> {
               ),
               textAlign: TextAlign.center,
             ),
-            child: tile.icon!,
+            child: Icon(tile.icon!),
           ),
         ),
       ),

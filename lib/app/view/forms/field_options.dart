@@ -11,10 +11,10 @@ enum FieldOptions implements AbstractViewTile {
     // Add calories, pace, power, etc (and maybe just a general purpose 'segment'?)
   
   @override
-  Icon? get icon => this == FieldOptions.distance ? const Icon(Icons.add_road) :
-    this == FieldOptions.cadence ? const Icon(Icons.repeat) :
-    this == FieldOptions.duration ? const Icon(Icons.timer) :
-    const Icon(Icons.data_array);
+  IconData? get icon => this == FieldOptions.distance ? Icons.add_road :
+    this == FieldOptions.cadence ? Icons.repeat :
+    this == FieldOptions.duration ? Icons.timer :
+    Icons.data_array;
   
 
   @override
