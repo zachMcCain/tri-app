@@ -1,3 +1,4 @@
+import 'package:calendar_view/calendar_view.dart';
 import 'package:carp_serializable/carp_serializable.dart';
 import 'package:flutter/material.dart';
 import 'package:tri/app/models/workout_models/segments/abstract_segment.dart';
@@ -17,8 +18,8 @@ import 'package:tri/app/view/home/home.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const ProviderScope( 
-    child: MyApp())
+  runApp(ProviderScope( 
+    child: CalendarControllerProvider(controller: EventController(), child: const MyApp()))
   );
 }
 
