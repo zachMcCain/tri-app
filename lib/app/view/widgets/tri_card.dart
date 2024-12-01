@@ -2,22 +2,19 @@ import 'package:flutter/material.dart';
 
 class TriCard extends StatelessWidget {
   final Widget child;
-  final double height;
+  final double padding;
 
-  const TriCard({super.key, required this.child, this.height = 150});
+  const TriCard({super.key, required this.child, this.padding = 3});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(3.0),
-      // child: SizedBox(
-      //   height: height,
-        child: Card(
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.elliptical(3, 3))),
-          elevation: .55,
-          child: child,
-        )
-      // )
+      padding: EdgeInsets.all(padding),
+      child: Card(
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.elliptical(3, 3))),
+        elevation: .55,
+        child: child,
+      )
     );
   }
 }

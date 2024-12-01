@@ -27,7 +27,19 @@ class Home extends StatelessWidget {
   
   Widget nextUp(BuildContext context) {
     AbstractWorkout? nextWorkout = getNextWorkout(context);
-    return nextWorkout != null ? FullWorkoutView(workout: nextWorkout) : const Text("Plan Your Next Workout!");
+    if (nextWorkout != null) {
+      return FullWorkoutView(workout: nextWorkout);
+    } else {
+      return const Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Text("Nothing Planned Yet, Time to Plan Your Next Workout!"),
+            SizedBox(height: 20,)
+          ],
+        ),
+      );
+    }
   }
 
   @override
@@ -42,7 +54,6 @@ class Home extends StatelessWidget {
     // Summary of what is coming up and what has happend a week out
     // The next workout with the ability to "log as completed"
     // Some form of stats over the course of the last n months where n is dynamic based on first workout in the log to a max of 1 year
-    AbstractWorkout? nextWorkout = getNextWorkout(context);
 
     return ListView(
       children: [
@@ -54,14 +65,14 @@ class Home extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: const TriHeader(header: "Next Up"),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: TriHeader(header: "Next Up"),
               ),
               nextUp(context)
             ],
           )
-        )
+        ),
         
 
         // Expanded(

@@ -6,8 +6,9 @@ import 'package:tri/app/view/workout/workout_list_item.dart';
 
 class WorkoutList extends ConsumerWidget {
   final Widget placeholder;
+  final bool removable;
 
-  const WorkoutList({super.key, required this.placeholder});
+  const WorkoutList({super.key, required this.placeholder, this.removable = false});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,7 +23,7 @@ class WorkoutList extends ConsumerWidget {
           width: 350,
           child: WorkoutListItem(workout: workout)
         ),
-        child: WorkoutListItem(workout: workout), 
+        child: WorkoutListItem(workout: workout, removable: removable), 
       );
     }
 
@@ -31,7 +32,7 @@ class WorkoutList extends ConsumerWidget {
         return ListView(
           shrinkWrap: true,
           physics: ClampingScrollPhysics(),
-          itemExtent: 100, 
+          itemExtent: 100,
           children: [
             ...allWorkouts.workouts.map(getDragableWorkouts)
           ]

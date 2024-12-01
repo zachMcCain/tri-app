@@ -23,16 +23,24 @@ class WorkoutBuilder extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 20.0),
             child: Text('Start with Your Workout', style: TextStyle(fontSize: 20),),
           ),
-          SizedBox(height: 300, child: WorkoutList(placeholder: Center(child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Text('No workouts have been built yet.'),
-              SizedBox(height: 10,),
-              Text('As you build workouts, you will be able to select them here for editing.'),
-            ],
+          SizedBox(
+            height: 300, 
+            child: WorkoutList(
+              removable: true,
+              placeholder: Center(
+                child: Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      Text('No workouts have been built yet.'),
+                      SizedBox(height: 10,),
+                      Text('As you build workouts, you will be able to select them here for editing.'),
+                    ],
+                  ),
+                )
+              ),
+            )
           ),
-        )),)),
         ],
       ),
     );
