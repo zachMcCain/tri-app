@@ -38,7 +38,7 @@ class _ViewPickerState extends State<ViewPicker> {
         child: Container(
           margin: const EdgeInsets.all(3),
           decoration: BoxDecoration(
-            color: Colors.grey[200],
+            // color: Colors.grey[200],
             border: Border.all(color: Colors.white),
             borderRadius: BorderRadius.circular(8),
           ),
@@ -58,7 +58,7 @@ class _ViewPickerState extends State<ViewPicker> {
     .toList();
 
     return Container(
-      color: Colors.grey[300],
+      // color: Colors.grey[300],
       child: GridView.count(
         crossAxisCount: tileView.length > 3 ? 3 : tileView.length,
         shrinkWrap: true,
