@@ -40,6 +40,9 @@ class WorkoutSummaryVisitor implements Visitor<AbstractSegment> {
       return 'Open';
     }
   }
+
+  Distance? get totalDistance => summary.totalDistance;
+  Duration? get totalDuration => summary.totalTime;
 }
 
 class WorkoutSummary {
@@ -48,4 +51,19 @@ class WorkoutSummary {
   WorkoutType type;
 
   WorkoutSummary({required this.type});
+
+  addSummary(WorkoutSummary summary) {
+    if (summary.type != type) {
+      return;
+    } else {
+      totalDistance = totalDistance?.addDistance(summary.totalDistance) ?? summary.totalDistance;
+      if (totalTime != null) {
+        if (summary.totalTime != null) {
+          totalTime = totalTime! + summary.totalTime!;
+        }
+      } else {
+        totalTime = summary.totalTime;
+      }
+    }
+  }
 }

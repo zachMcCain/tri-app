@@ -14,7 +14,7 @@ import 'package:tri/app/models/workout_models/strength.dart';
 import 'package:tri/app/models/workout_models/swim.dart';
 import 'package:tri/app/models/workout_models/segments/text_segment.dart';
 import 'package:tri/app/models/workout_models/segments/workout_duration.dart';
-import 'package:tri/app/view/home/home.dart';
+import 'package:tri/app/view/scaffold/app.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         scaffoldBackgroundColor: Colors.grey[300]
       ),
-      home: const MyHomePage(title: 'TRI',),
+      home: const TriApp(title: 'TRI',),
     );
   }
 }

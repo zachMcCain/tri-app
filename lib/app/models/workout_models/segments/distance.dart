@@ -37,8 +37,10 @@ class Distance extends AbstractSegment {
     }
   }
 
-  Distance addDistance(Distance distToAdd) {
-    distance = distance + distToAdd.distance;
+  Distance addDistance(Distance? distToAdd) {
+    if (distToAdd != null) {
+      distance = distance + distToAdd.distance;
+    }
     return this;
   }
 

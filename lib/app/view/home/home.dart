@@ -1,64 +1,47 @@
+import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
-import 'package:tri/app/view/planner/planner.dart';
-import 'package:tri/app/view/workout/workout_builder.dart';
+import 'package:tri/app/view/widgets/tri_header.dart';
+import 'package:tri/app/view/widgets/tri_summary.dart';
 import 'package:tri/app/view/workout/workout_list.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
+class Home extends StatelessWidget {
+  const Home({super.key});
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
 
-class _MyHomePageState extends State<MyHomePage> {
-  List<Widget> views = [
-    const WorkoutList(placeholder: Text('Welcome, let\'s get started!'),),
-    const WorkoutBuilder(),
-    const Planner()
-  ];
-
-  int _selectedIndex = 0;
-
-  Widget getCurrentView() {
-    return views.elementAt(_selectedIndex);
-  }
+  
 
   @override
   Widget build(BuildContext context) {
 
-    return Container(
-      decoration: BoxDecoration(color: Colors.grey[500]),
-      child: Center(
-        child: Container(
-          constraints: const BoxConstraints(maxWidth: 700),
-          child: Scaffold(
-            appBar: AppBar(
-              title: Text(widget.title),
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              
+
+    // Summary of what is coming up and what has happend a week out
+    // The next workout with the ability to "log as completed"
+    // Some form of stats over the course of the last n months where n is dynamic based on first workout in the log to a max of 1 year
+
+
+
+    CalendarControllerProvider.of(context).controller.getEventsOnDay(DateTime.now());
+
+    return const Column(
+      children: [
+        TriHeader(header: "Welcome"),
+        TriSummary(),
+
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: WeekView(
+              heightPerMinute: .5,
+              startHour: 5,
+              endHour: 24,
+              // hourIndicatorSettings: HourIndicatorSettings(startHour: 7),
+            
             ),
-            bottomNavigationBar: NavigationBar(
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              selectedIndex: _selectedIndex,
-              // title: Text(title),
-              destinations: const <Widget>[
-                NavigationDestination(icon: Icon(Icons.home), label: "Home"),
-                NavigationDestination(icon: Icon(Icons.run_circle), label: "Build Workout"),
-                NavigationDestination(icon: Icon(Icons.calendar_month), label: "Log"),
-              ],
-              onDestinationSelected: (int index) => {
-                setState(() {
-                  _selectedIndex = index;
-                })
-              },
-            ),
-            body: getCurrentView()
-          ),
+          )
         ),
-      ),
+        // WorkoutList(placeholder: Text("Wilkommen alles")),
+      ],
     );
-
-
   }
+  
 }
