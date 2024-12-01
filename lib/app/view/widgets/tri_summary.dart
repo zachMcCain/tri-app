@@ -59,11 +59,12 @@ class TriSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Summary lastWeeksSummary = this.lastWeeksSummary(context);
-    Summary thisWeeksSummary = this.comingWeeksSummary(context);
+    Summary thisWeeksSummary = comingWeeksSummary(context);
 
     return TriCard(
+      height: 175,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
         child: Column(
           children: [
             const Row(

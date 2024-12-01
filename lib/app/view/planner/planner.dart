@@ -52,7 +52,7 @@ class Planner extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
               
-                  FullWorkoutView(workout: (event.event as AbstractWorkout)),
+                  FullWorkoutView(workout: (event.event as AbstractWorkout), removable: true,),
                   TextButton(
                     onPressed: () {
                       CalendarControllerProvider.of(context).controller.remove(event);

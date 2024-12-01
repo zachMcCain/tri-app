@@ -6,8 +6,9 @@ import 'package:tri/app/providers/workouts_provider.dart';
 
 class WorkoutSummaryView extends ConsumerStatefulWidget {
   final AbstractWorkout workout;
+  final bool removable;
 
-  const WorkoutSummaryView({super.key, required this.workout});
+  const WorkoutSummaryView({super.key, required this.workout, this.removable = false});
 
   @override
   ConsumerState<WorkoutSummaryView> createState() => _WorkoutSummaryViewState();
@@ -34,6 +35,10 @@ class _WorkoutSummaryViewState extends ConsumerState<WorkoutSummaryView> {
               children: [
                 // summaryVisitor.summary.type.icon,
                 // const SizedBox(width: 9,),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                  child: Icon(size: 17, summaryVisitor.summary.type.icon),
+                ),
                 Text(summaryTitle),
               ],
             ),
@@ -58,7 +63,11 @@ class _WorkoutSummaryViewState extends ConsumerState<WorkoutSummaryView> {
                   ],
                 ),
                 const Spacer(),
-                IconButton(alignment: Alignment.centerRight, onPressed: () => workoutList.removeWorkout(widget.workout), icon: Icon(Icons.delete))
+                widget.removable ? IconButton(
+                  alignment: Alignment.centerRight, 
+                  onPressed: () => workoutList.removeWorkout(widget.workout), 
+                  icon: Icon(Icons.delete)
+                ) : Container()
               ],
             ),
           ),

@@ -34,7 +34,7 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
     if (value is AbstractSegment) {
       setState(() {
         workout.segments.add(value);
-        builtWorkout = FullWorkoutView(workout: workout,);
+        builtWorkout = FullWorkoutView(workout: workout, removable: true,);
       });
     } else {
       print("WARNING: RECEIVED AN ONWORKOUTCHANGED WITH VALUE THAT IS NOT A SEGMENT");

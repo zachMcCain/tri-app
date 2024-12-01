@@ -11,7 +11,7 @@ class WorkoutListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: Colors.grey[200],
-      child: WorkoutSummaryView(workout: workout)
+      child: WorkoutSummaryView(workout: workout, removable: true,)
     );
   }
 }

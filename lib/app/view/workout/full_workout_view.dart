@@ -5,8 +5,9 @@ import 'package:tri/app/view/workout/workout_summary_view.dart';
 
 class FullWorkoutView extends StatelessWidget {
   final AbstractWorkout workout;
+  final bool removable;
 
-  const FullWorkoutView({super.key, required this.workout});
+  const FullWorkoutView({super.key, required this.workout, this.removable = false});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class FullWorkoutView extends StatelessWidget {
         // Provide a summary at the top
         WorkoutSummaryView(workout: workout),
         const Divider(),
-        WorkoutSegmentList(workout: workout)
+        WorkoutSegmentList(workout: workout, removable: removable,)
       ],
     );
   }

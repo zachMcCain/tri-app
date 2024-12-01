@@ -4,9 +4,10 @@ import 'package:tri/app/models/workout_models/segments/distance.dart';
 
 class WorkoutSegmentView extends StatelessWidget {
   final AbstractSegment segment;
+  final bool removable;
   final void Function() onRemove;
 
-  const WorkoutSegmentView({super.key, required this.segment, required this.onRemove});
+  const WorkoutSegmentView({super.key, required this.segment, required this.onRemove, this.removable = false});
 
   Widget getSegmentView() {
     if (segment is Distance) {
@@ -37,7 +38,9 @@ class WorkoutSegmentView extends StatelessWidget {
           const Icon(Icons.menu),
           // const Text('-'),
           getSegmentView(),
-          Expanded(child: Align(alignment: Alignment.centerRight, child: TextButton(onPressed: onRemove, child: const Text('Remove Segment'))))
+          removable ? Expanded(
+            child: Align(alignment: Alignment.centerRight, child: TextButton(onPressed: onRemove, child: const Text('Remove Segment')))
+          ) : Container()
         ],
       ),
     );

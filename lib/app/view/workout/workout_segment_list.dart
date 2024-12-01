@@ -5,8 +5,9 @@ import 'package:tri/app/view/workout/workout_segment_view.dart';
 
 class WorkoutSegmentList extends StatefulWidget {
   final AbstractWorkout workout;
+  final bool removable;
 
-  const WorkoutSegmentList({super.key, required this.workout});
+  const WorkoutSegmentList({super.key, required this.workout, this.removable = false});
 
   @override
   State<WorkoutSegmentList> createState() => _WorkoutSegmentListState();
@@ -42,7 +43,7 @@ class _WorkoutSegmentListState extends State<WorkoutSegmentList> {
         children: [
           ...widget.workout.segments
             .asMap()
-            .map((index, segment) => MapEntry(index, WorkoutSegmentView(key: ValueKey(segment), segment: segment, onRemove: () => _removeEntry(index)))).values
+            .map((index, segment) => MapEntry(index, WorkoutSegmentView(key: ValueKey(segment), segment: segment, onRemove: () => _removeEntry(index), removable: widget.removable,))).values
         ],
       ),
     );
