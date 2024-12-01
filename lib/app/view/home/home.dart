@@ -51,7 +51,6 @@ class Home extends StatelessWidget {
         const SizedBox(height: 20,),
         const TriSummary(),
         TriCard(
-          height: 400,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

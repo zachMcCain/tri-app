@@ -10,14 +10,14 @@ class TriCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(3.0),
-      child: SizedBox(
-        height: height,
+      // child: SizedBox(
+      //   height: height,
         child: Card(
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.elliptical(3, 3))),
           elevation: .55,
           child: child,
         )
-      )
+      // )
     );
   }
 }

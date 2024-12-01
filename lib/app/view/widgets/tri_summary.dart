@@ -61,49 +61,51 @@ class TriSummary extends StatelessWidget {
     Summary lastWeeksSummary = this.lastWeeksSummary(context);
     Summary thisWeeksSummary = comingWeeksSummary(context);
 
-    return TriCard(
+    return SizedBox(
       height: 175,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
-        child: Column(
-          children: [
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                TriHeader(header: "Activity Summary"),
-              ],
-            ),
-            const Spacer(),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text("Upcoming Totals")
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Total Activities: ${thisWeeksSummary.activityCount.toString()}'),
-                Text('Time: ${formatDuration(thisWeeksSummary.time)}'),
-                Text('Distance: ${thisWeeksSummary.distance.toString()} mi'),
-              ],
-            ),
-            const Spacer(),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text("Last Week's Totals"),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Total Activities: ${lastWeeksSummary.activityCount.toString()}'),
-                Text('Time: ${formatDuration(lastWeeksSummary.time)}'),
-                Text('Distance: ${lastWeeksSummary.distance.toString()} mi'),
-              ],
-            )
-          ],
+      child: TriCard(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
+          child: Column(
+            children: [
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  TriHeader(header: "Activity Summary"),
+                ],
+              ),
+              const Spacer(),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text("Upcoming Totals")
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Total Activities: ${thisWeeksSummary.activityCount.toString()}'),
+                  Text('Time: ${formatDuration(thisWeeksSummary.time)}'),
+                  Text('Distance: ${thisWeeksSummary.distance.toString()} mi'),
+                ],
+              ),
+              const Spacer(),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text("Last Week's Totals"),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Total Activities: ${lastWeeksSummary.activityCount.toString()}'),
+                  Text('Time: ${formatDuration(lastWeeksSummary.time)}'),
+                  Text('Distance: ${lastWeeksSummary.distance.toString()} mi'),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
