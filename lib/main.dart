@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
         useMaterial3: true,
-        scaffoldBackgroundColor: Colors.grey[300]
+        scaffoldBackgroundColor: Colors.blueGrey.shade800,
       ),
       home: const TriApp(title: 'TRI',),
     );

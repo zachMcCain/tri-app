@@ -34,7 +34,7 @@ class WorkoutBuilder extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 6),
-                  child: TriHeader(header: 'Start with Your Workout'),
+                  child: TriHeader(header: 'Your Workouts'),
                 ),
                 SizedBox(
                   height: 300, 

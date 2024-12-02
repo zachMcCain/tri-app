@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tri/app/models/workout_models/abstract_workout.dart';
 import 'package:tri/app/view/planner/month_day.dart';
+import 'package:tri/app/view/widgets/tri_card.dart';
+import 'package:tri/app/view/widgets/tri_header.dart';
 import 'package:tri/app/view/workout/full_workout_view.dart';
 import 'package:tri/app/view/workout/workout_list.dart';
 import 'package:calendar_view/calendar_view.dart';
@@ -79,13 +81,24 @@ class Planner extends StatelessWidget {
           Expanded(
             flex: 3,
             child: MonthView(
-              cellAspectRatio: 0.8,
+              cellAspectRatio: 1,
               onCellTap: addEvent,
               cellBuilder: getCell,
               onEventTap: onEventTap,
             ),
           ),
-          const Expanded(flex: 2, child: WorkoutList(placeholder: Text('Your workouts will appear here!'),)),
+          const Expanded(
+            flex: 2, 
+            child: TriCard(
+              padding: 0,
+              child: Column(
+                children: [
+                  TriHeader(header: "Grab a Workout from Your List"),
+                  Expanded(child: WorkoutList(placeholder: Text('Your workouts will appear here!'),)),
+                ],
+              )
+            )
+          ),
         ],
       );
  

@@ -14,41 +14,63 @@ class Home extends StatelessWidget {
 
 
 
-  AbstractWorkout? getNextWorkout(BuildContext context) {
+  CalendarEventData<Object?>? getNextWorkout(BuildContext context) {
     CalendarEventData<Object?>? data = CalendarControllerProvider.of(context).controller.allEvents.firstWhereOrNull((event) {
       return (event.event is AbstractWorkout) && event.date.isAfter(DateTime.now());
     });
     if (data != null) {
-      return (data.event as AbstractWorkout);
+      return data;
     } else {
       return null;
     }
   }
+
+  String formatDate(DateTime date) {
+    String dateSlug ="${date.year.toString()}-${date.month.toString().padLeft(2,'0')}-${date.day.toString().padLeft(2,'0')}";
+    return dateSlug;
+  }
   
   Widget nextUp(BuildContext context) {
-    AbstractWorkout? nextWorkout = getNextWorkout(context);
-    if (nextWorkout != null) {
-      return FullWorkoutView(workout: nextWorkout);
-    } else {
-      return const Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Text("Nothing Planned Yet, Time to Plan Your Next Workout!"),
-            SizedBox(height: 20,)
-          ],
-        ),
+    CalendarEventData<Object?>? nextWorkout = getNextWorkout(context);
+    return TriCard(
+      padding: 0,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                const TriHeader(header: "Next Up"),
+                const Spacer(),
+                nextWorkout != null? Text(formatDate(nextWorkout.date)) : Container()
+              ],
+            ),
+          ),
+          (nextWorkout?.event != null) ? 
+            FullWorkoutView(workout: (nextWorkout!.event as AbstractWorkout)) : 
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Text("Nothing Upcoming, Time to Plan Your Next Workout!"),
+                  SizedBox(height: 20,)
+                ],
+              ),
+            )
+          ]
+        )
       );
-    }
+    
   }
 
   @override
   Widget build(BuildContext context) {
     List<String> welcomePhrases = [
-      "Time to Crush It!",
-      "Welcome, Let's Get to Work",
-      "Looking Good!",
-      "Show 'em How it's Done!"
+      // "Time to Crush It!",
+      "Welcome! Let's Get to Work",
+      // "Looking Good!",
+      // "Show 'em How it's Done!"
     ];
 
     // Summary of what is coming up and what has happend a week out
@@ -57,22 +79,30 @@ class Home extends StatelessWidget {
 
     return ListView(
       children: [
-        const SizedBox(height: 20,),
-        Center(child: TriHeader(header: welcomePhrases[Random().nextInt(welcomePhrases.length)])),
-        const SizedBox(height: 20,),
-        const TriSummary(),
+        // const SizedBox(height: 20,),
         TriCard(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: TriHeader(header: "Next Up"),
-              ),
-              nextUp(context)
-            ],
+          padding: 0,
+          child: Center(
+            heightFactor: 2,
+            child: TriHeader(header: welcomePhrases[Random().nextInt(welcomePhrases.length)])
           )
         ),
+        // const SizedBox(height: 20,),
+        const TriSummary(),
+        nextUp(context)
+        // TriCard(
+        //   padding: 0,
+        //   child: Column(
+        //     crossAxisAlignment: CrossAxisAlignment.start,
+        //     children: [
+        //       const Padding(
+        //         padding: EdgeInsets.all(8.0),
+        //         child: TriHeader(header: "Next Up"),
+        //       ),
+        //       nextUp(context)
+        //     ],
+        //   )
+        // ),
         
 
         // Expanded(

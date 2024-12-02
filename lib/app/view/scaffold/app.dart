@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tri/app/view/home/home.dart';
 import 'package:tri/app/view/planner/planner.dart';
 import 'package:tri/app/view/workout/workout_builder.dart';
-import 'package:tri/app/view/workout/workout_list.dart';
 
 class TriApp extends StatefulWidget {
   const TriApp({super.key, required this.title});

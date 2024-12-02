@@ -64,6 +64,7 @@ class TriSummary extends StatelessWidget {
     return SizedBox(
       height: 175,
       child: TriCard(
+        padding: 0,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
           child: Column(

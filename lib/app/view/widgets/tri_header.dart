@@ -7,6 +7,6 @@ class TriHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(header, style: const TextStyle(fontSize: 20, color: Colors.blueGrey,),);
+    return Text(header, style: const TextStyle(fontSize: 20, color: Colors.black54,),);
   }
 }

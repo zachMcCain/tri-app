@@ -1,5 +1,4 @@
 import 'package:calendar_view/calendar_view.dart';
-import 'package:flutter/foundation.dart';
 
 class PlannerProvider extends CalendarControllerProvider {
   const PlannerProvider({super.key, required super.controller, required super.child});
