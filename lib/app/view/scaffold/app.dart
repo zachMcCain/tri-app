@@ -4,9 +4,11 @@ import 'package:tri/app/view/planner/planner.dart';
 import 'package:tri/app/view/workout/workout_builder.dart';
 
 class TriApp extends StatefulWidget {
-  const TriApp({super.key, required this.title});
+  final Function(ThemeMode) onThemeModeChange;
   final String title;
 
+  const TriApp({super.key, required this.title, required this.onThemeModeChange});
+  
   @override
   State<TriApp> createState() => _TriAppState();
 }
@@ -26,6 +28,8 @@ class _TriAppState extends State<TriApp> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    IconData icon = isDarkMode ? Icons.light_mode_outlined : Icons.dark_mode_outlined;
 
     return Container(
       decoration: BoxDecoration(color: Colors.grey[500]),
@@ -36,7 +40,18 @@ class _TriAppState extends State<TriApp> {
             appBar: AppBar(
               title: Text(widget.title),
               backgroundColor: Theme.of(context).colorScheme.primary,
-              
+              actions: [
+                IconButton(onPressed: () {
+                  if (isDarkMode) {
+                    widget.onThemeModeChange(ThemeMode.light);
+                  } else {
+                    widget.onThemeModeChange(ThemeMode.dark);
+                  }
+                  setState(() {
+                    isDarkMode = !isDarkMode;
+                  });
+                }, icon: Icon(icon))
+              ],
             ),
             bottomNavigationBar: NavigationBar(
               backgroundColor: Theme.of(context).colorScheme.primary,

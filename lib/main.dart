@@ -33,11 +33,21 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
 
+class _MyAppState extends State<MyApp> {
+  ThemeMode _themeMode = ThemeMode.system;
+
+  void _toggleTheme(ThemeMode themeMode) {
+    setState(() {
+      _themeMode = themeMode;
+    });
+  }
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -62,81 +72,16 @@ class MyApp extends StatelessWidget {
       // darkTheme: AmberBlue.dark.copyWith(iconTheme: IconThemeData(color: Colors.amber.shade700)),
       // darkTheme: EspressoTheme.dark.copyWith(iconTheme: IconThemeData(color: Colors.amber.shade700)),
       // darkTheme: ForestTheme.dark.copyWith(iconTheme: IconThemeData(color: Colors.amber.shade700)),
-      darkTheme: NightTheme.dark.copyWith(iconTheme: IconThemeData(color: Color(0xFF004E5D))),
+      darkTheme: NightTheme.dark
+        .copyWith(iconTheme: IconThemeData(color: Color(0xFF004E5D)),
+        buttonTheme: ButtonThemeData()),
       // darkTheme: StoneTheme.dark.copyWith(iconTheme: IconThemeData(color: Colors.amber.shade700)),
       // darkTheme: VeridianTheme.dark.copyWith(iconTheme: IconThemeData(color: Colors.amber.shade700)),
       // darkTheme: MidnightTheme.dark.copyWith(iconTheme: IconThemeData(color: Colors.amber.shade700)),
       // darkTheme: GreenTheme.dark.copyWith(iconTheme: IconThemeData(color: Colors.amber.shade700)),
       // darkTheme: StoneTheme.dark,
-       // The defined light theme.
-    // theme: FlexThemeData.light(
-    //   scheme: FlexScheme.deepBlue,
-    //   subThemesData: const FlexSubThemesData(
-    //     interactionEffects: true,
-    //     tintedDisabledControls: true,
-    //     useM2StyleDividerInM3: true,
-    //     inputDecoratorIsFilled: true,
-    //     inputDecoratorBorderType: FlexInputBorderType.outline,
-    //     alignedDropdown: true,
-    //     navigationRailUseIndicator: true,
-    //     navigationRailLabelType: NavigationRailLabelType.all,
-    //   ),
-    //   visualDensity: FlexColorScheme.comfortablePlatformDensity,
-    //   cupertinoOverrideTheme: const NoDefaultCupertinoThemeData(applyThemeToAll: true),
-    // ),
-    // // The defined dark theme.
-    // darkTheme: FlexThemeData.dark(
-    //   scheme: FlexScheme.deepBlue,
-    //   subThemesData: const FlexSubThemesData(
-    //     interactionEffects: true,
-    //     tintedDisabledControls: true,
-    //     blendOnColors: true,
-    //     useM2StyleDividerInM3: true,
-    //     inputDecoratorIsFilled: true,
-    //     inputDecoratorBorderType: FlexInputBorderType.outline,
-    //     alignedDropdown: true,
-    //     navigationRailUseIndicator: true,
-    //     navigationRailLabelType: NavigationRailLabelType.all,
-    //   ),
-    //   visualDensity: FlexColorScheme.comfortablePlatformDensity,
-    //   cupertinoOverrideTheme: const NoDefaultCupertinoThemeData(applyThemeToAll: true),
-    // ),
-    themeMode: ThemeMode.dark,
-
-
-      // theme: ThemeData(
-      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
-      //   useMaterial3: true,
-      //   scaffoldBackgroundColor: Colors.blueGrey.shade800,
-      //   cardColor: Colors.blueGrey.shade900,
-      //   inputDecorationTheme: InputDecorationTheme(
-      //     fillColor: Colors.grey.shade300
-      //   ),
-      //   iconTheme: IconThemeData(
-      //     color: Colors.amber.shade700
-      //   ),
-      //   textTheme:  TextTheme(
-      //     headlineMedium: TextStyle(
-      //       color: Colors.green.shade700
-      //     ),
-      //     headlineLarge: TextStyle(
-      //       color: Colors.white70
-      //     ),
-      //     headlineSmall: TextStyle(
-      //       color: Colors.green.shade800
-      //     ),
-      //     bodyLarge: TextStyle(
-      //       color: Colors.white
-      //     ),
-      //     bodyMedium: TextStyle(
-      //       color: Colors.white,
-      //     ),
-      //     bodySmall: TextStyle(
-      //       color: Colors.white
-      //     ),
-      //   )
-      // ),
-      home: const TriApp(title: 'TRI',),
+      themeMode: _themeMode,
+      home: TriApp(title: 'TRI', onThemeModeChange: _toggleTheme),
     );
   }
 }
