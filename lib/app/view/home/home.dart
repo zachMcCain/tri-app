@@ -37,12 +37,14 @@ class Home extends StatelessWidget {
       return [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Text("Nothing Upcoming, Time to Plan Your Next Workout!", style: Theme.of(context).textTheme.bodyMedium),
-              const SizedBox(height: 20,)
-            ],
-          ),
+          // child: Expanded(
+            child: Column(
+              children: [
+                Text("Nothing Upcoming, Time to Plan Your Next Workout!", style: Theme.of(context).textTheme.bodyMedium),
+                const SizedBox(height: 20,)
+              ],
+            ),
+          // ),
         )
       ]; 
     }
@@ -61,6 +63,7 @@ class Home extends StatelessWidget {
                 ],
               ),
               FullWorkoutView(workout: (nextWorkout.event as AbstractWorkout)),
+              const Divider(),
             ],
           ) : Container();
         }).toList();

@@ -73,8 +73,8 @@ class _MyAppState extends State<MyApp> {
       // darkTheme: EspressoTheme.dark.copyWith(iconTheme: IconThemeData(color: Colors.amber.shade700)),
       // darkTheme: ForestTheme.dark.copyWith(iconTheme: IconThemeData(color: Colors.amber.shade700)),
       darkTheme: NightTheme.dark
-        .copyWith(iconTheme: IconThemeData(color: Color(0xFF004E5D)),
-        buttonTheme: ButtonThemeData()),
+        .copyWith(iconTheme: IconThemeData(color: Color(0xFF004E5D)),),
+        // buttonTheme: ButtonThemeData()),
       // darkTheme: StoneTheme.dark.copyWith(iconTheme: IconThemeData(color: Colors.amber.shade700)),
       // darkTheme: VeridianTheme.dark.copyWith(iconTheme: IconThemeData(color: Colors.amber.shade700)),
       // darkTheme: MidnightTheme.dark.copyWith(iconTheme: IconThemeData(color: Colors.amber.shade700)),

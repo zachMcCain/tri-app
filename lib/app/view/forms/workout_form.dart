@@ -11,8 +11,9 @@ import 'package:tri/app/view/workout/full_workout_view.dart';
 
 class WorkoutForm extends ConsumerStatefulWidget {
   final WorkoutType workoutType;
+  final AbstractWorkout? workout;
 
-  const WorkoutForm({super.key, required this.workoutType});
+  const WorkoutForm({super.key, required this.workoutType, this.workout});
 
   @override
   ConsumerState<WorkoutForm> createState() => _WorkoutFormState();
@@ -27,7 +28,11 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
   @override
   void initState() {
     super.initState();
-    workout = WorkoutFactory().create(widget.workoutType);
+    if (widget.workout != null) {
+      workout = widget.workout!;
+    } else {
+      workout = WorkoutFactory().create(widget.workoutType);
+    }
   }
 
   void onWorkoutChanged(value) {

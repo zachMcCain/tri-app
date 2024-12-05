@@ -6,8 +6,9 @@ class WorkoutSegmentView extends StatelessWidget {
   final AbstractSegment segment;
   final bool removable;
   final void Function() onRemove;
+  final int index;
 
-  const WorkoutSegmentView({super.key, required this.segment, required this.onRemove, this.removable = false});
+  const WorkoutSegmentView({super.key, required this.segment, required this.onRemove, this.removable = false, required this.index});
 
   Widget getSegmentView() {
     if (segment is Distance) {
@@ -15,6 +16,7 @@ class WorkoutSegmentView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Row(
           children: [
+            Text('${index + 1}.  '),
             Text(segment.getDisplayValue()),
             const Text(' '),
             Text((segment as Distance).getPaceDisplay()),
@@ -35,8 +37,6 @@ class WorkoutSegmentView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Row(
         children: [
-          const Icon(Icons.menu),
-          // const Text('-'),
           getSegmentView(),
           removable ? Expanded(
             child: Align(alignment: Alignment.centerRight, child: TextButton(onPressed: onRemove, child: Text('Remove Segment')))

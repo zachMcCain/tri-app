@@ -40,7 +40,7 @@ class _ViewPickerState extends State<ViewPicker> {
           decoration: BoxDecoration(
             // border: Border.all(color: Colors.white),
             borderRadius: BorderRadius.circular(8),
-            color: Theme.of(context).cardColor
+            color: Theme.of(context).dialogBackgroundColor
           ),
           child: GridTile(
             header: Text(

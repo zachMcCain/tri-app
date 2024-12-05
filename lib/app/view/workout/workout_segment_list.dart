@@ -42,8 +42,45 @@ class _WorkoutSegmentListState extends State<WorkoutSegmentList> {
       children: [
         ...widget.workout.segments
           .asMap()
-          .map((index, segment) => MapEntry(index, WorkoutSegmentView(key: ValueKey(segment), segment: segment, onRemove: () => _removeEntry(index), removable: widget.removable,))).values
+          .map((index, segment) => MapEntry(index, WorkoutSegmentView(key: ValueKey(segment), index: index, segment: segment, onRemove: () => _removeEntry(index), removable: widget.removable,))).values
       ],
     );
   }
 }
+
+
+
+
+    // return 
+    // // Padding(
+    // //   padding: const EdgeInsets.fromLTRB(12.0, 0, 0, 0),
+    // //   child: 
+    //   // Column(
+    //   //   children: [
+    //   //     const Row(
+    //   //       children: [
+    //   //         Text("Segments:"),
+    //   //       ],
+    //   //     ),
+    //       ReorderableListView(
+    //         shrinkWrap: true,
+    //         onReorder: (oldIndex, newIndex) => {
+    //           setState(() {
+    //             _updateList(oldIndex, newIndex);
+    //           })
+    //         },
+    //         children: [
+    //           ...widget.workout.segments
+    //             .asMap()
+    //             .map((index, segment) => MapEntry(index, 
+    //               Row(
+    //                 key: ValueKey(segment),
+    //                 children: [
+    //                   Text('${index + 1}.'),
+    //                   WorkoutSegmentView(key: ValueKey(segment), segment: segment, onRemove: () => _removeEntry(index), removable: widget.removable,),
+    //                 ],
+    //               ))).values
+    //         ],
+    //       // ),
+    //     // ],
+    //   // ),

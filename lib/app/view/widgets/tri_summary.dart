@@ -79,7 +79,7 @@ class TriSummary extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text("Upcoming Totals", textScaler: const TextScaler.linear(1.25), style: Theme.of(context).textTheme.bodyMedium)
+                  Text("Upcoming Totals", style: Theme.of(context).textTheme.bodyMedium) //textScaler: const TextScaler.linear(1.25), 
                 ],
               ),
               Row(
@@ -94,7 +94,7 @@ class TriSummary extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text("Last Week's Totals", textScaler: const TextScaler.linear(1.25), style: Theme.of(context).textTheme.bodyMedium),
+                  Text("Last Week's Totals", style: Theme.of(context).textTheme.bodyMedium), //textScaler: const TextScaler.linear(1.25), 
                 ],
               ),
               Row(
