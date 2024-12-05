@@ -38,8 +38,12 @@ class Distance extends AbstractSegment {
   }
 
   Distance addDistance(Distance? distToAdd) {
-    if (distToAdd != null) {
-      distance = distance + distToAdd.distance;
+    if (distToAdd != null && distToAdd.units == DistanceUnit.mi) {
+      if (distToAdd.units == DistanceUnit.mi) {
+        distance = distance + distToAdd.distance;
+      } else if (distToAdd.units == DistanceUnit.m) {
+        distance = (distToAdd.distance * 0.000621371) + distance;
+      }
     }
     return this;
   }

@@ -50,7 +50,7 @@ class WorkoutSummary {
   Duration? totalTime;
   WorkoutType type;
 
-  WorkoutSummary({required this.type});
+  WorkoutSummary({required this.type}): totalDistance = Distance();
 
   addSummary(WorkoutSummary summary) {
     if (summary.type != type) {

@@ -84,7 +84,7 @@ class Home extends StatelessWidget {
           padding: 0,
           child: Center(
             heightFactor: 2,
-            child: TriHeader(header: welcomePhrases[Random().nextInt(welcomePhrases.length)], style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: Colors.amber.shade800),)
+            child: TriHeader(header: welcomePhrases[Random().nextInt(welcomePhrases.length)], style: Theme.of(context).textTheme.headlineMedium,)
           )
         ),
         // const SizedBox(height: 20,),

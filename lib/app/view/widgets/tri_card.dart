@@ -10,10 +10,10 @@ class TriCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(padding),
-      child: Card(
+      child: Card.filled(
         shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.elliptical(3, 3))),
         elevation: .55,
-        color: Theme.of(context).cardColor,
+        // color: Theme.of(context).fill,
         child: child,
       )
     );
