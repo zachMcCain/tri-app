@@ -17,15 +17,15 @@ import 'package:tri/app/models/workout_models/segments/text_segment.dart';
 import 'package:tri/app/models/workout_models/segments/workout_duration.dart';
 import 'package:tri/app/view/scaffold/app.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:tri/app/view/themes/amber_blue.dart';
-import 'package:tri/app/view/themes/espresso_theme.dart';
-import 'package:tri/app/view/themes/forest_theme.dart';
-import 'package:tri/app/view/themes/green_theme.dart';
-import 'package:tri/app/view/themes/midnight_theme.dart';
+// import 'package:flex_color_scheme/flex_color_scheme.dart';
+// import 'package:tri/app/view/themes/amber_blue.dart';
+// import 'package:tri/app/view/themes/espresso_theme.dart';
+// import 'package:tri/app/view/themes/forest_theme.dart';
+// import 'package:tri/app/view/themes/green_theme.dart';
+// import 'package:tri/app/view/themes/midnight_theme.dart';
 import 'package:tri/app/view/themes/night_theme.dart';
-import 'package:tri/app/view/themes/stone_theme.dart';
-import 'package:tri/app/view/themes/veridian_theme.dart';
+// import 'package:tri/app/view/themes/stone_theme.dart';
+// import 'package:tri/app/view/themes/veridian_theme.dart';
 
 void main() {
   runApp(ProviderScope( 
