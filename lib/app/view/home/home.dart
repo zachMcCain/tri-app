@@ -7,24 +7,17 @@ import 'package:tri/app/view/widgets/tri_card.dart';
 import 'package:tri/app/view/widgets/tri_header.dart';
 import 'package:tri/app/view/widgets/tri_summary.dart';
 import 'package:tri/app/view/workout/full_workout_view.dart';
-import 'package:collection/collection.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
 
 
 
-  List<CalendarEventData<Object?>>? getNextWorkout(BuildContext context) {
-    List<CalendarEventData<Object?>>? events = [];
+  List<CalendarEventData<Object?>> getNextWorkout(BuildContext context) {
     
-    List<CalendarEventData<Object?>> data = CalendarControllerProvider.of(context).controller.allEvents.where((event) {
+    return  CalendarControllerProvider.of(context).controller.allEvents.where((event) {
       return (event.event is AbstractWorkout) && event.date.isAfter(DateTime.now());
     }).toList();
-    if (data != null) {
-      return data;
-    } else {
-      return null;
-    }
   }
 
   String formatDate(DateTime date) {
@@ -78,7 +71,7 @@ class Home extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child: Row(
               children: [
                 TriHeader(header: "Next Up"),
