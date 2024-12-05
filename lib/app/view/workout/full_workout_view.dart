@@ -16,7 +16,7 @@ class FullWorkoutView extends StatelessWidget {
       children: [
         // Provide a summary at the top
         WorkoutSummaryView(workout: workout),
-        const Divider(),
+        const SizedBox(height: 5,),
         WorkoutSegmentList(workout: workout, removable: removable,)
       ],
     );

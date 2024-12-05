@@ -87,7 +87,7 @@ class TriSummary extends StatelessWidget {
                 children: [
                   Text('Total Activities: ${thisWeeksSummary.activityCount.toString()}', style: Theme.of(context).textTheme.bodyMedium),
                   Text('Time: ${formatDuration(thisWeeksSummary.time)}', style: Theme.of(context).textTheme.bodyMedium),
-                  Text('Distance: ${thisWeeksSummary.distance.toString()} mi', style: Theme.of(context).textTheme.bodyMedium),
+                  Text('Distance: ${thisWeeksSummary.distance.toStringAsFixed(1)} mi', style: Theme.of(context).textTheme.bodyMedium),
                 ],
               ),
               const Spacer(),
@@ -102,7 +102,7 @@ class TriSummary extends StatelessWidget {
                 children: [
                   Text('Total Activities: ${lastWeeksSummary.activityCount.toString()}', style: Theme.of(context).textTheme.bodyMedium),
                   Text('Time: ${formatDuration(lastWeeksSummary.time)}', style: Theme.of(context).textTheme.bodyMedium),
-                  Text('Distance: ${lastWeeksSummary.distance.toString()} mi', style: Theme.of(context).textTheme.bodyMedium),
+                  Text('Distance: ${lastWeeksSummary.distance.toStringAsFixed(1)} mi', style: Theme.of(context).textTheme.bodyMedium),
                 ],
               )
             ],

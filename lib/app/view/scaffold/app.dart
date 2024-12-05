@@ -32,7 +32,7 @@ class _TriAppState extends State<TriApp> {
     IconData icon = isDarkMode ? Icons.light_mode_outlined : Icons.dark_mode_outlined;
 
     return Container(
-      decoration: BoxDecoration(color: Colors.grey[500]),
+      // decoration: BoxDecoration(color: Colors.grey[500]),
       child: Center(
         child: Container(
           constraints: const BoxConstraints(maxWidth: 700),
@@ -50,7 +50,7 @@ class _TriAppState extends State<TriApp> {
                   setState(() {
                     isDarkMode = !isDarkMode;
                   });
-                }, icon: Icon(icon))
+                }, icon: Icon(icon, ))
               ],
             ),
             bottomNavigationBar: NavigationBar(

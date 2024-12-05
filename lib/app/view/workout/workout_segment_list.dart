@@ -32,20 +32,18 @@ class _WorkoutSegmentListState extends State<WorkoutSegmentList> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 200,
-      child: ReorderableListView(
-        onReorder: (oldIndex, newIndex) => {
-          setState(() {
-            _updateList(oldIndex, newIndex);
-          })
-        },
-        children: [
-          ...widget.workout.segments
-            .asMap()
-            .map((index, segment) => MapEntry(index, WorkoutSegmentView(key: ValueKey(segment), segment: segment, onRemove: () => _removeEntry(index), removable: widget.removable,))).values
-        ],
-      ),
+    return ReorderableListView(
+      shrinkWrap: true,
+      onReorder: (oldIndex, newIndex) => {
+        setState(() {
+          _updateList(oldIndex, newIndex);
+        })
+      },
+      children: [
+        ...widget.workout.segments
+          .asMap()
+          .map((index, segment) => MapEntry(index, WorkoutSegmentView(key: ValueKey(segment), segment: segment, onRemove: () => _removeEntry(index), removable: widget.removable,))).values
+      ],
     );
   }
 }

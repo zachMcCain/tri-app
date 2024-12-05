@@ -14,10 +14,12 @@ class Home extends StatelessWidget {
 
 
 
-  CalendarEventData<Object?>? getNextWorkout(BuildContext context) {
-    CalendarEventData<Object?>? data = CalendarControllerProvider.of(context).controller.allEvents.firstWhereOrNull((event) {
+  List<CalendarEventData<Object?>>? getNextWorkout(BuildContext context) {
+    List<CalendarEventData<Object?>>? events = [];
+    
+    List<CalendarEventData<Object?>> data = CalendarControllerProvider.of(context).controller.allEvents.where((event) {
       return (event.event is AbstractWorkout) && event.date.isAfter(DateTime.now());
-    });
+    }).toList();
     if (data != null) {
       return data;
     } else {
@@ -29,35 +31,60 @@ class Home extends StatelessWidget {
     String dateSlug ="${date.year.toString()}-${date.month.toString().padLeft(2,'0')}-${date.day.toString().padLeft(2,'0')}";
     return dateSlug;
   }
+
+  List<Widget> workoutDisplay(List<CalendarEventData<Object?>>? workouts, context) {
+    if (workouts == null || workouts.isEmpty) { 
+      return [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Text("Nothing Upcoming, Time to Plan Your Next Workout!", style: Theme.of(context).textTheme.bodyMedium),
+              const SizedBox(height: 20,)
+            ],
+          ),
+        )
+      ]; 
+    }
+    return workouts.map((nextWorkout) {
+      return (nextWorkout.event != null) ? 
+                      // nextWorkout != null? Text(formatDate(nextWorkout.date), textScaler: const TextScaler.linear(1.2), style: Theme.of(context).textTheme.bodySmall) : Container()
+          Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                    child: Text(formatDate(nextWorkout.date), textScaler: const TextScaler.linear(1.2), style: Theme.of(context).textTheme.bodySmall!.copyWith(fontStyle: FontStyle.italic)),
+                  ),
+                ],
+              ),
+              FullWorkoutView(workout: (nextWorkout.event as AbstractWorkout)),
+            ],
+          ) : Container();
+        }).toList();
+  }
   
   Widget nextUp(BuildContext context) {
-    CalendarEventData<Object?>? nextWorkout = getNextWorkout(context);
+    List<CalendarEventData<Object?>>? nextWorkout = getNextWorkout(context);
     return TriCard(
       padding: 0,
       child: Column(
+        
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
+          const Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                const TriHeader(header: "Next Up"),
-                const Spacer(),
-                nextWorkout != null? Text(formatDate(nextWorkout.date), textScaler: const TextScaler.linear(1.2), style: Theme.of(context).textTheme.bodySmall) : Container()
+                TriHeader(header: "Next Up"),
+                Spacer(),
+                // nextWorkout != null? Text(formatDate(nextWorkout.date), textScaler: const TextScaler.linear(1.2), style: Theme.of(context).textTheme.bodySmall) : Container()
               ],
             ),
           ),
-          (nextWorkout?.event != null) ? 
-            FullWorkoutView(workout: (nextWorkout!.event as AbstractWorkout)) : 
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Text("Nothing Upcoming, Time to Plan Your Next Workout!", style: Theme.of(context).textTheme.bodyMedium),
-                  const SizedBox(height: 20,)
-                ],
-              ),
-            )
+          ...workoutDisplay(nextWorkout, context)
           ]
         )
       );
