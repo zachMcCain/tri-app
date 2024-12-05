@@ -41,7 +41,6 @@ class _TriAppState extends State<TriApp> {
             bottomNavigationBar: NavigationBar(
               backgroundColor: Theme.of(context).colorScheme.primary,
               selectedIndex: _selectedIndex,
-              // title: Text(title),
               destinations: const <Widget>[
                 NavigationDestination(icon: Icon(Icons.home), label: "Home"),
                 NavigationDestination(icon: Icon(Icons.run_circle), label: "Build Workout"),

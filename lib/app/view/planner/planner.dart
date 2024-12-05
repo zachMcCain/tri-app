@@ -81,20 +81,35 @@ class Planner extends StatelessWidget {
           Expanded(
             flex: 3,
             child: MonthView(
+              startDay: WeekDays.sunday,
+              // hideDaysNotInMonth: true,
+              // showBorder: false
+              weekDayBuilder: (day) => Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  border: Border.all()
+                ), 
+                height: 30, 
+                child: Center(child: Text(WeekDays.values[day].name[0].toUpperCase(),))
+              ),
+              showWeekTileBorder: false,
+              headerStyle: HeaderStyle(
+                decoration: BoxDecoration(color: Theme.of(context).cardColor)
+              ),
               cellAspectRatio: 1,
               onCellTap: addEvent,
               cellBuilder: getCell,
               onEventTap: onEventTap,
             ),
           ),
-          const Expanded(
+          Expanded(
             flex: 2, 
             child: TriCard(
               padding: 0,
               child: Column(
                 children: [
-                  TriHeader(header: "Grab a Workout from Your List"),
-                  Expanded(child: WorkoutList(placeholder: Text('Your workouts will appear here!'),)),
+                  const TriHeader(header: "Grab a Workout from Your List"),
+                  Expanded(child: WorkoutList(placeholder: Text('Your workouts will appear here!', style: Theme.of(context).textTheme.labelMedium),)),
                 ],
               )
             )

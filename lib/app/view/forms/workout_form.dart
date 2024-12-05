@@ -65,8 +65,9 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
       // If the form is valid, display a snackbar. In the real world,
       // you'd often call a server or save the information in a database.
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: 
-          Column(children: [...getWorkoutSummary()],)
+        const SnackBar(content: 
+          Center(child: Text("Workout Submitted!"))
+          // Column(children: [...getWorkoutSummary()],)
         )
       );
       Navigator.pop(context);
@@ -107,7 +108,7 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
   Widget build(BuildContext context) {
     // The full layout
     return Container(
-      decoration: BoxDecoration(color: Colors.grey[500]),
+      // decoration: BoxDecoration(color: Colors.grey[500]),
       child: Center(
         child: Container(
           constraints: const BoxConstraints(maxWidth: 700),
@@ -121,20 +122,20 @@ class _WorkoutFormState extends ConsumerState<WorkoutForm> {
             // Workout form holder
             body: Center(
               child: Material(
-                color: Colors.grey[300],
+                color: Theme.of(context).scaffoldBackgroundColor,
                 // The Actual Form
                 child: Form(
                   key: _formKey, // used to save, reset, and validate every child FormField
                   child: ListView(
                     children: [
-                      TriTextInput(onChanged: onNameChanged, minLines: 1, maxLines: 1, fillColor: Colors.white70, hintText: widget.workoutType.name.toUpperCase(),),
+                      TriTextInput(onChanged: onNameChanged, minLines: 1, maxLines: 1, fillColor: Theme.of(context).inputDecorationTheme.fillColor, hintText: widget.workoutType.name.toUpperCase(),),
                       // Places the Metadata from the Workout
                       ...getWorkoutSummary(),
-                      Divider(),
+                      const Divider(),
                       // Gets the Actual Form Based on Type
                       WorkoutFormFactory().getWorkoutForm(widget.workoutType, onWorkoutChanged),
                       // The Notes Section of All Workout Forms
-                      TriTextInput(onChanged: onNotesChanged, minLines: 5, maxLines: 10, fillColor: Colors.white70,),
+                      TriTextInput(onChanged: onNotesChanged, minLines: 5, maxLines: 10, fillColor: Theme.of(context).inputDecorationTheme.fillColor,),
                       // The Submit Button
                       TextButton(
                         onPressed: onSubmit,

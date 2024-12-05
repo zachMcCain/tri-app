@@ -52,6 +52,33 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
         useMaterial3: true,
         scaffoldBackgroundColor: Colors.blueGrey.shade800,
+        cardColor: Colors.blueGrey.shade900,
+        inputDecorationTheme: InputDecorationTheme(
+          fillColor: Colors.grey.shade300
+        ),
+        iconTheme: IconThemeData(
+          color: Colors.amber.shade700
+        ),
+        textTheme: const TextTheme(
+          headlineMedium: TextStyle(
+            color: Colors.white70
+          ),
+          headlineLarge: TextStyle(
+            color: Colors.white70
+          ),
+          headlineSmall: TextStyle(
+            color: Colors.white70
+          ),
+          bodyLarge: TextStyle(
+            color: Colors.white
+          ),
+          bodyMedium: TextStyle(
+            color: Colors.white,
+          ),
+          bodySmall: TextStyle(
+            color: Colors.white
+          ),
+        )
       ),
       home: const TriApp(title: 'TRI',),
     );

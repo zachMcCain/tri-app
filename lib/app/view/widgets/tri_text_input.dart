@@ -17,7 +17,7 @@ class TriTextInput extends StatelessWidget {
         decoration: 
         InputDecoration(
           hintText: hintText,
-          hintStyle: TextStyle(color: Colors.grey[500]),
+          hintStyle: Theme.of(context).inputDecorationTheme.hintStyle,
           fillColor: fillColor,
           filled: fillColor != null ? true : false,
         ),

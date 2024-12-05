@@ -38,19 +38,18 @@ class _ViewPickerState extends State<ViewPicker> {
         child: Container(
           margin: const EdgeInsets.all(3),
           decoration: BoxDecoration(
-            // color: Colors.grey[200],
-            border: Border.all(color: Colors.white),
+            // border: Border.all(color: Colors.white),
             borderRadius: BorderRadius.circular(8),
+            color: Theme.of(context).cardColor
           ),
           child: GridTile(
             header: Text(
               tile.title,
-              style: const TextStyle(
-                fontSize: 20,
-              ),
+              style: Theme.of(context).textTheme.headlineSmall,
               textAlign: TextAlign.center,
             ),
-            child: Icon(tile.icon!),
+            
+            child: Icon(tile.icon!, color: Theme.of(context).iconTheme.color),
           ),
         ),
       ),
@@ -58,7 +57,7 @@ class _ViewPickerState extends State<ViewPicker> {
     .toList();
 
     return Container(
-      // color: Colors.grey[300],
+      color: Theme.of(context).scaffoldBackgroundColor,
       child: GridView.count(
         crossAxisCount: tileView.length > 3 ? 3 : tileView.length,
         shrinkWrap: true,

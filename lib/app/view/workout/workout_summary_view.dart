@@ -39,7 +39,7 @@ class _WorkoutSummaryViewState extends ConsumerState<WorkoutSummaryView> {
                   padding: const EdgeInsets.symmetric(horizontal: 3.0),
                   child: Icon(size: 17, summaryVisitor.summary.type.icon),
                 ),
-                Text(summaryTitle),
+                Text(summaryTitle, style: Theme.of(context).textTheme.bodyMedium),
               ],
             ),
           ),
@@ -50,16 +50,16 @@ class _WorkoutSummaryViewState extends ConsumerState<WorkoutSummaryView> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Planned Distance:'),
-                    Text(summaryVisitor.getDistanceDisplay())
+                    Text('Planned Distance:', style: Theme.of(context).textTheme.bodyMedium),
+                    Text(summaryVisitor.getDistanceDisplay(), style: Theme.of(context).textTheme.bodyMedium)
                   ],
                 ),
                 const SizedBox(width: 30,),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Planned Time:'),
-                    Text(summaryVisitor.getTimeDisplay())
+                    Text('Planned Time:', style: Theme.of(context).textTheme.bodyMedium),
+                    Text(summaryVisitor.getTimeDisplay(), style: Theme.of(context).textTheme.bodyMedium)
                   ],
                 ),
                 const Spacer(),

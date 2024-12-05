@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tri/app/models/workout_models/abstract_workout.dart';
 import 'package:tri/data/docs_path.dart';
+import 'package:http/http.dart' as http;
 
 // part 'workouts_provider.g.dart';
 
@@ -41,6 +42,26 @@ class WorkoutsProvider extends ChangeNotifier {
     print("Adding workout with id: ${workout.workoutId}");
     if (!kIsWeb) {
       DocsPath().writeJsonData(workout.toJson(), workout.workoutId);
+    } else {
+      print("Attempting to post it to /workout");
+      http.post(Uri.parse("http://localhost:3000/workout"), 
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(workout.toJson())
+      ).then((res) {
+        print("Got a response: $res");
+      });
+      
+      // .then((HttpClientRequest request) {
+      //   request.headers.set(HttpHeaders.contentTypeHeader, "application/json; charset=UTF-8");
+      //   request.write(workout.toJson());//.then((request) {request.close();});
+      //   request.close().then((response) {
+      //     print("Repsonse");
+      //   });
+      // });
+      
+
     }
     notifyListeners();
   }

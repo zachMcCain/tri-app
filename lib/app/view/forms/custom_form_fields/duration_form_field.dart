@@ -39,16 +39,16 @@ class _DurationFormFieldState extends State<DurationFormField> {
     });
   }
 
-  Widget getDurationOrEditor() {
+  Widget getDurationOrEditor(BuildContext context) {
     if (duration.duration.inMilliseconds > 0) {
       return TextButton(
         onPressed: onDurationEdit,
-        child: Text(duration.getDisplayValue())
+        child: Text(duration.getDisplayValue(), style: Theme.of(context).textTheme.bodyMedium,)
       );
     } else {
       return TextButton(
         onPressed: onDurationEdit, 
-        child: const Text('Add Timed Segment')
+        child: Text('Add Timed Segment', style: Theme.of(context).textTheme.bodyMedium,)
       );
     }
   }
@@ -71,14 +71,14 @@ class _DurationFormFieldState extends State<DurationFormField> {
     );
   }
 
-  Widget getPaceOrButton() {
+  Widget getPaceOrButton(BuildContext context) {
     if (duration.pace != null) {
       return TextButton(
         onPressed: paceDialog,
         child: Column(
           children: [
-            const Text('Target Pace:'),
-            Text(duration.getPaceDisplay())
+            Text('Target Pace:', style: Theme.of(context).textTheme.bodyMedium,),
+            Text(duration.getPaceDisplay(), style: Theme.of(context).textTheme.bodyMedium,)
           ],
         ),
       );
@@ -87,7 +87,7 @@ class _DurationFormFieldState extends State<DurationFormField> {
         onPressed: () {
           paceDialog();
         }, 
-        child: const Text('Set Pace Target')
+        child: Text('Set Pace Target', style: Theme.of(context).textTheme.bodyMedium,)
       );
     }
   }
@@ -111,14 +111,14 @@ class _DurationFormFieldState extends State<DurationFormField> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: Colors.white70,
+          color: Theme.of(context).cardColor,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            getDurationOrEditor(),
-            getPaceOrButton(),
+            getDurationOrEditor(context),
+            getPaceOrButton(context),
             IconButton(
               onPressed: () {
                 widget.onChanged(duration);

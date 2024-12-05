@@ -76,33 +76,33 @@ class TriSummary extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text("Upcoming Totals")
+                  Text("Upcoming Totals", textScaler: const TextScaler.linear(1.25), style: Theme.of(context).textTheme.bodyMedium)
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Total Activities: ${thisWeeksSummary.activityCount.toString()}'),
-                  Text('Time: ${formatDuration(thisWeeksSummary.time)}'),
-                  Text('Distance: ${thisWeeksSummary.distance.toString()} mi'),
+                  Text('Total Activities: ${thisWeeksSummary.activityCount.toString()}', style: Theme.of(context).textTheme.bodyMedium),
+                  Text('Time: ${formatDuration(thisWeeksSummary.time)}', style: Theme.of(context).textTheme.bodyMedium),
+                  Text('Distance: ${thisWeeksSummary.distance.toString()} mi', style: Theme.of(context).textTheme.bodyMedium),
                 ],
               ),
               const Spacer(),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text("Last Week's Totals"),
+                  Text("Last Week's Totals", textScaler: const TextScaler.linear(1.25), style: Theme.of(context).textTheme.bodyMedium),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Total Activities: ${lastWeeksSummary.activityCount.toString()}'),
-                  Text('Time: ${formatDuration(lastWeeksSummary.time)}'),
-                  Text('Distance: ${lastWeeksSummary.distance.toString()} mi'),
+                  Text('Total Activities: ${lastWeeksSummary.activityCount.toString()}', style: Theme.of(context).textTheme.bodyMedium),
+                  Text('Time: ${formatDuration(lastWeeksSummary.time)}', style: Theme.of(context).textTheme.bodyMedium),
+                  Text('Distance: ${lastWeeksSummary.distance.toString()} mi', style: Theme.of(context).textTheme.bodyMedium),
                 ],
               )
             ],

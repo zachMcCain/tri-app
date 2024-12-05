@@ -13,10 +13,10 @@ class WorkoutBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: ListView(
-        children: const [
+        children: [
           // Have 
           // SizedBox(height: 20,),
-          TriCard(
+          const TriCard(
             padding: 0,
             child: Column(
               children: [
@@ -32,7 +32,7 @@ class WorkoutBuilder extends StatelessWidget {
             padding: 0,
             child: Column(
               children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 6),
                   child: TriHeader(header: 'Your Workouts'),
                 ),
@@ -45,9 +45,9 @@ class WorkoutBuilder extends StatelessWidget {
                         padding: EdgeInsets.all(16.0),
                         child: Column(
                           children: [
-                            Text('No workouts have been built yet.'),
-                            SizedBox(height: 10,),
-                            Text('As you build workouts, you will be able to select them here for editing.'),
+                            Text('No workouts have been built yet.', style: Theme.of(context).textTheme.labelMedium),
+                            const SizedBox(height: 10,),
+                            Text('As you build workouts, you will be able to select them here for editing.', style: Theme.of(context).textTheme.labelMedium),
                           ],
                         ),
                       )

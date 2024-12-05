@@ -39,7 +39,7 @@ class WorkoutSegmentView extends StatelessWidget {
           // const Text('-'),
           getSegmentView(),
           removable ? Expanded(
-            child: Align(alignment: Alignment.centerRight, child: TextButton(onPressed: onRemove, child: const Text('Remove Segment')))
+            child: Align(alignment: Alignment.centerRight, child: TextButton(onPressed: onRemove, child: Text('Remove Segment')))
           ) : Container()
         ],
       ),

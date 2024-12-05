@@ -52,21 +52,21 @@ class _DistanceFormFieldState extends State<DistanceFormField> {
     });
   }
 
-  Widget getPaceOrButton() {
+  Widget getPaceOrButton(BuildContext context) {
     if (distance.pace != null) {
       return TextButton(
         onPressed: paceDialog,
         child: Column(
           children: [
-            const Text('Target Pace:'),
-            Text(distance.getPaceDisplay())
+            Text('Target Pace:', style: Theme.of(context).textTheme.bodyMedium,),
+            Text(distance.getPaceDisplay(), style: Theme.of(context).textTheme.bodyMedium)
           ],
         ),
       );
     } else {
       return TextButton(
         onPressed: paceDialog, 
-        child: const Text('Set Pace Target')
+        child: Text('Set Pace Target', style: Theme.of(context).textTheme.bodyMedium)
       );
     }
   }
@@ -83,10 +83,10 @@ class _DistanceFormFieldState extends State<DistanceFormField> {
       );
     }
 
-  Widget getDistanceOrEditor() {
+  Widget getDistanceOrEditor(BuildContext context) {
     return TextButton(
       onPressed: onDistanceEdit, 
-      child: Text(distance.distance > 0 ? distance.getDistanceDisplay() : 'Add Distance Segment')
+      child: Text(distance.distance > 0 ? distance.getDistanceDisplay() : 'Add Distance Segment', style: Theme.of(context).textTheme.bodyMedium)
     );
   }
 
@@ -152,14 +152,14 @@ class _DistanceFormFieldState extends State<DistanceFormField> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: Colors.white70,
+          color: Theme.of(context).cardColor,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            getDistanceOrEditor(),
-            getPaceOrButton(),
+            getDistanceOrEditor(context),
+            getPaceOrButton(context),
             IconButton(
               onPressed: () {
                 widget.onChanged(distance);

@@ -13,6 +13,7 @@ class TriCard extends StatelessWidget {
       child: Card(
         shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.elliptical(3, 3))),
         elevation: .55,
+        color: Theme.of(context).cardColor,
         child: child,
       )
     );

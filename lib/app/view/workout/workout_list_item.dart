@@ -13,7 +13,6 @@ class WorkoutListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return TriCard(
       padding: 0,
-      // color: Colors.grey[200],
       child: WorkoutSummaryView(workout: workout, removable: removable,)
     );
   }

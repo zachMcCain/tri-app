@@ -25,15 +25,15 @@ class MonthDay extends StatelessWidget {
 
     Color getEventColor(AbstractWorkout workout) {
       if (workout.type == WorkoutType.run) {
-        return Colors.green.shade300;
+        return Colors.green.shade800;
       } else if (workout.type == WorkoutType.bike) {
-        return Colors.amber.shade600;
+        return Colors.amber.shade900;
       } else if (workout.type == WorkoutType.swim) {
-        return Colors.blue.shade300;
+        return Colors.blue.shade800;
       } else if (workout.type == WorkoutType.brick) {
         return Colors.red.shade200;
       }
-      return Colors.green.shade300;
+      return Colors.green.shade900;
     }
     
     bool dragging = false;
@@ -76,7 +76,7 @@ class MonthDay extends StatelessWidget {
         return Container(
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
-            color: isInMonth ? Colors.white : null
+            color: isInMonth ? Theme.of(context).inputDecorationTheme.fillColor : null
           ),
           child: Column(
             children: [
